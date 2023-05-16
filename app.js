@@ -12,12 +12,12 @@ const categoryRoute = require('./routes/categoryRoute')
 
 //APP MiddleWares
 app.use(cors())
-
+app.use(express.json())
 
 //MiddleWares Routes
 app.use('/api/v1/category',categoryRoute)
 
-//ALL Route Handling
+//Catch All Routes
 app.get("*",(request,response)=>{
     response.status(200).json({error:'This Route Is Not Correct'})
 })
