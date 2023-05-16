@@ -2,10 +2,12 @@ const express = require('express')
 
 const router = express.Router()
 
+
+//Controllers
+const {getAllCategories} = require('./../controllers/categoryController')
+
 //GET ==> get all Categories
-router.get('/all',(request,response)=>{
-    response.status(200).json({massage:'all categories will back soon '})
-})
+router.get('/all', getAllCategories)
 
 
 module.exports = router
