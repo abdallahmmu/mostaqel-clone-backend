@@ -6,7 +6,7 @@ const CategoryModel = new Schema(
     title: {
       type: String,
       require: true,
-      unique: ture,
+      unique: true,
     },
   },
   {

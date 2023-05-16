@@ -17,6 +17,18 @@ app.use(cors())
 //MiddleWares Routes
 app.use('/api/v1/category',categoryRoute)
 
+//ALL Route Handling
+app.get("*",(request,response)=>{
+    response.status(200).json({error:'This Route Is Not Correct'})
+})
+
+//ERROR HANDLING
+app.use((error,request,response,next)=>{
+    
+
+    response.status(error.statusCode).json({error:error.message})
+
+})
 
 
 init(app)
