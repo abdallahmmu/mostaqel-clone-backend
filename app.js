@@ -8,6 +8,7 @@ const {init} = require('./helpers/DBconnection')
 
 //ROUTES IMPORT
 const categoryRoute = require('./routes/categoryRoute')
+const freelancerRoute = require('./routes/freelancerRoute')
 
 
 //APP MiddleWares
@@ -16,6 +17,7 @@ app.use(express.json())
 
 //MiddleWares Routes
 app.use('/api/v1/category',categoryRoute)
+app.use('/api/v1/freelancers', freelancerRoute)
 
 //Catch All Routes
 app.get("*",(request,response)=>{
