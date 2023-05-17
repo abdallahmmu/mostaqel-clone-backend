@@ -5,7 +5,7 @@ const router = express.Router();
 //Controllers
 const {
   getAllCategories,getCategoryById,
-  addNewCategory,updateCategoryById
+  addNewCategory,updateCategoryById,deleteCategoryById
 } = require("./../controllers/categoryController");
 
 //GET ==> get all Categories
@@ -24,6 +24,8 @@ router.post("/add", addNewCategory);
 
 router.patch('/:id',updateCategoryById)
 
-//Delete Category -- Delete CategoryById
+//Delete Category -- Delete CategoryById  
+
+router.delete('/:id',deleteCategoryById)
 
 module.exports = router;

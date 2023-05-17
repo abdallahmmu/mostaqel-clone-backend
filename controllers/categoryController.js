@@ -28,6 +28,10 @@ exports.getCategoryById = async (request, response, next) => {
 
   try {
     const category = await CategoryModel.findOne({ _id: categoryId });
+
+    if (!category) {
+      throw new Error();
+    }
     response.status(200).json({ category });
   } catch (error) {
     error.message = "Can not Find This Category";
@@ -52,7 +56,7 @@ exports.addNewCategory = async (request, response, next) => {
       title,
     });
 
-    await newCategory.save();
+    const savedCategory = await newCategory.save();
     response.status(200).json({ massage: "Your Category Has Been Saved !" });
   } catch (error) {
     error.message = "Can Not Add This Category It's Already Exsist!!";
@@ -66,8 +70,7 @@ exports.addNewCategory = async (request, response, next) => {
 
 exports.updateCategoryById = async (request, response, next) => {
   const categoryId = request.params.id;
-  const title = request.body.title
-
+  const title = request.body.title;
 
   if (!title || !categoryId) {
     return response
@@ -76,10 +79,33 @@ exports.updateCategoryById = async (request, response, next) => {
   }
 
   try {
-    await CategoryModel.updateOne({ _id: categoryId }, {title:title});
+    await CategoryModel.updateOne({ _id: categoryId }, { title: title });
     response.status(200).json({ massage: "Your Category Has Been Updated!!" });
   } catch (error) {
     error.message = "Can Not Update This Category";
+    error.statusCode = 500;
+
+    next(error);
+  }
+};
+
+//DELETE ===> Delete CategoryById
+
+exports.deleteCategoryById = async (request, response, next) => {
+  const categoryId = request.params.id;
+  console.log(categoryId);
+
+  if (!categoryId) {
+    return response
+      .status(200)
+      .json({ error: "Please Make Sure You Entered A Valid Id" });
+  }
+
+  try {
+    await CategoryModel.deleteOne({ _id: categoryId });
+    response.status(200).json({ massage: "Your Category Has Been Deleted!!" });
+  } catch (error) {
+    error.message = "Can Not Find This Category";
     error.statusCode = 500;
 
     next(error);
