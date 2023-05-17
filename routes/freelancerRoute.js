@@ -6,7 +6,7 @@ const router = express.Router();
 const { registerFreelancer } = require("./../controllers/freelancerController");
 
 //Schema Validator
-const freelancerSchemaValidator = require('./../validators/freelancer.schema')
+const freelancerSchemaValidator = require('../validators/freelancerRegister.schema')
 
 router.post("/register",checkSchema(freelancerSchemaValidator) ,registerFreelancer);
 

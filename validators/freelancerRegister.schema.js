@@ -7,15 +7,14 @@ const freelancerSchemaValidations = {
     optional: false,
     isLength: { options: { min: 8 } },
     errorMessage: "username should be string with at leaset 8 alphanumeric",
-    custom:{
+    custom: {
       options: async (value) => {
-        const freelancer = await FreelancerModel.findOne({username: value})
-        if(freelancer){
-          throw new Error('freelancer is already exist')
+        const freelancer = await FreelancerModel.findOne({ username: value });
+        if (freelancer) {
+          throw new Error("freelancer is already exist");
         }
-      }
-    }
-
+      },
+    },
   },
   password: {
     isStrongPassword: true,
@@ -41,25 +40,24 @@ const freelancerSchemaValidations = {
     errorMessage:
       "lastname should be string with at leaset 8 and at most 15 alphapetic charachters",
   },
-  email:{
-    isEmail:true,
-    notEmpty:true,
+  email: {
+    isEmail: true,
+    notEmpty: true,
     custom: {
       options: async (value) => {
-        const freelancer = await FreelancerModel.findOne({email: value})
-        if(freelancer){
-          throw new Error('freelancer is already exist')
+        const freelancer = await FreelancerModel.findOne({ email: value });
+        if (freelancer) {
+          throw new Error("freelancer is already exist");
         }
-      }
-    }
+      },
+    },
   },
-  jobTitle:{
-    notEmpty:true,
+  jobTitle: {
+    notEmpty: true,
   },
-  categoryId:{
-    notEmpty:true
-  }
-
+  categoryId: {
+    notEmpty: true,
+  },
 };
 
 module.exports = freelancerSchemaValidations;
