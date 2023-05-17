@@ -1,6 +1,7 @@
 const FreelancerModel = require("../models/freelancerModel");
+const CategoryModel = require('./../models/categoryModel')
 
-const freelancerSchemaValidations = {
+const freelancerRegisterSchemaValidations = {
   username: {
     isAlphanumeric: true,
     notEmpty: true,
@@ -57,7 +58,16 @@ const freelancerSchemaValidations = {
   },
   categoryId: {
     notEmpty: true,
+    custom:{
+      options: async (value) =>{
+        const category = await CategoryModel.findOne({_id:id})
+
+        if(!category){
+          throw new Error('Can not Find This Category Please Enter A Valid Category!')
+        }
+      }
+    }
   },
 };
 
-module.exports = freelancerSchemaValidations;
+module.exports = freelancerRegisterSchemaValidations;
