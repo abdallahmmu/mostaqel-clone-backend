@@ -1,10 +1,13 @@
 const express = require("express");
-
+const {checkSchema} = require('express-validator')
 const router = express.Router();
 
 //Controller
 const { registerFreelancer } = require("./../controllers/freelancerController");
 
-router.post("/register", registerFreelancer);
+//Schema Validator
+const freelancerSchemaValidator = require('./../validators/freelancer.schema')
+
+router.post("/register",checkSchema(freelancerSchemaValidator) ,registerFreelancer);
 
 module.exports = router;
