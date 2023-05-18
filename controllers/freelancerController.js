@@ -52,7 +52,9 @@ exports.loginFreelancer = async (request, response, next) => {
       freelancerAccout.password
     );
     if (!hashedPassword) {
-     return response.status(401).json({massage:'invalid email or password'})
+      return response
+        .status(401)
+        .json({ massage: "invalid email or password" });
     }
 
     //Generate JWT Token
@@ -81,4 +83,58 @@ exports.loginFreelancer = async (request, response, next) => {
 
   console.log(password);
   response.status(200).json({ massage: "Login into Freelancer Accout" });
+};
+
+//GET ===> Get FreelancerById
+
+exports.getFreelancerById = async (request, response, next) => {
+  const freelancerId = request.freelancerId;
+
+  try {
+    const freelancerAccount = await FreelancerModel.findOne(
+      { _id: freelancerId },
+      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username"
+    ).populate("categoryId");
+    response.status(200).json({ data: freelancerAccount });
+  } catch (error) {
+    error.message = "can not find freelancer account";
+    error.statusCode = 401;
+    next(error);
+  }
+};
+
+//Update ===> Update Freelancer
+
+exports.updateFreelancerById = async (request, response, next) => {
+  const freelancerId = request.freelancerId;
+  const newUpdate = { ...request.body };
+
+  //checking for incomming param to be equal the current freelancerId
+  if (request.params.id !== freelancerId) {
+    return response.status(404).json({ error: "param is not an id" });
+  }
+
+  try {
+    const freelancerAccount = await FreelancerModel.findOne({
+      _id: freelancerId,
+    });
+
+    if (!freelancerAccount) {
+      return response
+        .status(404)
+        .json({ error: "can not find this freelancer" });
+    }
+
+    const updatedData = await FreelancerModel.updateOne(
+      { _id: freelancerId },
+      newUpdate
+    );
+
+    response.status(200).json({ massage: "your data has been updated !" });
+    console.log(updatedData);
+  } catch (error) {
+    error.message = "can not update this freelancer";
+    error.statusCode = 401;
+    next(error);
+  }
 };
