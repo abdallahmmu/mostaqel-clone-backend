@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const CategoryModel = new Schema(
+let CategoryModel = new Schema(
   {
     title: {
       type: String,
@@ -15,4 +15,4 @@ const CategoryModel = new Schema(
 );
 
 
-module.exports = mongoose.model('categories',CategoryModel)
+export default mongoose.model('categories',CategoryModel)

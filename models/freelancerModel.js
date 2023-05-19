@@ -1,24 +1,24 @@
-const mongoose = require("mongoose");
-const bcrypt = require('bcrypt')
+import mongoose from "mongoose";
+import bcrypt from 'bcrypt'
 const Schema = mongoose.Schema;
 
-const FreelancerModel = new Schema({
+let FreelancerModel = new Schema({
   username: {
     type: String,
     min: 3,
     max: 25,
     unique: true,
-    require: true,
+    required: true,
   },
   phoneNumber: {
     type: String,
     unique: true,
-    require: true,
+    required:true
   },
   email: {
     type: String,
     unique: true,
-    require: true,
+    required: true,
   },
   isVerify: {
     type: Boolean,
@@ -32,7 +32,7 @@ const FreelancerModel = new Schema({
   },
   password: {
     type: String,
-    require: true,
+    required: true,
     min: 8,
     max: 16,
   },
@@ -42,18 +42,18 @@ const FreelancerModel = new Schema({
   },
   jobTitle: {
     type: String,
-    require: true,
+    required: true,
   },
   description: {
     type: String,
   },
   firstName: {
     type: String,
-    require: true,
+    required: true,
   },
   lastName: {
     type: String,
-    require: true,
+    required: true,
   },
   completedProjects: {
     type: Array,
@@ -62,9 +62,10 @@ const FreelancerModel = new Schema({
 });
 
 
-FreelancerModel.pre('save', async function(next){
-  this.password = await bcrypt.hash(this.password,12)
+FreelancerModel.pre('save', function(next){
+  console.log('pp')
+  this.password = bcrypt.hashSync(this.password, 12)
   next()
 })
 
-module.exports = mongoose.model('freelancers',FreelancerModel)
+export default  mongoose.model('freelancers',FreelancerModel)

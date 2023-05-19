@@ -1,8 +1,8 @@
 //MODELS
-const CategoryModel = require("./../models/categoryModel");
+import CategoryModel from "./../models/categoryModel.js";
 
 // READ - GET ===> All Categories
-exports.getAllCategories = async (request, response, next) => {
+export const getAllCategories = async (request, response, next) => {
   try {
     const categories = await CategoryModel.find();
 
@@ -17,7 +17,7 @@ exports.getAllCategories = async (request, response, next) => {
 
 //READ GET ===> Get CategoryById
 
-exports.getCategoryById = async (request, response, next) => {
+export const getCategoryById = async (request, response, next) => {
   const categoryId = request.params.id;
 
   if (!categoryId) {
@@ -42,7 +42,7 @@ exports.getCategoryById = async (request, response, next) => {
 
 //CREATE - POST ===> Add new Category
 
-exports.addNewCategory = async (request, response, next) => {
+export const addNewCategory = async (request, response, next) => {
   const title = request.body.title;
 
   if (!title) {
@@ -68,7 +68,7 @@ exports.addNewCategory = async (request, response, next) => {
 
 //PATCH ===> Update CategoryById
 
-exports.updateCategoryById = async (request, response, next) => {
+export const updateCategoryById = async (request, response, next) => {
   const categoryId = request.params.id;
   const title = request.body.title;
 
@@ -91,7 +91,7 @@ exports.updateCategoryById = async (request, response, next) => {
 
 //DELETE ===> Delete CategoryById
 
-exports.deleteCategoryById = async (request, response, next) => {
+export const deleteCategoryById = async (request, response, next) => {
   const categoryId = request.params.id;
   console.log(categoryId);
 

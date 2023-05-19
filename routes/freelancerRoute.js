@@ -1,34 +1,37 @@
-const express = require("express");
-const {checkSchema} = require('express-validator')
-const router = express.Router();
+import express from "express";
+import { checkSchema } from "express-validator";
+
 
 //Controller
-const { registerFreelancer,loginFreelancer,getFreelancerById,updateFreelancerById } = require("./../controllers/freelancerController");
+import {registerFreelancer,loginFreelancer,getFreelancerById,updateFreelancerById} from './../controllers/freelancerController.js'
 
 //Schema Validator
-const freelancerRegisterSchemaValidations = require('../validators/freelancerRegister.schema')
-const freelancerLoginSchemaValidation = require('./../validators/freelancerLogin.schema')
+import { freelancerRegisterSchemaValidations } from "../validators/freelancerRegister.schema.js";
+import { freelancerLoginSchemaValidation } from "./../validators/freelancerLogin.schema.js";
 
 //Authentication Middlewar
-const {isFreelancersAuth} = require('../middlewares/isFreelancersAuth') 
+import { isFreelancersAuth } from "../middlewares/isFreelancersAuth.js";
+
+
+
+
+export const freelancerRoute = express.Router();
 
 //POST ===> Register A Freelancer
-router.post("/register",checkSchema(freelancerRegisterSchemaValidations) ,registerFreelancer);
+freelancerRoute.post("/register",checkSchema(freelancerRegisterSchemaValidations) ,registerFreelancer);
 
 //POST ===> Login A Freelancer
-router.post('/login',checkSchema(freelancerLoginSchemaValidation),loginFreelancer)
+freelancerRoute.post('/login',checkSchema(freelancerLoginSchemaValidation),loginFreelancer)
 
 
 //GET ===> Get FreelancerById
 
-router.get('/:id',isFreelancersAuth,getFreelancerById)
+freelancerRoute.get('/:id',isFreelancersAuth,getFreelancerById)
 
 
 //UPDATE  ===> Update FreelancerById
 
-router.patch('/:id',isFreelancersAuth,updateFreelancerById)
+freelancerRoute.patch('/:id',isFreelancersAuth,updateFreelancerById)
 
 
 
-
-module.exports = router;

@@ -1,6 +1,7 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken'
 
-exports.isFreelancersAuth = (request, response, next) => {
+
+export const isFreelancersAuth = (request, response, next) => {
   const token = request.get("Authorization");
   let verify;
   try {

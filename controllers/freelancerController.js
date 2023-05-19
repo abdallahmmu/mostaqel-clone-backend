@@ -1,12 +1,12 @@
-const FreelancerModel = require("./../models/freelancerModel");
-const { validationResult } = require("express-validator");
+import FreelancerModel from "./../models/freelancerModel.js";
+import { validationResult } from "express-validator";
 
 //bcrypt and jwt
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 //Create ===> Register A Freelancer
-exports.registerFreelancer = async (request, response, next) => {
+export const registerFreelancer = async (request, response, next) => {
   const errors = validationResult(request)
     .array()
     .map((el) => {
@@ -17,13 +17,12 @@ exports.registerFreelancer = async (request, response, next) => {
   }
 
   try {
-    const newFreelancer = new FreelancerModel(request.body);
-
+    let newFreelancer = new FreelancerModel(request.body);
     const createdFreelancer = await newFreelancer.save();
-
+    console.log("test", createdFreelancer);
     response.status(200).json({ massage: "Freelancer Created Sucssfully!" });
   } catch (error) {
-    error.message = "this freelancer already exsist!";
+    error.message = "Error During Saving";
     error.statusCode = 500;
 
     next(error);
@@ -32,7 +31,7 @@ exports.registerFreelancer = async (request, response, next) => {
 
 //POST ===> Login A Freelancer
 
-exports.loginFreelancer = async (request, response, next) => {
+export const loginFreelancer = async (request, response, next) => {
   const errors = validationResult(request)
     .array()
     .map((el) => {
@@ -87,8 +86,14 @@ exports.loginFreelancer = async (request, response, next) => {
 
 //GET ===> Get FreelancerById
 
-exports.getFreelancerById = async (request, response, next) => {
+export const getFreelancerById = async (request, response, next) => {
   const freelancerId = request.freelancerId;
+
+  if (freelancerId !== request.params.id) {
+    return response
+      .status(401)
+      .json({ error: "Your Are Not Allowed To Get This Data" });
+  }
 
   try {
     const freelancerAccount = await FreelancerModel.findOne(
@@ -105,7 +110,7 @@ exports.getFreelancerById = async (request, response, next) => {
 
 //Update ===> Update Freelancer
 
-exports.updateFreelancerById = async (request, response, next) => {
+export const updateFreelancerById = async (request, response, next) => {
   const freelancerId = request.freelancerId;
   const newUpdate = { ...request.body };
 

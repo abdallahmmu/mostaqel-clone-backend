@@ -1,9 +1,10 @@
-const FreelancerModel = require("../models/freelancerModel");
-const CategoryModel = require('./../models/categoryModel')
 
-const freelancerRegisterSchemaValidations = {
+import FreelancerModel from "../models/freelancerModel.js";
+import CategoryModel from "./../models/categoryModel.js";
+
+export const freelancerRegisterSchemaValidations = {
   username: {
-    isAlphanumeric: true,
+    isAlphanumeric:true,
     notEmpty: true,
     optional: false,
     isLength: { options: { min: 8 } },
@@ -12,7 +13,7 @@ const freelancerRegisterSchemaValidations = {
       options: async (value) => {
         const freelancer = await FreelancerModel.findOne({ username: value });
         if (freelancer) {
-          throw new Error("freelancer is already exist");
+          throw new Error("username is already exist");
         }
       },
     },
@@ -48,7 +49,7 @@ const freelancerRegisterSchemaValidations = {
       options: async (value) => {
         const freelancer = await FreelancerModel.findOne({ email: value });
         if (freelancer) {
-          throw new Error("freelancer is already exist");
+          throw new Error("email is already exist");
         }
       },
     },
@@ -60,7 +61,7 @@ const freelancerRegisterSchemaValidations = {
     notEmpty: true,
     custom:{
       options: async (value) =>{
-        const category = await CategoryModel.findOne({_id:id})
+        const category = await CategoryModel.findOne({_id:value})
 
         if(!category){
           throw new Error('Can not Find This Category Please Enter A Valid Category!')
@@ -68,6 +69,8 @@ const freelancerRegisterSchemaValidations = {
       }
     }
   },
+  phoneNumber:{
+    isMobilePhone:true
+  }
 };
 
-module.exports = freelancerRegisterSchemaValidations;

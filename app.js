@@ -1,14 +1,15 @@
-const dotenv = require('dotenv').config()
-const express = require('express')
-const app = express()
-const cors = require('cors')
-
+import { config } from 'dotenv'
+import express from 'express'
+import cors from 'cors'
 //INIT APP
-const {init} = require('./helpers/DBconnection')
-
+import { init } from './helpers/DBconnection.js'
 //ROUTES IMPORT
-const categoryRoute = require('./routes/categoryRoute')
-const freelancerRoute = require('./routes/freelancerRoute')
+import {categoryRoute} from './routes/categoryRoute.js'
+import {freelancerRoute} from './routes/freelancerRoute.js'
+
+//Configuration
+config()
+const app = express()
 
 
 //APP MiddleWares

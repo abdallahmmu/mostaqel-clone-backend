@@ -1,6 +1,6 @@
-const FreelancerModel = require('./../models/freelancerModel')
+import FreelancerModel from './../models/freelancerModel.js'
 
-const freelancerLoginSchemaValidation = {
+export const freelancerLoginSchemaValidation = {
     email: {
         isEmail:true,
         errorMessage: 'Email should be string with at leaset 8 alphanumeric',
@@ -23,5 +23,3 @@ const freelancerLoginSchemaValidation = {
       },
 }
 
-
-module.exports = freelancerLoginSchemaValidation

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-exports.init = async (app) => {
+export const  init = async (app) => {
     try {
         const CONNECTION = await mongoose.connect(process.env.DB_CONNECTION)
 

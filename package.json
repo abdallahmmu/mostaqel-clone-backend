@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "mostaqel is a platform for freelancers to get a job",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon app.js"
   },
