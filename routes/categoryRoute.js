@@ -6,7 +6,7 @@ export const categoryRoute = express.Router();
 
 //Controllers
 import {  getAllCategories,getCategoryById,
-  addNewCategory,updateCategoryById,deleteCategoryById} from './../controllers/categoryController.js'
+  addNewCategory,updateCategoryById,deleteCategoryById,getFreelancersForCategory} from './../controllers/categoryController.js'
 //GET ==> get all Categories
 categoryRoute.get("/all", getAllCategories);
 
@@ -26,5 +26,10 @@ categoryRoute.patch('/:id',updateCategoryById)
 //Delete Category -- Delete CategoryById  
 
 categoryRoute.delete('/:id',deleteCategoryById)
+
+
+//GET Freelancers For Some Category 
+
+categoryRoute.get('/:id/freelancers',getFreelancersForCategory)
 
 

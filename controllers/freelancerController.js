@@ -87,7 +87,7 @@ export const loginFreelancer = async (request, response, next) => {
 export const getFreelancerById = async (request, response, next) => {
   const freelancerId = request.freelancerId;
 
-  if (freelancerId !== request.params.id) {
+  if (!freelancerId || !request.params.id) {
     return response
       .status(401)
       .json({ error: "Your Are Not Allowed To Get This Data" });
