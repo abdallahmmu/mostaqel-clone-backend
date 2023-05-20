@@ -63,7 +63,6 @@ let FreelancerModel = new Schema({
 
 
 FreelancerModel.pre('save', function(next){
-  console.log('pp')
   this.password = bcrypt.hashSync(this.password, 12)
   next()
 })

@@ -70,7 +70,16 @@ export const freelancerRegisterSchemaValidations = {
     }
   },
   phoneNumber:{
-    isMobilePhone:true
+    isMobilePhone:true,
+    custom:{
+      options: async (value) => {
+        const phoneNumberExsist = await FreelancerModel.findOne({phoneNumber:value})
+
+        if(phoneNumberExsist){
+          throw new Error('This phone number is already exsist')
+        }
+      }
+    }
   }
 };
 

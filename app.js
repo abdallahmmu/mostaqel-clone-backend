@@ -16,6 +16,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+
+
 //MiddleWares Routes
 app.use('/api/v1/category',categoryRoute)
 app.use('/api/v1/freelancers', freelancerRoute)

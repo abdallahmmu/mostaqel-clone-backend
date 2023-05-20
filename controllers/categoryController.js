@@ -93,7 +93,6 @@ export const updateCategoryById = async (request, response, next) => {
 
 export const deleteCategoryById = async (request, response, next) => {
   const categoryId = request.params.id;
-  console.log(categoryId);
 
   if (!categoryId) {
     return response

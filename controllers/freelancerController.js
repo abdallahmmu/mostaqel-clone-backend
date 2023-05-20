@@ -1,6 +1,6 @@
-import FreelancerModel from "./../models/freelancerModel.js";
+import FreelancerModel from "../models/freelancerModel.js";
 import { validationResult } from "express-validator";
-
+import { deleteFile } from "../helpers/deleteFile.js";
 //bcrypt and jwt
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -19,7 +19,6 @@ export const registerFreelancer = async (request, response, next) => {
   try {
     let newFreelancer = new FreelancerModel(request.body);
     const createdFreelancer = await newFreelancer.save();
-    console.log("test", createdFreelancer);
     response.status(200).json({ massage: "Freelancer Created Sucssfully!" });
   } catch (error) {
     error.message = "Error During Saving";
@@ -80,7 +79,6 @@ export const loginFreelancer = async (request, response, next) => {
     error.message = "invalid email or password";
   }
 
-  console.log(password);
   response.status(200).json({ massage: "Login into Freelancer Accout" });
 };
 
@@ -136,10 +134,37 @@ export const updateFreelancerById = async (request, response, next) => {
     );
 
     response.status(200).json({ massage: "your data has been updated !" });
-    console.log(updatedData);
   } catch (error) {
     error.message = "can not update this freelancer";
     error.statusCode = 401;
+    next(error);
+  }
+};
+
+export const uploadImageForFreelancer = async (request, response, next) => {
+  const avatarPhoto = request.file;
+
+  if (!avatarPhoto) {
+    return response.status(404).json({ error: "no file to uploaded" });
+  }
+ 
+
+  try {
+    
+    const freelancerAccount = await FreelancerModel.findById(request.freelancerId)
+    if (freelancerAccount.avatar) {
+      deleteFile(freelancerAccount.avatar)
+    }
+
+    freelancerAccount.avatar = avatarPhoto.path
+    await freelancerAccount.save()
+    freelancerAccount.avatar = 
+
+    response.status(200).json({ massage: "your photo has been uploaded" });
+  } catch (error) {
+    error.message = "server error faild to upload";
+    error.statusCode = 500;
+
     next(error);
   }
 };

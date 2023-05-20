@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken'
-
+import jwt from "jsonwebtoken";
 
 export const isFreelancersAuth = (request, response, next) => {
   const token = request.get("Authorization");
