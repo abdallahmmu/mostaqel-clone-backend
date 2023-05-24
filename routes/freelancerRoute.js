@@ -3,7 +3,7 @@ import { checkSchema } from "express-validator";
 import multer from "multer";
 
 //Controller
-import {registerFreelancer,loginFreelancer,getFreelancerById,updateFreelancerById, uploadImageForFreelancer} from '../controllers/freelancerController.js'
+import {registerFreelancer,loginFreelancer,getFreelancerById,updateFreelancerById, uploadImageForFreelancer,getAllFreelancers} from '../controllers/freelancerController.js'
 
 //Schema Validator
 import { freelancerRegisterSchemaValidations } from "../validators/freelancerRegister.schema.js";
@@ -46,6 +46,11 @@ const upload = multer({storage:diskStorage,fileFilter:fileFiltered,limits:{field
 
 export const freelancerRoute = express.Router();
 
+
+
+//GET All Freelancers
+freelancerRoute.get('/all',getAllFreelancers)
+
  
 //POST ===> Register A Freelancer
 freelancerRoute.post("/register",checkSchema(freelancerRegisterSchemaValidations) ,registerFreelancer);
@@ -58,7 +63,7 @@ freelancerRoute.post('/login',checkSchema(freelancerLoginSchemaValidation),login
 
 //GET ===> Get FreelancerById
 
-freelancerRoute.get('/:id',isFreelancersAuth,getFreelancerById)
+freelancerRoute.get('/:id',getFreelancerById)
 
 
 //UPDATE  ===> Update FreelancerById
@@ -68,6 +73,8 @@ freelancerRoute.patch('/:id',isFreelancersAuth,updateFreelancerById)
 //UPLOAD FILES 
 
 freelancerRoute.post('/upload-avatar/:id',isFreelancersAuth,isAuthToUpload,upload.single('avatar'),uploadImageForFreelancer)
+
+
 
 
 

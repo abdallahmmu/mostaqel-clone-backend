@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Serveing file staticly ==>> localhost:port/Freelancers-avatars/...
+//Serveing Folders staticly ==>> localhost:port/Freelancers-avatars/...
 const filename = fileURLToPath(import.meta.url);
 app.use(
   "/Freelancers-Avatars",
@@ -29,7 +29,7 @@ app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/freelancers", freelancerRoute);
 
 //Catch All Routes
-app.get("*", (request, response) => {
+app.use("*", (request, response) => {
   response.status(200).json({ error: "This Route Is Not Correct" });
 });
 
