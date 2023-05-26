@@ -111,24 +111,31 @@ export const deleteCategoryById = async (request, response, next) => {
   }
 };
 
-
 //GET ===>> Freelancers For Category
 
-export const getFreelancersForCategory = async (request,response,next)=>{
-  const categoryId = request.params.id
+export const getFreelancersForCategory = async (request, response, next) => {
+  const categoryId = request.params.id;
 
-  if(!categoryId){
-    return response.status(404).json({error:'please send a valid category id'})
+  if (!categoryId) {
+    return response
+      .status(404)
+      .json({ error: "please send a valid category id" });
   }
 
   try {
-    const freelancers = await FreelancerModel.find({categoryId:categoryId},'firstName lasName username categoryId email jobTitle ')
-    if(!freelancers) return response.status(200).json({massage:'can not find freelancers in this category'})
-    return response.status(200).json({freelancers})
+    const freelancers = await FreelancerModel.find(
+      { categoryId: categoryId },
+      "firstName lasName username categoryId email jobTitle "
+    );
+    if (!freelancers)
+      return response
+        .status(200)
+        .json({ massage: "can not find freelancers in this category" });
+    return response.status(200).json({ freelancers });
   } catch (error) {
-    error.message = 'server error faild to get freelancers for category'
-    error.statusCode = 500
+    error.message = "server error faild to get freelancers for category";
+    error.statusCode = 500;
 
-    next(error)
+    next(error);
   }
-}
+};
