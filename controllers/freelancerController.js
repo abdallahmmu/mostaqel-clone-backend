@@ -73,13 +73,13 @@ export const loginFreelancer = async (request, response, next) => {
       massage: "You Have Been Login Sucssesfully!",
       token,
       freelancerId: freelancerAccout._id,
-      role: "freelancer",
+      username: freelancerAccout.username,
     });
   } catch (error) {
-    error.message = "invalid email or password";
+    error.message = " Server invalid email or password";
+    error.statusCode = 500;
+    next(error);
   }
-
-  response.status(200).json({ massage: "Login into Freelancer Accout" });
 };
 
 //GET ===> Get FreelancerById
@@ -87,7 +87,7 @@ export const loginFreelancer = async (request, response, next) => {
 export const getFreelancerById = async (request, response, next) => {
   const freelancerId = request.params.id;
 
-/*   if (!freelancerId || !request.params.id) {
+  /*   if (!freelancerId || !request.params.id) {
     return response
       .status(401)
       .json({ error: "Your Are Not Allowed To Get This Data" });
@@ -98,8 +98,8 @@ export const getFreelancerById = async (request, response, next) => {
       { _id: freelancerId },
       "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username"
     ).populate("categoryId");
-    if(!freelancerAccount){
-      return response.status(404).json({massage:'user not found'})
+    if (!freelancerAccount) {
+      return response.status(404).json({ massage: "user not found" });
     }
     response.status(200).json({ data: freelancerAccount });
   } catch (error) {
@@ -150,20 +150,20 @@ export const uploadImageForFreelancer = async (request, response, next) => {
   if (!avatarPhoto) {
     return response.status(404).json({ error: "no file to uploaded" });
   }
- 
 
   try {
-    
-    const freelancerAccount = await FreelancerModel.findById(request.freelancerId)
+    const freelancerAccount = await FreelancerModel.findById(
+      request.freelancerId
+    );
     if (freelancerAccount.avatar) {
-      deleteFile(freelancerAccount.avatar)
+      deleteFile(freelancerAccount.avatar);
     }
 
-    freelancerAccount.avatar = avatarPhoto.path
-    await freelancerAccount.save()
-    freelancerAccount.avatar = 
-
-    response.status(200).json({ massage: "your photo has been uploaded" });
+    freelancerAccount.avatar = avatarPhoto.path;
+    await freelancerAccount.save();
+    freelancerAccount.avatar = response
+      .status(200)
+      .json({ massage: "your photo has been uploaded" });
   } catch (error) {
     error.message = "server error faild to upload";
     error.statusCode = 500;
@@ -172,17 +172,15 @@ export const uploadImageForFreelancer = async (request, response, next) => {
   }
 };
 
-
-
 //GET ===> All Freelancers
 
-export const getAllFreelancers = async (request, response,next) =>{
-  
+export const getAllFreelancers = async (request, response, next) => {
   try {
-      const allFreelancers = await FreelancerModel.find({},'isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username').sort({username:-1})
+    const allFreelancers = await FreelancerModel.find(
+      {},
+      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username"
+    ).sort({ username: -1 });
 
-      response.status(200).json({allFreelancers})
-  } catch (error) {
-    
-  }
-}
+    response.status(200).json({ allFreelancers });
+  } catch (error) {}
+};

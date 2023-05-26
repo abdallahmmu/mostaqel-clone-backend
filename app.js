@@ -8,7 +8,10 @@ import { init } from "./helpers/DBconnection.js";
 //ROUTES IMPORT
 import { categoryRoute } from "./routes/categoryRoute.js";
 import { freelancerRoute } from "./routes/freelancerRoute.js";
-
+import { projectRoute } from "./routes/projectRoute.js";
+import clientRouter from "./routes/clientRoute.js";
+import { offerRoute } from "./routes/offerRoute.js";
+import { chatRoute } from "./routes/chatRoute.js";
 //Configuration
 config();
 const app = express();
@@ -17,7 +20,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Serveing Folders staticly ==>> localhost:port/Freelancers-avatars/...
+//Serveing file staticly ==>> localhost:port/Freelancers-avatars/...
 const filename = fileURLToPath(import.meta.url);
 app.use(
   "/Freelancers-Avatars",
@@ -27,6 +30,10 @@ app.use(
 //MiddleWares Routes
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/freelancers", freelancerRoute);
+app.use("/api/v1/projects", projectRoute);
+app.use("/api/v1/clients", clientRouter);
+app.use("/api/v1", offerRoute);
+app.use("/api/v1/chats", chatRoute);
 
 //Catch All Routes
 app.use("*", (request, response) => {
