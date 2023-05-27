@@ -12,4 +12,11 @@ export const sendOfferSchemaValidator = {
       },
     },
   },
+  description: {
+    isLength: { options: { min: 10 } },
+    notEmpty: true,
+    optional: false,
+    errorMessage:
+      "Description must have at leaset 10 words and should not be empty",
+  },
 };

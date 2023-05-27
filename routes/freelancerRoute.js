@@ -55,7 +55,7 @@ const upload = multer({
 export const freelancerRoute = express.Router();
 
 //GET All Freelancers
-freelancerRoute.get("/all", getAllFreelancers);
+freelancerRoute.get("/", getAllFreelancers);
 
 //POST ===> Register A Freelancer
 freelancerRoute.post(

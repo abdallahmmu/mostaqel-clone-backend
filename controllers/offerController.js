@@ -98,7 +98,7 @@ export const updateOffer = async (req, res, next) => {
 
     await offerModel.findByIdAndDelete(id);
     res.status(200).json({
-      message: "Offer Deleted Successfully",
+      message: "Offer Updated Successfully",
     });
   } catch (error) {
     error.message = "Error During Saving";

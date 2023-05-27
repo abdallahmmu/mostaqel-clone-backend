@@ -2,14 +2,17 @@ import freelancerModel from "../models/freelancerModel.js";
 import offerModel from "../models/offerModel.js";
 
 import projectModel from "../models/projectModel.js";
+
 const createProject = async (req, res) => {
   req.body.clientId = req.clientId;
   const project = req.body;
 
   try {
     let projectAdded = await projectModel.create(project);
-    projectAdded && res.status(200).json(projectAdded);
-    !projectAdded && res.status(400).json({ message: "project can't added" });
+    if (!projectAdded) {
+      return res.status(400).json({ error: "can not save project" });
+    }
+    res.status(200).json(projectAdded);
   } catch (error) {
     res.status(403).json({ message: error.message });
   }
@@ -59,8 +62,6 @@ const acceptFreelancerToProject = async (req, res) => {
     );
 
     projectUpdated && res.status(200).json({ projectUpdated });
-
-    // !projectUpdated &&  res.status(400).json({message: "project can't returned"})
   } catch (error) {
     res.status(403).json({ message: error.message });
   }
@@ -78,17 +79,6 @@ const getSingleProject = async (req, res) => {
   }
 };
 
-const getProjectReviews = async (req, res) => {
-  const { projectId } = req.params;
-  try {
-    const reviews = await ReviewModel.find({ projectId });
-    reviews && res.status(200).json(reviews);
-    !reviews &&
-      res.status(400).json({ message: "project can't return reviews" });
-  } catch (error) {
-    res.status(403).json({ message: error.message });
-  }
-};
 const updateProject = async (req, res) => {
   const { title, description } = req.body;
   const { id } = req.params;
@@ -106,20 +96,6 @@ const updateProject = async (req, res) => {
   }
 };
 
-// const updateProjectFreelancer = async (req, res) => {
-
-//     const {title, description}  = req.body
-//     const {id} = req.params
-
-//     try {
-//         let projectUpdated = await projectModel.updateOne({_id: id}, {title, description}, {returnDocument: 'after'});
-
-//         projectUpdated &&  res.status(200).json(projectUpdated)
-//         !projectUpdated &&  res.status(400).json({message: "project can't updated"})
-//     } catch (error) {
-//         res.status(403).json({message: error.message})
-//     }
-// }
 const deleteProject = async (req, res) => {
   const { id } = req.params;
   try {
@@ -131,13 +107,12 @@ const deleteProject = async (req, res) => {
     res.status(403).json({ message: error.message });
   }
 };
+
 export {
   createProject,
   getAllProjects,
   getSingleProject,
   updateProject,
   deleteProject,
-  //  updateProjectFreelancer,
-  getProjectReviews,
   acceptFreelancerToProject,
 };

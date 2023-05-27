@@ -1,5 +1,6 @@
 import express from "express";
 import { auth } from "../middlewares/auth.js";
+import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
 import {
   saveClient,
   getClientById,
@@ -52,7 +53,7 @@ clientRouter.get("/:id", async (req, res) => {
 clientRouter.patch("/:id", auth, async (req, res) => {
   var { userName } = req.body;
   var { id } = req.params;
-
+  console.log("before editing");
   var UpdatedClient = await EditClientById(id, userName);
   res.json(UpdatedClient);
 });
