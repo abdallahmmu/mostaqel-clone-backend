@@ -11,7 +11,12 @@ function getClientById(id) {
 }
 
 function EditClientById(id, title) {
-  return clientModel.findByIdAndUpdate(id, { title: title }, { new: true });
+  console.log("tesing");
+  return clientModel.findByIdAndUpdate(
+    { _id: id },
+    { userName: title },
+    { new: true }
+  );
 }
 
 function getClient() {

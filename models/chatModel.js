@@ -4,7 +4,12 @@ const chatSchema = Schema(
   {
     freelancerId: {
       type: Schema.Types.ObjectId,
-      ref: "freelancers",
+      ref: "freelancer",
+      required: true,
+    },
+    cleintId: {
+      type: Schema.Types.ObjectId,
+      ref: "client",
       required: true,
     },
     projectId: {

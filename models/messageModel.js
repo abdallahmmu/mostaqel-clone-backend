@@ -11,6 +11,11 @@ const messageSchema = Schema(
       type: String,
       required: true,
     },
+    sender: {
+      type: String,
+      required: true,
+      enums: ["freelancer", "client"],
+    },
   },
   {
     timestamps: true,

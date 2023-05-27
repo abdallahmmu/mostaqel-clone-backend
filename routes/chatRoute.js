@@ -13,6 +13,7 @@ import {
 //Schema Validator
 
 //Authentication Middlewar
+import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
 import { isFreelancersAuth } from "../middlewares/freelancersMiddlewares/isFreelancersAuth.js";
 
 export const chatRoute = express.Router();
@@ -20,11 +21,7 @@ export const chatRoute = express.Router();
 // @desc get all messages for specific chat
 // @route get /api/v1/chats/:chatId/messages
 // @access freelancer, the client they chat to each other
-chatRoute.get(
-  "/:chatId/messages",
-  // isFreelancersAuth,
-  getChatMessages
-);
+chatRoute.get("v1/chats/:chatId/messages", getChatMessages);
 
 // @desc Send Message
 // @route post /api/v1/chats/:chatId/messages
@@ -36,26 +33,14 @@ chatRoute.post(
 );
 
 // @desc get all chats for specific freelancer
-// @route get /api/v1/chats/freelancers/:freeancerId
+// @route get /api/v1/chats/freelancers/myChats
 // @access freelancer
-chatRoute.get(
-  "/freelancers/:freeancerId",
-  // isFreelancersAuth,
-  getFreelancerChats
-);
+chatRoute.get("/freelancers/myChats", isFreelancersAuth, getFreelancerChats);
 // @desc get all chats for specific client
-// @route get /api/v1/chats/clients/:clientId
+// @route get /api/v1/chats/clients/myChats/clients/myChats
 // @access client
-chatRoute.get(
-  "/clients/:clientId",
-  // isClientAuth,
-  getClientChats
-);
+chatRoute.get("/clients/myChats", isClient, getClientChats);
 // @desc Create New Chat Between Between Client And Freelancer
 // @route get /api/v1/chats/
 // @access client
-chatRoute.post(
-  "",
-  // isFreelancersAuth,
-  createChat
-);
+chatRoute.post("/", isClient, createChat);

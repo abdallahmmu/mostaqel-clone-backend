@@ -33,7 +33,7 @@ app.use("/api/v1/freelancers", freelancerRoute);
 app.use("/api/v1/projects", projectRoute);
 app.use("/api/v1/clients", clientRouter);
 app.use("/api/v1", offerRoute);
-app.use("/api/v1/chats", chatRoute);
+app.use("/api/", chatRoute);
 
 //Catch All Routes
 app.use("*", (request, response) => {

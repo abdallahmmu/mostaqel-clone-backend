@@ -112,12 +112,12 @@ export const getFreelancerById = async (request, response, next) => {
 //Update ===> Update Freelancer
 
 export const updateFreelancerById = async (request, response, next) => {
-  const freelancerId = request.freelancerId;
+  const freelancerId = request.freelancerId; // coming from token
   const newUpdate = { ...request.body };
 
   //checking for incomming param to be equal the current freelancerId
   if (request.params.id !== freelancerId) {
-    return response.status(404).json({ error: "param is not an id" });
+    return response.status(404).json({ error: "freelancer id is not valid" });
   }
 
   try {

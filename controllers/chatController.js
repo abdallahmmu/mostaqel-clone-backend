@@ -26,8 +26,8 @@ export const sendMessage = async (req, res, next) => {
   try {
     const { chatId } = req.params;
     const { content } = req.body;
-
-    const chatMessages = await messageModel.create({ chatId, content });
+    const sender = req.freelancerId ? "freelancer" : "client";
+    const chatMessages = await messageModel.create({ chatId, content, sender });
     res.status(200).json({
       message: "Success",
       count: chatMessages.length,
@@ -40,55 +40,54 @@ export const sendMessage = async (req, res, next) => {
   }
 };
 
-// @route get /api/v1/freelancers/:freeancerId/chats
+// @route get /api/v1/freelancers/chats
 export const getFreelancerChats = async (req, res, next) => {
-  // try {
-  //   const { chatId } = req.params;
-  //   const chatMessages = await messageModel.find({ chatId });
-  //   res.status(200).json({
-  //     message: "Success",
-  //     count: chatMessages.length,
-  //     data: chatMessages,
-  //   });
-  // } catch (error) {
-  //   error.message = "Can't Find This Project Offers";
-  //   error.statusCode = 404;
-  //   next(error);
-  // }
+  try {
+    const { chatId } = req.params;
+    const chatMessages = await messageModel.find({ chatId });
+    res.status(200).json({
+      message: "Success",
+      count: chatMessages.length,
+      data: chatMessages,
+    });
+  } catch (error) {
+    error.message = "Can't Find This Project Offers";
+    error.statusCode = 404;
+    next(error);
+  }
 };
 
-// @route get /api/v1/clients/:clientId/chats
+// @route get /api/v1/clients/myChats
 export const getClientChats = async (req, res, next) => {
-  // try {
-  //   const { chatId } = req.params;
-  //   const chatMessages = await messageModel.find({ chatId });
-  //   res.status(200).json({
-  //     message: "Success",
-  //     count: chatMessages.length,
-  //     data: chatMessages,
-  //   });
-  // } catch (error) {
-  //   error.message = "Can't Find This Project Offers";
-  //   error.statusCode = 404;
-  //   next(error);
-  // }
+  try {
+    const { clientId } = req;
+    const chatMessages = await chatModel.find({ clientId });
+    res.status(200).json({
+      message: "Success",
+      count: chatMessages.length,
+      data: chatMessages,
+    });
+  } catch (error) {
+    error.message = "Can't Find This Project Offers";
+    error.statusCode = 404;
+    next(error);
+  }
 };
 
 // @route get /api/v1/chats/
 export const createChat = async (req, res, next) => {
-  // try {
-  //   const { chatId } = req.params;
-  //   const chatMessages = await messageModel.find({ chatId });
-  //   res.status(200).json({
-  //     message: "Success",
-  //     count: chatMessages.length,
-  //     data: chatMessages,
-  //   });
-  // } catch (error) {
-  //   error.message = "Can't Find This Project Offers";
-  //   error.statusCode = 404;
-  //   next(error);
-  // }
+  try {
+    req.body.clientId = req.clientId; // projectId,freelancerId
+    const newChat = await chatModel.create(req.body);
+    res.status(200).json({
+      message: "Success",
+      data: newChat,
+    });
+  } catch (error) {
+    error.message = "Can't Find This Project Offers";
+    error.statusCode = 404;
+    next(error);
+  }
 };
 
 // // @route post /api/v1/projects/:projectId/offers

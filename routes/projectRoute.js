@@ -5,7 +5,7 @@ import {
   getSingleProject,
   updateProject,
   deleteProject,
-  getProjectReviews,
+  // getProjectReviews,
   acceptFreelancerToProject,
 } from "../controllers/projectController.js";
 import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
@@ -18,7 +18,7 @@ export const projectRoute = express.Router();
 projectRoute.get("/", getAllProjects);
 
 projectRoute.get("/:id", getSingleProject);
-projectRoute.get("/:projectId/feedback", getProjectReviews);
+// projectRoute.get("/:projectId/feedback", getProjectReviews);
 
 // save project in DB
 projectRoute.post(
