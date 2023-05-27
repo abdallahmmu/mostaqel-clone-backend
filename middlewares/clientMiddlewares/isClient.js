@@ -14,6 +14,7 @@ export const isClient = (req, res, next) => {
   } catch (err) {
     err.message = "server error client middleware auth";
     err.statusCode = 500;
+
     next(err);
   }
 

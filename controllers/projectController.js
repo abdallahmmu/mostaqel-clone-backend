@@ -9,8 +9,10 @@ const createProject = async (req, res) => {
 
   try {
     let projectAdded = await projectModel.create(project);
-    projectAdded && res.status(200).json(projectAdded);
-    !projectAdded && res.status(400).json({ message: "project can't added" });
+    if (!projectAdded) {
+      return res.status(400).json({ error: "can not save project" });
+    }
+    res.status(200).json(projectAdded);
   } catch (error) {
     res.status(403).json({ message: error.message });
   }

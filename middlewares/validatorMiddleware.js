@@ -2,10 +2,8 @@ import { validationResult } from "express-validator";
 // import validator from "express-validator";
 // @desc  catch errors from rules if exists
 const validatorMiddleware = (req, res, next) => {
-  //isEmpty method inside a class called validator static
+  //isEmpty method inside a class called validator stati
 
-  console.log(errors.isEmpty()); //
-  console.log(errors.length); //
   const errors = validationResult(req);
   if (errors.length > 0) {
     return res.status(400).json({ errors: errors.array() });

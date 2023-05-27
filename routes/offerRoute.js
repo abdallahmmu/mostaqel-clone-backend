@@ -48,7 +48,7 @@ offerRoute.delete("/offers/:id", isFreelancersAuth, deleteOffer);
 
 // @desc update offer for specific project
 // @route patch /api/v1/offers/:id
-offerRoute.patch("offers/:id", isFreelancersAuth, updateOffer);
+offerRoute.patch("/offers/:id", isFreelancersAuth, updateOffer);
 
 // @desc get offer for specific freelancer
 // @route get /api/v1/freelancers/myOffers

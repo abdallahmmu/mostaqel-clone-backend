@@ -18,6 +18,11 @@ import { isFreelancersAuth } from "../middlewares/freelancersMiddlewares/isFreel
 
 export const chatRoute = express.Router();
 
+// @desc Create New Chat Between Between Client And Freelancer
+// @route get /api/v1/chats/
+// @access client
+chatRoute.post("v1/chats", isClient, createChat);
+
 // @desc get all messages for specific chat
 // @route get /api/v1/chats/:chatId/messages
 // @access freelancer, the client they chat to each other
@@ -27,20 +32,17 @@ chatRoute.get("v1/chats/:chatId/messages", getChatMessages);
 // @route post /api/v1/chats/:chatId/messages
 // @access freelancer, the client they chat to each other
 chatRoute.post(
-  "/:chatId/messages",
+  "v1/chats/:chatId/messages",
   // isFreelancersAuth,
   sendMessage
 );
 
 // @desc get all chats for specific freelancer
-// @route get /api/v1/chats/freelancers/myChats
+// @route get /api/v1/freelancers/myChats
 // @access freelancer
 chatRoute.get("/freelancers/myChats", isFreelancersAuth, getFreelancerChats);
+
 // @desc get all chats for specific client
-// @route get /api/v1/chats/clients/myChats/clients/myChats
+// @route get /api/v1/clients/myChats
 // @access client
-chatRoute.get("/clients/myChats", isClient, getClientChats);
-// @desc Create New Chat Between Between Client And Freelancer
-// @route get /api/v1/chats/
-// @access client
-chatRoute.post("/", isClient, createChat);
+chatRoute.get("v1/clients/myChats", isClient, getClientChats);
