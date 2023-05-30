@@ -20,7 +20,8 @@ function EditClientById(id, title) {
 }
 
 function getClient() {
-  return clientModel.find().populate("userId");
+  // return clientModel.find().populate("userId");
+  return clientModel.find();
 }
 
 function deleteClientById(id) {
@@ -45,16 +46,12 @@ async function login(req, res) {
 
       res.status(200).json({
         token,
-        savedClient: {
-          name: savedClient.userName,
-          id: savedClient._id,
-        },
       });
     } else {
-      res.status(422).json({ message: "invalid Name or Password" });
+      res.status(422).json({ error: "invalid Name or Password" });
     }
   } else {
-    res.status(422).json({ message: "invalid Name or Password" });
+    res.status(422).json({ error: "invalid Name or Password" });
   }
 }
 

@@ -8,7 +8,6 @@ export const getAllCategories = async (request, response, next) => {
 
     response.status(200).json({ categories });
   } catch (error) {
-    error.message = "Can Not Find Categories";
     error.statusCode = 500;
 
     next(error);
@@ -34,8 +33,7 @@ export const getCategoryById = async (request, response, next) => {
     }
     response.status(200).json({ category });
   } catch (error) {
-    error.message = "Can not Find This Category";
-    error.statusCode = 404;
+    error.statusCode = 500;
     next(error);
   }
 };
@@ -57,9 +55,8 @@ export const addNewCategory = async (request, response, next) => {
     });
 
     const savedCategory = await newCategory.save();
-    response.status(200).json({ massage: "Your Category Has Been Saved !" });
+    response.status(200).json({ message: "Your Category Has Been Saved !" });
   } catch (error) {
-    error.message = "Can Not Add This Category It's Already Exsist!!";
     error.statusCode = 500;
 
     next(error);
@@ -80,9 +77,8 @@ export const updateCategoryById = async (request, response, next) => {
 
   try {
     await CategoryModel.updateOne({ _id: categoryId }, { title: title });
-    response.status(200).json({ massage: "Your Category Has Been Updated!!" });
+    response.status(200).json({ message: "Your Category Has Been Updated!!" });
   } catch (error) {
-    error.message = "Can Not Update This Category";
     error.statusCode = 500;
 
     next(error);
@@ -102,9 +98,8 @@ export const deleteCategoryById = async (request, response, next) => {
 
   try {
     await CategoryModel.deleteOne({ _id: categoryId });
-    response.status(200).json({ massage: "Your Category Has Been Deleted!!" });
+    response.status(200).json({ message: "Your Category Has Been Deleted!!" });
   } catch (error) {
-    error.message = "Can Not Find This Category";
     error.statusCode = 500;
 
     next(error);
@@ -130,10 +125,9 @@ export const getFreelancersForCategory = async (request, response, next) => {
     if (!freelancers)
       return response
         .status(200)
-        .json({ massage: "can not find freelancers in this category" });
+        .json({ message: "can not find freelancers in this category" });
     return response.status(200).json({ freelancers });
   } catch (error) {
-    error.message = "server error faild to get freelancers for category";
     error.statusCode = 500;
 
     next(error);

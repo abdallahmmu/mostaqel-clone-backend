@@ -8,16 +8,17 @@ import {
 } from "../controllers/skillController.js";
 export const skillesRoute = express.Router();
 
-skillesRoute.get("/", async (req, res) => {
+skillesRoute.get("/", async (req, res, next) => {
   try {
     var skills = await getAllskills();
     res.status(200).json(skills);
   } catch (e) {
-    res.status(404).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
-skillesRoute.post("/", async (req, res) => {
+skillesRoute.post("/", async (req, res, next) => {
   try {
     var skill = req.body;
 
@@ -25,17 +26,19 @@ skillesRoute.post("/", async (req, res) => {
 
     res.json(newSkill);
   } catch (e) {
-    res.status(404).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
-skillesRoute.get("/:id", async (req, res) => {
+skillesRoute.get("/:id", async (req, res, next) => {
   var id = req.params.id;
   try {
     var foundedSkill = await getSkillById(id);
     res.json(foundedSkill);
   } catch (e) {
-    res.status(404).json(e.message);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
@@ -47,12 +50,13 @@ skillesRoute.patch("/:id", async (req, res) => {
   res.json(UpdatedSkill);
 });
 
-skillesRoute.delete("/:id", async (req, res) => {
+skillesRoute.delete("/:id", async (req, res, next) => {
   try {
     var { id } = req.params;
     var deleteSkill = await deleteSkillById(id);
     res.status(201).json(deleteSkill);
   } catch (e) {
-    res.status(404).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });

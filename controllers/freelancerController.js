@@ -19,11 +19,9 @@ export const registerFreelancer = async (request, response, next) => {
   try {
     let newFreelancer = new FreelancerModel(request.body);
     const createdFreelancer = await newFreelancer.save();
-    response.status(200).json({ massage: "Freelancer Created Sucssfully!" });
+    response.status(200).json({ message: "Freelancer Created Sucssfully!" });
   } catch (error) {
-    error.message = "Error During Saving";
     error.statusCode = 500;
-
     next(error);
   }
 };
@@ -50,9 +48,7 @@ export const loginFreelancer = async (request, response, next) => {
       freelancerAccout.password
     );
     if (!hashedPassword) {
-      return response
-        .status(401)
-        .json({ massage: "invalid email or password" });
+      return response.status(401).json({ error: "invalid email or password" });
     }
 
     //Generate JWT Token
@@ -60,6 +56,7 @@ export const loginFreelancer = async (request, response, next) => {
       {
         email: freelancerAccout.email,
         freelancerId: freelancerAccout._id.toString(),
+        username: freelancerAccout.username,
         role: "freelancer",
       },
       process.env.SECRETE_KEY,
@@ -70,13 +67,10 @@ export const loginFreelancer = async (request, response, next) => {
     );
 
     response.status(200).json({
-      massage: "You Have Been Login Sucssesfully!",
+      message: "You Have Been Login Sucssesfully!",
       token,
-      freelancerId: freelancerAccout._id,
-      username: freelancerAccout.username,
     });
   } catch (error) {
-    error.message = " Server invalid email or password";
     error.statusCode = 500;
     next(error);
   }
@@ -87,7 +81,7 @@ export const loginFreelancer = async (request, response, next) => {
 export const getFreelancerById = async (request, response, next) => {
   const freelancerId = request.params.id;
 
-  /*   if (!freelancerId || !request.params.id) {
+  /*   if (!req.freelancerId || !request.params.id) { // it was for authorization but now anyone can get any freelancer details
     return response
       .status(401)
       .json({ error: "Your Are Not Allowed To Get This Data" });
@@ -99,12 +93,11 @@ export const getFreelancerById = async (request, response, next) => {
       "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username"
     ).populate("categoryId");
     if (!freelancerAccount) {
-      return response.status(404).json({ massage: "user not found" });
+      return response.status(404).json({ error: "user not found" });
     }
     response.status(200).json({ data: freelancerAccount });
   } catch (error) {
-    error.message = "can not find freelancer account";
-    error.statusCode = 401;
+    error.statusCode = 500;
     next(error);
   }
 };
@@ -136,10 +129,9 @@ export const updateFreelancerById = async (request, response, next) => {
       newUpdate
     );
 
-    response.status(200).json({ massage: "your data has been updated !" });
+    response.status(200).json({ message: "your data has been updated !" });
   } catch (error) {
-    error.message = "can not update this freelancer";
-    error.statusCode = 401;
+    error.statusCode = 500;
     next(error);
   }
 };
@@ -163,7 +155,7 @@ export const uploadImageForFreelancer = async (request, response, next) => {
     await freelancerAccount.save();
     freelancerAccount.avatar = response
       .status(200)
-      .json({ massage: "your photo has been uploaded" });
+      .json({ message: "your photo has been uploaded" });
   } catch (error) {
     error.message = "server error faild to upload";
     error.statusCode = 500;
@@ -182,5 +174,8 @@ export const getAllFreelancers = async (request, response, next) => {
     ).sort({ username: -1 });
 
     response.status(200).json({ allFreelancers });
-  } catch (error) {}
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
 };

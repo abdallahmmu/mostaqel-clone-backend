@@ -3,7 +3,7 @@ import offerModel from "../models/offerModel.js";
 
 import projectModel from "../models/projectModel.js";
 
-const createProject = async (req, res) => {
+const createProject = async (req, res, next) => {
   req.body.clientId = req.clientId;
   const project = req.body;
 
@@ -14,11 +14,12 @@ const createProject = async (req, res) => {
     }
     res.status(200).json(projectAdded);
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const getAllProjects = async (req, res) => {
+const getAllProjects = async (req, res, next) => {
   const limit = 5; //projects per page
   const page = parseInt(req.query.page) || 1;
 
@@ -42,13 +43,14 @@ const getAllProjects = async (req, res) => {
         .json({ resultProjects, totalPages, currentPage, countDocument });
 
     !resultProjects &&
-      res.status(400).json({ message: "all project can't returned" });
+      res.status(400).json({ error: "all project can't returned" });
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const acceptFreelancerToProject = async (req, res) => {
+const acceptFreelancerToProject = async (req, res, next) => {
   let projetId = req.params.id;
   let offerId = req.body.offerId;
 
@@ -63,23 +65,25 @@ const acceptFreelancerToProject = async (req, res) => {
 
     projectUpdated && res.status(200).json({ projectUpdated });
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const getSingleProject = async (req, res) => {
+const getSingleProject = async (req, res, next) => {
   let projectId = req.params.id;
   try {
     let singleProject = await projectModel.findById(projectId);
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
-      res.status(400).json({ message: "single project can't returned" });
+      res.status(404).json({ error: "single project can't returned" });
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const updateProject = async (req, res) => {
+const updateProject = async (req, res, next) => {
   const { title, description } = req.body;
   const { id } = req.params;
 
@@ -89,22 +93,22 @@ const updateProject = async (req, res) => {
       { title, description }
     );
     projectUpdated && res.status(200).json(projectUpdated);
-    !projectUpdated &&
-      res.status(400).json({ message: "project can't updated" });
+    !projectUpdated && res.status(404).json({ error: "project can't updated" });
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const deleteProject = async (req, res) => {
+const deleteProject = async (req, res, next) => {
   const { id } = req.params;
   try {
     let projectDeleted = await projectModel.deleteOne({ _id: id });
     projectDeleted && res.status(200).json(projectDeleted);
-    !projectDeleted &&
-      res.status(400).json({ message: "project can't deleted" });
+    !projectDeleted && res.status(404).json({ error: "project can't deleted" });
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    error.statusCode = 500;
+    next(error);
   }
 };
 

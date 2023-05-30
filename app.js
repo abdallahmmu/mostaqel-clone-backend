@@ -29,13 +29,13 @@ app.use(
 );
 
 //MiddleWares Routes
+app.use("/api/v1", offerRoute);
+app.use("/api/", chatRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/freelancers", freelancerRoute);
 app.use("/api/v1/projects", projectRoute);
 app.use("/api/v1/skills", skillesRoute);
 app.use("/api/v1/clients", clientRouter);
-app.use("/api/v1", offerRoute);
-app.use("/api/", chatRoute);
 
 //Catch All Routes
 app.use("*", (request, response) => {

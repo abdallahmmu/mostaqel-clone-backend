@@ -13,7 +13,10 @@ import {
 } from "./../controllers/offerController.js";
 
 //Schema Validator
-import { sendOfferSchemaValidator } from "../validators/offerValidator.js";
+import {
+  sendOfferSchemaValidator,
+  updateOfferSchemaValidator,
+} from "../validators/offerValidator.js";
 
 //Authentication Middlewar
 import { isFreelancersAuth } from "../middlewares/freelancersMiddlewares/isFreelancersAuth.js";
@@ -48,8 +51,15 @@ offerRoute.delete("/offers/:id", isFreelancersAuth, deleteOffer);
 
 // @desc update offer for specific project
 // @route patch /api/v1/offers/:id
-offerRoute.patch("/offers/:id", isFreelancersAuth, updateOffer);
+offerRoute.patch(
+  "/offers/:id",
+  isFreelancersAuth,
+  checkSchema(updateOfferSchemaValidator),
+  validatorMiddleware,
+  updateOffer
+);
 
 // @desc get offer for specific freelancer
-// @route get /api/v1/freelancers/myOffers
-offerRoute.get("freelancers/myOffers", isFreelancersAuth, getFreelancerOffers);
+// @route get /api/v1/freelancers/myoffers
+//  @access freelancer who logged In and who sent the offer
+offerRoute.get("/freelancers/myoffers", isFreelancersAuth, getFreelancerOffers);
