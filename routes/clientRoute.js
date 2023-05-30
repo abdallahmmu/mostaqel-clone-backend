@@ -11,17 +11,18 @@ import {
 } from "../controllers/clientController.js";
 const clientRouter = express.Router();
 
-clientRouter.get("/", async (req, res) => {
+clientRouter.get("/", async (req, res, next) => {
   try {
     var client = await getClient();
 
     res.status(200).json(client);
   } catch (e) {
-    res.status(404).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
-clientRouter.post("/", async (req, res) => {
+clientRouter.post("/", async (req, res, next) => {
   var { firstName, lastName, userName, password, phone, email, address } =
     req.body;
   try {
@@ -36,35 +37,37 @@ clientRouter.post("/", async (req, res) => {
     });
     res.status(201).json(newClient);
   } catch (e) {
-    res.status(422).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
-clientRouter.get("/:id", async (req, res) => {
+clientRouter.get("/:id", async (req, res, next) => {
   var id = req.params.id;
   try {
     var foundedClient = await getClientById(id);
     res.json(foundedClient);
   } catch (e) {
-    res.status(404).json(e.message);
+    e.statusCode = 500;
+    next(e);
   }
 });
 
 clientRouter.patch("/:id", auth, async (req, res) => {
   var { userName } = req.body;
   var { id } = req.params;
-  console.log("before editing");
   var UpdatedClient = await EditClientById(id, userName);
   res.json(UpdatedClient);
 });
 
-clientRouter.delete("/:id", auth, async (req, res) => {
+clientRouter.delete("/:id", auth, async (req, res, next) => {
   try {
     var { id } = req.params;
     var deleteClient = await deleteClientById(id);
     res.status(201).json(deleteClient);
   } catch (e) {
-    res.status(404).json(e);
+    e.statusCode = 500;
+    next(e);
   }
 });
 

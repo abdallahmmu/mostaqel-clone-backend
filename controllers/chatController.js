@@ -12,8 +12,7 @@ export const createChat = async (req, res, next) => {
       data: newChat,
     });
   } catch (error) {
-    error.message = "Can't Find This Project Offers";
-    error.statusCode = 404;
+    error.statusCode = 500;
     next(error);
   }
 };
@@ -30,8 +29,7 @@ export const getChatMessages = async (req, res, next) => {
       data: chatMessages,
     });
   } catch (error) {
-    error.message = "Can't Find This Project Offers";
-    error.statusCode = 404;
+    error.statusCode = 500;
 
     next(error);
   }
@@ -50,16 +48,15 @@ export const sendMessage = async (req, res, next) => {
       data: chatMessages,
     });
   } catch (error) {
-    error.message = "Can't Find This Project Offers";
-    error.statusCode = 404;
+    error.statusCode = 500;
     next(error);
   }
 };
 
-// @route get /api/v1/freelancers/myChats
+// @route get /api/v1/freelancers/chats
 export const getFreelancerChats = async (req, res, next) => {
   try {
-    const { freelancerId } = req.params;
+    const { freelancerId } = req;
     const freelancerChats = await chatModel.find({ freelancerId });
     res.status(200).json({
       message: "Success",
@@ -67,13 +64,12 @@ export const getFreelancerChats = async (req, res, next) => {
       data: freelancerChats,
     });
   } catch (error) {
-    error.message = "Can't Find This Project Offers";
-    error.statusCode = 404;
+    error.statusCode = 500;
     next(error);
   }
 };
 
-// @route get /api/v1/clients/myChats
+// @route get /api/v1/clients/chats
 export const getClientChats = async (req, res, next) => {
   try {
     const { clientId } = req;
@@ -84,8 +80,7 @@ export const getClientChats = async (req, res, next) => {
       data: clientChats,
     });
   } catch (error) {
-    error.message = "Can't Find This Project Offers";
-    error.statusCode = 404;
+    error.statusCode = 500;
     next(error);
   }
 };

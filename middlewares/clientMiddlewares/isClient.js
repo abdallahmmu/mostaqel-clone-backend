@@ -5,14 +5,16 @@ export const isClient = (req, res, next) => {
   const token = req.get("Authorization");
 
   if (!token) {
-    return res.status(404).json({ error: "token not found" });
+    return res.status(404).json({
+      error:
+        "token not found or you are not a client  --- you should login with client account",
+    });
   }
 
   let veryify;
   try {
     veryify = jwt.verify(token, process.env.SECRETE_KEY);
   } catch (err) {
-    err.message = "server error client middleware auth";
     err.statusCode = 500;
 
     next(err);
@@ -20,11 +22,10 @@ export const isClient = (req, res, next) => {
 
   if (!veryify) {
     return res.status(401).json({
-      error: "can not not valid",
+      error: "your token is not valid",
     });
   }
 
   req.clientId = veryify.clientId;
-
   next();
 };

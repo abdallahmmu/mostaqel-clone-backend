@@ -1,0 +1,3762 @@
+{
+	"info": {
+		"_postman_id": "b212d3ad-9de3-4978-89f4-5724a8dbf164",
+		"name": "Backend_ITI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24015218",
+		"_collection_link": "https://warped-desert-584127.postman.co/workspace/Team-Workspace~f1cb50d2-8086-40e7-8764-d738f8444b1d/collection/24015218-b212d3ad-9de3-4978-89f4-5724a8dbf164?action=share&creator=24015218&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Freelancer",
+			"item": [
+				{
+					"name": "Register A Freelancer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"a@a10.com\",\n    \"firstName\":\"Abdallah\",\n    \"lastName\":\"Muhammed\",\n    \"username\":\"AbdooHamoo4\",\n    \"password\":\"Test2023**\",\n    \"jobTitle\":\"Front-end Developer\",\n    \"categoryId\":\"6463c901d7d486e9f46876fe\",\n    \"phoneNumber\":\"01113455879\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a4.com\",\n    \"firstName\":\"Abdallah\",\n    \"lastName\":\"Muhammed\",\n    \"username\":\"AbdooHamo4\",\n    \"password\":\"Test2023**\",\n    \"jobTitle\":\"Front-end Developer\",\n    \"categoryId\":\"6463c901d7d486e9f46876fe\",\n    \"phoneNumber\":\"01013455020\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-aV3QsRmuuf2eLDnjjAkCd7Dbdiw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 May 2023 17:35:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Freelancer Created Sucssfully!\"\n}"
+						},
+						{
+							"name": "Register A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a7.com\",\n    \"firstName\":\"Abdallah\",\n    \"lastName\":\"Muhammed\",\n    \"username\":\"AbdooHamo4\",\n    \"password\":\"Test2023**\",\n    \"jobTitle\":\"Front-end Developer\",\n    \"categoryId\":\"6463c901d7d486e9f46876fe\",\n    \"phoneNumber\":\"01113455020\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-aV3QsRmuuf2eLDnjjAkCd7Dbdiw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:06:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Freelancer Created Sucssfully!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login A Freelancer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.environment.set(\"freelancerToken\", responseJson.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"a@a10.com\",\n    \"password\":\"Test2023**\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a4.com\",\n    \"password\":\"Test2023**\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-u9RK8mSLCUNys0Tr2o9W9i4bP6Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 May 2023 17:42:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"You Have Been Login Sucssesfully!\",\n    \"token\": \"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTQuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MGVkZTdlMTU1NjVhYmJhMWM0ODdiIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUxMjI5NTAsImV4cCI6MTY4NTEzMDE1MH0.2XRWbBDfksaNyLmvNzJNAPk7KP9mOJ2z_8TjLcVgNVw9yNN6LEF_1306zzaJZGcv\",\n    \"freelancerId\": \"6470ede7e15565abba1c487b\",\n    \"role\": \"freelancer\"\n}"
+						},
+						{
+							"name": "Login A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a7.com\",\n    \"password\":\"Test2023**\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "381"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17d-FzUulKupuk+Mojp1TvfCkzjnqLk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:07:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"You Have Been Login Sucssesfully!\",\n    \"token\": \"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTcuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MjM4YjM0YjIxODllMDFjZGNmZmUyIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUyMDcyNTEsImV4cCI6MTY4NTIxNDQ1MX0.gEw8JcyyMcoO0A8lH4XPUTYVtOMgLlMWYQvm8n_En4698--HluvK06GJyWU912QA\",\n    \"freelancerId\": \"647238b34b2189e01cdcffe2\",\n    \"username\": \"AbdooHamo4\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get FreelancerById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/freelancers/6476148f71810ff2093c346c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"6476148f71810ff2093c346c"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get FreelancerById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/freelancers/647238b34b2189e01cdcffe2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"647238b34b2189e01cdcffe2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "388"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"184-oWjS4xl2Ho08EHuoI3cbn5MMwuI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:08:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"_id\": \"647238b34b2189e01cdcffe2\",\n        \"username\": \"AbdooHamo4\",\n        \"phoneNumber\": \"01113455020\",\n        \"email\": \"a@a7.com\",\n        \"isVerify\": false,\n        \"categoryId\": {\n            \"_id\": \"6463c901d7d486e9f46876fe\",\n            \"title\": \"Translating\",\n            \"createdAt\": \"2023-05-16T18:18:41.296Z\",\n            \"updatedAt\": \"2023-05-16T18:18:41.296Z\",\n            \"__v\": 0\n        },\n        \"jobTitle\": \"Front-end Developer\",\n        \"firstName\": \"Abdallah\",\n        \"lastName\": \"Muhammed\",\n        \"completedProjects\": []\n    }\n}"
+						},
+						{
+							"name": "Get FreelancerById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/freelancers/647238b34b2189e01cdcffe2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"647238b34b2189e01cdcffe2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "386"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"182-JbolGBf05t7QG0QfxCOlD6xrE2M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:09:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"_id\": \"647238b34b2189e01cdcffe2\",\n        \"username\": \"Mo Farag\",\n        \"phoneNumber\": \"01113455020\",\n        \"email\": \"a@a7.com\",\n        \"isVerify\": false,\n        \"categoryId\": {\n            \"_id\": \"6463c901d7d486e9f46876fe\",\n            \"title\": \"Translating\",\n            \"createdAt\": \"2023-05-16T18:18:41.296Z\",\n            \"updatedAt\": \"2023-05-16T18:18:41.296Z\",\n            \"__v\": 0\n        },\n        \"jobTitle\": \"Front-end Developer\",\n        \"firstName\": \"Abdallah\",\n        \"lastName\": \"Muhammed\",\n        \"completedProjects\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update FreelancerById",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTEwLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NzYxNDhmNzE4MTBmZjIwOTNjMzQ2YyIsInVzZXJuYW1lIjoiQWJkb29IYW1vbzQiLCJyb2xlIjoiZnJlZWxhbmNlciIsImlhdCI6MTY4NTQ2MDEyMCwiZXhwIjoxNjg1NDY3MzIwfQ.bwIMBPTGMg2a0ZAJbqFOj0noyYw4N3AdS75E2BvwN1XaHRSBUlI5FiUoEpOVZus4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"Abdallah Muhammed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/6476148f71810ff2093c346c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"6476148f71810ff2093c346c"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update FreelancerById",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTcuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MjM4YjM0YjIxODllMDFjZGNmZmUyIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUyMDcyNTEsImV4cCI6MTY4NTIxNDQ1MX0.gEw8JcyyMcoO0A8lH4XPUTYVtOMgLlMWYQvm8n_En4698--HluvK06GJyWU912QA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"Mo Farag\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/647238b34b2189e01cdcffe2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"647238b34b2189e01cdcffe2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-sBFyVi63EAjh1/ezB6NN6tEEmT0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:09:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"your data has been updated !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload Avatar Freelancer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTEwLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NzYxNDhmNzE4MTBmZjIwOTNjMzQ2YyIsInVzZXJuYW1lIjoiQWJkb29IYW1vbzQiLCJyb2xlIjoiZnJlZWxhbmNlciIsImlhdCI6MTY4NTQ2MDEyMCwiZXhwIjoxNjg1NDY3MzIwfQ.bwIMBPTGMg2a0ZAJbqFOj0noyYw4N3AdS75E2BvwN1XaHRSBUlI5FiUoEpOVZus4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/abdallah/Downloads/000.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/upload-avatar/6476148f71810ff2093c346c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"upload-avatar",
+								"6476148f71810ff2093c346c"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upload Avatar Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTcuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MjM4YjM0YjIxODllMDFjZGNmZmUyIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUyMDcyNTEsImV4cCI6MTY4NTIxNDQ1MX0.gEw8JcyyMcoO0A8lH4XPUTYVtOMgLlMWYQvm8n_En4698--HluvK06GJyWU912QA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": "/D:/DCwnIRCXsAAIAYC.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/upload-avatar/647238b34b2189e01cdcffe2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"upload-avatar",
+										"647238b34b2189e01cdcffe2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-eT16z9SS1GA/IF+oKYShQkgqB78\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:11:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"your photo has been uploaded\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Freelancers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/freelancers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Freelancers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/freelancers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1317"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"525-dYVf256igj5Gt+X2esWCM76ONUM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:13:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"allFreelancers\": [\n        {\n            \"_id\": \"647238b34b2189e01cdcffe2\",\n            \"username\": \"Mo Farag\",\n            \"phoneNumber\": \"01113455020\",\n            \"email\": \"a@a7.com\",\n            \"isVerify\": false,\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\",\n            \"lastName\": \"Muhammed\",\n            \"completedProjects\": [],\n            \"avatar\": \"Freelancers-Avatars\\\\avatar209.9748916049635-DCwnIRCXsAAIAYC.jpg\"\n        },\n        {\n            \"_id\": \"64709f69fbd91f0b43dfcb4e\",\n            \"username\": \"AbdooHamo2\",\n            \"phoneNumber\": \"01013455022\",\n            \"email\": \"a@a2.com\",\n            \"isVerify\": false,\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\",\n            \"lastName\": \"Muhammed\",\n            \"completedProjects\": [],\n            \"avatar\": \"Freelancers-Avatars\\\\avatar255-.png\"\n        },\n        {\n            \"_id\": \"6468e782ddc2a4d4d6a16b13\",\n            \"username\": \"AbdooHamo\",\n            \"phoneNumber\": \"01013455024\",\n            \"email\": \"a@a.com\",\n            \"isVerify\": false,\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\",\n            \"lastName\": \"Muhammed\",\n            \"completedProjects\": []\n        },\n        {\n            \"_id\": \"6467a36b8aa1609a10cc6265\",\n            \"username\": \"Abdallahmmu\",\n            \"phoneNumber\": \"01013455023\",\n            \"email\": \"a@02a.com\",\n            \"isVerify\": false,\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\",\n            \"lastName\": \"Muhammed\",\n            \"completedProjects\": [],\n            \"avatar\": \"Freelancers-Avatars/avatar135.80642555148754-000.jpg\"\n        },\n        {\n            \"_id\": \"6470ede7e15565abba1c487b\",\n            \"username\": \"14\",\n            \"phoneNumber\": \"01013455020\",\n            \"email\": \"a@a4.com\",\n            \"isVerify\": false,\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\",\n            \"lastName\": \"Muhammed\",\n            \"completedProjects\": []\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/category",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category"
+							]
+						},
+						"description": "this api gives you all the categories in the DB"
+					},
+					"response": [
+						{
+							"name": "Get All Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/category",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-WhPOph3cYbI6g28j5vyPkilf8a8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:13:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categories\": [\n        {\n            \"_id\": \"6463c901d7d486e9f46876fe\",\n            \"title\": \"Translating\",\n            \"createdAt\": \"2023-05-16T18:18:41.296Z\",\n            \"updatedAt\": \"2023-05-16T18:18:41.296Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get CategoryById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/category/6463c901d7d486e9f46876fe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"6463c901d7d486e9f46876fe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get CategoryById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/category/6463c901d7d486e9f46876fe",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category",
+										"6463c901d7d486e9f46876fe"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "155"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9b-bii4Pmus3G+u1jqvzCV+phMCD8Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:13:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"category\": {\n        \"_id\": \"6463c901d7d486e9f46876fe\",\n        \"title\": \"Translating\",\n        \"createdAt\": \"2023-05-16T18:18:41.296Z\",\n        \"updatedAt\": \"2023-05-16T18:18:41.296Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Freelancers For Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/category/6463c901d7d486e9f46876fe/freelancers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"6463c901d7d486e9f46876fe",
+								"freelancers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Freelancers For Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/category/6463c901d7d486e9f46876fe/freelancers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category",
+										"6463c901d7d486e9f46876fe",
+										"freelancers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "877"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36d-Y44JXPBMOpPuqnweUailDG0qMiU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:14:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"freelancers\": [\n        {\n            \"_id\": \"6467a36b8aa1609a10cc6265\",\n            \"username\": \"Abdallahmmu\",\n            \"email\": \"a@02a.com\",\n            \"categoryId\": \"6463c901d7d486e9f46876fe\",\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\"\n        },\n        {\n            \"_id\": \"6468e782ddc2a4d4d6a16b13\",\n            \"username\": \"AbdooHamo\",\n            \"email\": \"a@a.com\",\n            \"categoryId\": \"6463c901d7d486e9f46876fe\",\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\"\n        },\n        {\n            \"_id\": \"64709f69fbd91f0b43dfcb4e\",\n            \"username\": \"AbdooHamo2\",\n            \"email\": \"a@a2.com\",\n            \"categoryId\": \"6463c901d7d486e9f46876fe\",\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\"\n        },\n        {\n            \"_id\": \"6470ede7e15565abba1c487b\",\n            \"username\": \"14\",\n            \"email\": \"a@a4.com\",\n            \"categoryId\": \"6463c901d7d486e9f46876fe\",\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\"\n        },\n        {\n            \"_id\": \"647238b34b2189e01cdcffe2\",\n            \"username\": \"Mo Farag\",\n            \"email\": \"a@a7.com\",\n            \"categoryId\": \"6463c901d7d486e9f46876fe\",\n            \"jobTitle\": \"Front-end Developer\",\n            \"firstName\": \"Abdallah\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add New Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Programming\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/category",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add New Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Programming\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/category",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-w9ntWRS0CzrvG6u0XlDAQlpeHvY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:14:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Your Category Has Been Saved !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update CategoryById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Programming Updateddddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/category/647615eb71810ff2093c3482",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"647615eb71810ff2093c3482"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update CategoryById",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Programming Updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/category/64723a7b4b2189e01cdcfff4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category",
+										"64723a7b4b2189e01cdcfff4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-Soj1UbOkZfW2msiq2lI2xZgDmPA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:15:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Your Category Has Been Updated!!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete CategoryById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/category/647615eb71810ff2093c3482",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"647615eb71810ff2093c3482"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete CategoryById",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/category/64723a7b4b2189e01cdcfff4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"category",
+										"64723a7b4b2189e01cdcfff4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-rbaZDgfk+b2XLnyPFychw5fK4fY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:15:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Your Category Has Been Deleted!!\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Mostaqel-clone Category API Documentation"
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Register A Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"mohammed\",\r\n    \"lastName\" : \"farrag\",\r\n     \"userName\" : \"akak\",\r\n     \"password\": \"123456785\",\r\n      \"phone\" : 123456745,\r\n       \"email\" : \"m@m0.com\",\r\n        \"address\" : \"addressss\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clients",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register A Client",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\" : \"mohammed\",\r\n    \"lastName\" : \"farrag\",\r\n     \"userName\" : \"akak\",\r\n     \"password\": \"123456785\",\r\n      \"phone\" : 123456745,\r\n       \"email\" : \"m@m0.com\",\r\n        \"address\" : \"addressss\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/clients",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clients"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "255"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ff-HLeLd/exWDzZtu8PfhR3AjfeXpo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:17:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstName\": \"mohammed\",\n    \"lastName\": \"farrag\",\n    \"userName\": \"akak\",\n    \"password\": \"$2b$12$3DlH9.CgmYiFFZD7USU5LuTqPfcXUPkCBVaOJCbfkgMa9Egnj6kxu\",\n    \"phone\": 123456745,\n    \"email\": \"m@m0.com\",\n    \"address\": \"addressss\",\n    \"isVerified\": false,\n    \"_id\": \"64723b384b2189e01cdd0003\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Login A Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.environment.set(\"clientToken\", responseJson.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \"password\": \"123456785\",\r\n       \"email\" : \"m@m0.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clients/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login A Client",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n     \"password\": \"123456785\",\r\n       \"email\" : \"m@m0.com\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3300/api/v1/clients/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3300",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fd-VyjJBnxWJrRS+BlZlYUeoKLvgFc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:18:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzYjM4NGIyMTg5ZTAxY2RkMDAwMyIsImlhdCI6MTY4NTIwNzkwMiwiZXhwIjoxNjg1MjE1MTAyfQ.TTmdRJPCRWMEtYEpD5AAvjg0hdnVAdnDUiDhiI1_Jwg\",\n    \"savedClient\": {\n        \"name\": \"akak\",\n        \"id\": \"64723b384b2189e01cdd0003\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Client By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzZGQ1NGIyMTg5ZTAxY2RkMDAxNSIsImlhdCI6MTY4NTQ2MDY5MiwiZXhwIjoxNjg1NDY3ODkyfQ.ClSzlkhXjQisPw8TzM2kAP93HEWMyjoXaSHingYqaAk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/clients/64723dd54b2189e01cdd0015",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients",
+								"64723dd54b2189e01cdd0015"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Client By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/clients/64723b384b2189e01cdd0003",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clients",
+										"64723b384b2189e01cdd0003"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "255"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ff-KnNQbO4w1KiY2BT+8BfH92wxWmw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:18:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64723b384b2189e01cdd0003\",\n    \"firstName\": \"mohammed\",\n    \"lastName\": \"farrag\",\n    \"userName\": \"akak\",\n    \"password\": \"$2b$12$3DlH9.CgmYiFFZD7USU5LuTqPfcXUPkCBVaOJCbfkgMa9Egnj6kxu\",\n    \"phone\": 123456745,\n    \"email\": \"m@m0.com\",\n    \"address\": \"addressss\",\n    \"isVerified\": false,\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Client By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzZGQ1NGIyMTg5ZTAxY2RkMDAxNSIsImlhdCI6MTY4NTQ2MDY5MiwiZXhwIjoxNjg1NDY3ODkyfQ.ClSzlkhXjQisPw8TzM2kAP93HEWMyjoXaSHingYqaAk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\":\"Mo Farag2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clients/64723dd54b2189e01cdd0015",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients",
+								"64723dd54b2189e01cdd0015"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Client By Id",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzYjM4NGIyMTg5ZTAxY2RkMDAwMyIsImlhdCI6MTY4NTIwODA5NSwiZXhwIjoxNjg1MjE1Mjk1fQ.GH-qgXpmrJFVg1BWdRKMv3OdAfHC049p3n_HFYPQ0Gw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userName\":\"Mo Farag2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/clients/64723b384b2189e01cdd0003",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clients",
+										"64723b384b2189e01cdd0003"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-vKhOFI5gGnkcJ0DAN/lpaxWuFJk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:22:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64723b384b2189e01cdd0003\",\n    \"firstName\": \"mohammed\",\n    \"lastName\": \"farrag\",\n    \"userName\": \"Mo Farag2\",\n    \"password\": \"$2b$12$3DlH9.CgmYiFFZD7USU5LuTqPfcXUPkCBVaOJCbfkgMa9Egnj6kxu\",\n    \"phone\": 123456745,\n    \"email\": \"m@m0.com\",\n    \"address\": \"addressss\",\n    \"isVerified\": false,\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Client By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzZGQ1NGIyMTg5ZTAxY2RkMDAxNSIsImlhdCI6MTY4NTQ2MDY5MiwiZXhwIjoxNjg1NDY3ODkyfQ.ClSzlkhXjQisPw8TzM2kAP93HEWMyjoXaSHingYqaAk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clients/64723dd54b2189e01cdd0015?=",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients",
+								"64723dd54b2189e01cdd0015"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Client By Id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzYjM4NGIyMTg5ZTAxY2RkMDAwMyIsImlhdCI6MTY4NTIwODA5NSwiZXhwIjoxNjg1MjE1Mjk1fQ.GH-qgXpmrJFVg1BWdRKMv3OdAfHC049p3n_HFYPQ0Gw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/clients/64723b384b2189e01cdd0003",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clients",
+										"64723b384b2189e01cdd0003"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-vKhOFI5gGnkcJ0DAN/lpaxWuFJk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:23:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64723b384b2189e01cdd0003\",\n    \"firstName\": \"mohammed\",\n    \"lastName\": \"farrag\",\n    \"userName\": \"Mo Farag2\",\n    \"password\": \"$2b$12$3DlH9.CgmYiFFZD7USU5LuTqPfcXUPkCBVaOJCbfkgMa9Egnj6kxu\",\n    \"phone\": 123456745,\n    \"email\": \"m@m0.com\",\n    \"address\": \"addressss\",\n    \"isVerified\": false,\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "Get All skills",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/skills",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"skills"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All skills",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/skills",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"skills"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"175-VECRcZbX5c1HTpMMe8+XPIji71I\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 16:53:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"645742dcd27b9a6251272952\",\n        \"name\": \"CSS\"\n    },\n    {\n        \"_id\": \"645742dcd27b9a625127294f\",\n        \"name\": \"graphic design\"\n    },\n    {\n        \"_id\": \"645742dcd27b9a6251272951\",\n        \"name\": \"HTML\"\n    },\n    {\n        \"_id\": \"645742dcd27b9a6251272950\",\n        \"name\": \"writing\"\n    },\n    {\n        \"_id\": \"645a606c3928dff0fea073ea\",\n        \"name\": \"photoshop\"\n    },\n    {\n        \"_id\": \"645a606c3928dff0fea073e9\",\n        \"name\": \"Wordpress\"\n    },\n    {\n        \"_id\": \"645a606c3928dff0fea073eb\",\n        \"name\": \"translation\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get skills By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/skills/645a606c3928dff0fea073eb",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"skills",
+								"645a606c3928dff0fea073eb"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get skills By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/skills/645a606c3928dff0fea073eb",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"skills",
+										"645a606c3928dff0fea073eb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-K+PjR6gZOUxILPDA2UhIC37BtdI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 16:58:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"645a606c3928dff0fea073eb\",\n    \"name\": \"translation\"\n}"
+						}
+					]
+				},
+				{
+					"name": "post a Skill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \"name\": \"JavaScript\",\r\n     \"categoryId\":\"6463c901d7d486e9f46876fe\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/skills",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"skills"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "post a Skill",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n     \"name\": \"JavaScript\",\r\n     \"categoryId\":\"6463c901d7d486e9f46876fe\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/skills",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"skills"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "102"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"66-HQX262n7qtb4ZMWBBnujTSbRqyU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:00:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"JavaScript\",\n    \"categoryId\": \"6463c901d7d486e9f46876fe\",\n    \"_id\": \"6472371737399b47ef44f33f\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Skills By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIyMTlhOGM5YjIwMGQxMDExYmI3NiIsImlhdCI6MTY4NTIwMTcwMiwiZXhwIjoxNjg1MjA4OTAyfQ.ZKSTu1F04LUscFNGnieaMGwK0z3S_jq2d4rQ2M7jw_g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"graphiccc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/skills/645742dcd27b9a625127294f",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"skills",
+								"645742dcd27b9a625127294f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Skills By Id",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIyMTlhOGM5YjIwMGQxMDExYmI3NiIsImlhdCI6MTY4NTIwMTcwMiwiZXhwIjoxNjg1MjA4OTAyfQ.ZKSTu1F04LUscFNGnieaMGwK0z3S_jq2d4rQ2M7jw_g",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Css\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/skills/6472371737399b47ef44f33f",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"skills",
+										"6472371737399b47ef44f33f"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-o+s+9s/CYZot0TPZQmuoc3lHOw0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:02:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6472371737399b47ef44f33f\",\n    \"name\": \"Css\",\n    \"categoryId\": \"6463c901d7d486e9f46876fe\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete skills By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMjNhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjUxYjdhMmUxMjk5NzdlMmMzOWY1NiIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NDE1OTEzLCJleHAiOjE2ODQ0MjMxMTN9.Hu6EgCNVHlnkBVLGFo0K9fi083iZHPePeYiwpEyAB3JEGgBwUM6HL1x-k6Do6eUb",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/skills/645742dcd27b9a625127294f",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"skills",
+								"645742dcd27b9a625127294f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete skills By Id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMjNhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjUxYjdhMmUxMjk5NzdlMmMzOWY1NiIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NDE1OTEzLCJleHAiOjE2ODQ0MjMxMTN9.Hu6EgCNVHlnkBVLGFo0K9fi083iZHPePeYiwpEyAB3JEGgBwUM6HL1x-k6Do6eUb",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/skills/6472371737399b47ef44f33f",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"skills",
+										"6472371737399b47ef44f33f"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-o+s+9s/CYZot0TPZQmuoc3lHOw0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:02:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6472371737399b47ef44f33f\",\n    \"name\": \"Css\",\n    \"categoryId\": \"6463c901d7d486e9f46876fe\",\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Projects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/projects",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1948"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79c-KGT60sKD/k97p/sPub87AwbJPGY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:25:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"resultProjects\": [\n        {\n            \"skillsIds\": [],\n            \"offerId\": null,\n            \"_id\": \"64571f7851057dde54e3dc7a\",\n            \"title\": \"React Developer For Custom Website\",\n            \"description\": \"this is description 2 for this website\",\n            \"status\": \"active\",\n            \"avg_price\": \"100$\",\n            \"skills\": [\n                \"ReactJS\",\n                \"NodeJS\"\n            ],\n            \"count_offers\": 5,\n            \"client_id\": \"64580da49d4502efa317e735\",\n            \"category_id\": \"64574c07d27b9a625127295f\",\n            \"created_at\": \"2023-05-07T03:48:08.405Z\",\n            \"freelancer_id\": \"645a59eabeffc0c7ed94d74d\"\n        },\n        {\n            \"skillsIds\": [],\n            \"_id\": \"64571f7851057dde54e3dc79\",\n            \"title\": \"Looking for Web Developer using node.js\",\n            \"description\": \"this is a description for this project\",\n            \"status\": \"pending\",\n            \"skills\": [\n                \"HTML\",\n                \"CSS\",\n                \"Javascript\",\n                \"Nodejs\"\n            ],\n            \"count_offers\": 0,\n            \"avg_price\": \"50$ - 60$\",\n            \"client_id\": \"64580da49d4502efa317e735\",\n            \"category_id\": \"64574c07d27b9a625127295f\",\n            \"created_AT\": \"2023-05-07T03:48:08.405Z\",\n            \"freelancer_id\": \"645a5a13beffc0c7ed94d754\",\n            \"updatedAt\": \"2023-05-26T21:20:46.242Z\",\n            \"offerId\": \"647116e93861dca2d4dfa2ec\"\n        },\n        {\n            \"skillsIds\": [],\n            \"offerId\": null,\n            \"_id\": \"64571f7851057dde54e3dc7b\",\n            \"title\": \"Translator to translate a pdf into arabic\",\n            \"description\": \"this is description 3 for job\",\n            \"status\": \"pending\",\n            \"avg_price\": \"45$\",\n            \"skills\": [\n                \"Translator\",\n                \"Arabic\",\n                \"English\"\n            ],\n            \"count_offers\": 10,\n            \"client_id\": \"defaulte Value\",\n            \"category_id\": \"64574c07d27b9a6251272961\",\n            \"created_at\": \"2023-05-07T03:48:08.405Z\",\n            \"freelancer_id\": \"64574b0bd27b9a6251272959\"\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff428f\",\n            \"title\": \"project title 3\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff4290\",\n            \"title\": \"project title 4\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        }\n    ],\n    \"totalPages\": 6,\n    \"currentPage\": 1,\n    \"countDocument\": 27\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Projects pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/projects?page=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Projects pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NjA2MjQzLCJleHAiOjE2ODQ2MTM0NDN9.ud29LwWnS5hHoeXHluhqbWnOVog80DoXztnG4Pu0yRvpACqCkYPxocrGA3lkIIlV",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/projects?page=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1453"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5ad-/YUG76UyqGPvqxgZz2jUx5M6ItU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:26:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"resultProjects\": [\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff428e\",\n            \"title\": \"project title 2\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"pending\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-26T21:18:10.667Z\",\n            \"__v\": 0\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff429e\",\n            \"title\": \"project title 4\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff4298\",\n            \"title\": \"project title 5\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"64641af9aa78b70e86dbe991\",\n            \"title\": \"project title 1\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        },\n        {\n            \"offerId\": null,\n            \"_id\": \"646be5bbc0b6b1a099ff4294\",\n            \"title\": \"project title 8\",\n            \"description\": \"project descipriton 1\",\n            \"status\": \"open\",\n            \"range\": 20,\n            \"avgPrice\": 100,\n            \"offersCount\": 17,\n            \"winningId\": 2020,\n            \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n            \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n            \"__v\": 0\n        }\n    ],\n    \"totalPages\": 6,\n    \"currentPage\": 2,\n    \"countDocument\": 27\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Specific Project Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMjNhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjUxYjdhMmUxMjk5NzdlMmMzOWY1NiIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NDE1OTEzLCJleHAiOjE2ODQ0MjMxMTN9.Hu6EgCNVHlnkBVLGFo0K9fi083iZHPePeYiwpEyAB3JEGgBwUM6HL1x-k6Do6eUb",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/646be5bbc0b6b1a099ff4298",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"646be5bbc0b6b1a099ff4298"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Specific Project Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMjNhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjUxYjdhMmUxMjk5NzdlMmMzOWY1NiIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NDE1OTEzLCJleHAiOjE2ODQ0MjMxMTN9.Hu6EgCNVHlnkBVLGFo0K9fi083iZHPePeYiwpEyAB3JEGgBwUM6HL1x-k6Do6eUb",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"abdallahmmuddd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/projects/646be5bbc0b6b1a099ff4298",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"646be5bbc0b6b1a099ff4298"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "275"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"113-Rz6Tpv7kZ3n4OQTKBkpU7+UTkHI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:27:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"offerId\": null,\n    \"_id\": \"646be5bbc0b6b1a099ff4298\",\n    \"title\": \"project title 5\",\n    \"description\": \"project descipriton 1\",\n    \"status\": \"open\",\n    \"range\": 20,\n    \"avgPrice\": 100,\n    \"offersCount\": 17,\n    \"winningId\": 2020,\n    \"createdAt\": \"2023-05-17T00:08:25.062Z\",\n    \"updatedAt\": \"2023-05-17T00:08:25.062Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Add New Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzZGQ1NGIyMTg5ZTAxY2RkMDAxNSIsImlhdCI6MTY4NTIwODUzNiwiZXhwIjoxNjg1MjE1NzM2fQ.9Z723HAEDasmox7ywip8MUBk6D2nishhciirfxoQxnQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"title\":\"Title 1234567\",\n    \"description\":\" When You ....................................\",\n    \"range\": 40,\n    \"categoryId\":\"6463c901d7d486e9f46876fe\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a4.com\",\n    \"firstName\":\"Abdallah\",\n    \"lastName\":\"Muhammed\",\n    \"username\":\"AbdooHamo4\",\n    \"password\":\"Test2023**\",\n    \"jobTitle\":\"Front-end Developer\",\n    \"categoryId\":\"6463c901d7d486e9f46876fe\",\n    \"phoneNumber\":\"01013455020\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-aV3QsRmuuf2eLDnjjAkCd7Dbdiw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 May 2023 17:35:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"Freelancer Created Sucssfully!\"\n}"
+						},
+						{
+							"name": "Add New Project",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzIzZGQ1NGIyMTg5ZTAxY2RkMDAxNSIsImlhdCI6MTY4NTIwODUzNiwiZXhwIjoxNjg1MjE1NzM2fQ.9Z723HAEDasmox7ywip8MUBk6D2nishhciirfxoQxnQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"title\":\"Title 1234567\",\n    \"description\":\" When You ....................................\",\n    \"range\": 40,\n    \"categoryId\":\"6463c901d7d486e9f46876fe\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/projects",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "342"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"156-JvHLI/92sPpup7/KRS23zos4GgM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:42:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"Title 1234567\",\n    \"description\": \" When You ....................................\",\n    \"status\": \"open\",\n    \"range\": 40,\n    \"skillsIds\": [],\n    \"clientId\": \"64723dd54b2189e01cdd0015\",\n    \"categoryId\": \"6463c901d7d486e9f46876fe\",\n    \"offerId\": null,\n    \"_id\": \"647240ea5d89fb369c1b192d\",\n    \"createdAt\": \"2023-05-27T17:42:02.603Z\",\n    \"updatedAt\": \"2023-05-27T17:42:02.603Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/projects/647240ea5d89fb369c1b192d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"647240ea5d89fb369c1b192d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tilte\":\"a@a4.com\",\n    \"description\":\"Hi podkij;dkij\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/647240ea5d89fb369c1b192d/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"647240ea5d89fb369c1b192d",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a4.com\",\n    \"password\":\"Test2023**\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-u9RK8mSLCUNys0Tr2o9W9i4bP6Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 May 2023 17:42:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"You Have Been Login Sucssesfully!\",\n    \"token\": \"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTQuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MGVkZTdlMTU1NjVhYmJhMWM0ODdiIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUxMjI5NTAsImV4cCI6MTY4NTEzMDE1MH0.2XRWbBDfksaNyLmvNzJNAPk7KP9mOJ2z_8TjLcVgNVw9yNN6LEF_1306zzaJZGcv\",\n    \"freelancerId\": \"6470ede7e15565abba1c487b\",\n    \"role\": \"freelancer\"\n}"
+						},
+						{
+							"name": "Update Project",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tilte\":\"a@a4.com\",\n    \"description\":\"Hi podkij;dkij\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/projects/647240ea5d89fb369c1b192d/update",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"647240ea5d89fb369c1b192d",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c-XE4LqSKK8lMBgnDPfq7vp2yCSG8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:45:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"acknowledged\": true,\n    \"modifiedCount\": 1,\n    \"upsertedId\": null,\n    \"upsertedCount\": 0,\n    \"matchedCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Accept Offer For Project",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY0NzEwNzQ1MTllNTZjNjAwNmIwZmFjOCIsImlhdCI6MTY4NTEzNDY5NSwiZXhwIjoxNjg1MTQxODk1fQ.ZVO8NqSvRT5ckZPyrjtdxjqr9xiEvve5j7T22l6CDU4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"offerId\":\"647116e93861dca2d4dfa2ec\"\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/64574b0bd27b9a6251272959/accept",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"64574b0bd27b9a6251272959",
+								"accept"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login A Freelancer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"a@a4.com\",\n    \"password\":\"Test2023**\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/freelancers/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"freelancers",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-u9RK8mSLCUNys0Tr2o9W9i4bP6Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 May 2023 17:42:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"massage\": \"You Have Been Login Sucssesfully!\",\n    \"token\": \"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTQuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MGVkZTdlMTU1NjVhYmJhMWM0ODdiIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUxMjI5NTAsImV4cCI6MTY4NTEzMDE1MH0.2XRWbBDfksaNyLmvNzJNAPk7KP9mOJ2z_8TjLcVgNVw9yNN6LEF_1306zzaJZGcv\",\n    \"freelancerId\": \"6470ede7e15565abba1c487b\",\n    \"role\": \"freelancer\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Offers",
+			"item": [
+				{
+					"name": "Get All  Offers For Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/projects/646be5bbc0b6b1a099ff4290/offers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"646be5bbc0b6b1a099ff4290",
+								"offers"
+							]
+						},
+						"description": "this api gives you all the categories in the DB"
+					},
+					"response": [
+						{
+							"name": "Get All  Offers For Project",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/projects/64571f7851057dde54e3dc79/offers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"64571f7851057dde54e3dc79",
+										"offers"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-NOm86FBvPyQArPEAhP2jpfnsTxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 May 2023 18:58:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Can't Find This Project Offers\"\n}"
+						},
+						{
+							"name": "Get All  Offers For Project",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/projects/647240ea5d89fb369c1b192d/offers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"647240ea5d89fb369c1b192d",
+										"offers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-+LuRlbc0EtrMcprEekLUmVIq0pI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:48:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"count\": 0,\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get statistics Offers For Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/projects/646be5bbc0b6b1a099ff429d/offers/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"646be5bbc0b6b1a099ff429d",
+								"offers",
+								"statistics"
+							]
+						},
+						"description": "this api gives you all the categories in the DB"
+					},
+					"response": [
+						{
+							"name": "Get All  Offers For Project",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/projects/64571f7851057dde54e3dc79/offers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"64571f7851057dde54e3dc79",
+										"offers"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-NOm86FBvPyQArPEAhP2jpfnsTxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 May 2023 18:58:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Can't Find This Project Offers\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Send New Offer For Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{freelancerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"duration\":3,\n    \"amount\":10,\n    \"description\":\"Hi Dear I am \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/646be5bbc0b6b1a099ff4290/offers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"646be5bbc0b6b1a099ff4290",
+								"offers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Send New Offer For Project",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NTIzMzEwLCJleHAiOjE2ODQ1MzA1MTB9.wCFPie-ZLcjjDrawrE2f6uA8LKpoKt56VEYQkpf_mIzWDpQXIUQG9n762ZiDONNz",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"duration\":3,\n    \"amount\":30,\n    \"description\":\"Hi Dear I am \"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/projects/64571f7851057dde54e3dc79/offers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"64571f7851057dde54e3dc79",
+										"offers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-Ij5eqRHxFzcby/RSWU7qczoXYrE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 May 2023 19:09:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Error During Saving\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Offer For Project",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{freelancerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"duration\":140\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/offers/6474f8b6af875a011f8a38da",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"offers",
+								"6474f8b6af875a011f8a38da"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Offer For Project",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYTQuY29tIiwiZnJlZWxhbmNlcklkIjoiNjQ3MGVkZTdlMTU1NjVhYmJhMWM0ODdiIiwicm9sZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE2ODUyMDk2ODcsImV4cCI6MTY4NTIxNjg4N30.1cN2wRHk1ip3k0Tc81cQIxAO0gSYaoWL3dfN9MwuZ3ijtWGFcD9pEIoSvmcySC8t",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"duration\":10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/offers/647242855d89fb369c1b1941",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"offers",
+										"647242855d89fb369c1b1941"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-RJtIMY+Wf2or56JO4AKSbXi/CQ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 27 May 2023 17:51:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Offer Deleted Successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Offer For Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{freelancerToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/offers/647242855d89fb369c1b1941",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"offers",
+								"647242855d89fb369c1b1941"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Offers Related to Specific Freelancer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{freelancerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/myoffers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"myoffers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Get All Chat For freelancer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{freelancerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Programming Updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/freelancers/chats",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"freelancers",
+								"chats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Chats For Client",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "dsadasdasda",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/clients/chats",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clients",
+								"chats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Chat Between Client,Freelancer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{clientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/chats/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chats",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Messages Of Chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/chats/645a5720598592d69d2d1e3c/messages",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chats",
+								"645a5720598592d69d2d1e3c",
+								"messages"
+							]
+						},
+						"description": "this api gives you all the categories in the DB"
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NTIzMzEwLCJleHAiOjE2ODQ1MzA1MTB9.wCFPie-ZLcjjDrawrE2f6uA8LKpoKt56VEYQkpf_mIzWDpQXIUQG9n762ZiDONNz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"duration\":3,\n    \"amount\":30,\n    \"description\":\"Hi Dear I am \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/chats/645a5720598592d69d2d1e3c/messages",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chats",
+								"645a5720598592d69d2d1e3c",
+								"messages"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Send New Offer For Project",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAMDJhLmNvbSIsImZyZWVsYW5jZXJJZCI6IjY0NjdhMzZiOGFhMTYwOWExMGNjNjI2NSIsInJvbGUiOiJmcmVlbGFuY2VyIiwiaWF0IjoxNjg0NTIzMzEwLCJleHAiOjE2ODQ1MzA1MTB9.wCFPie-ZLcjjDrawrE2f6uA8LKpoKt56VEYQkpf_mIzWDpQXIUQG9n762ZiDONNz",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"duration\":3,\n    \"amount\":30,\n    \"description\":\"Hi Dear I am \"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/projects/64571f7851057dde54e3dc79/offers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"projects",
+										"64571f7851057dde54e3dc79",
+										"offers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-Ij5eqRHxFzcby/RSWU7qczoXYrE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 May 2023 19:09:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Error During Saving\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3300/api/v1"
+		},
+		{
+			"key": "freelancerToken",
+			"value": ""
+		}
+	]
+}
