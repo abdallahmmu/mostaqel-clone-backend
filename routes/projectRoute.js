@@ -23,9 +23,9 @@ projectRoute.get("/:id", getSingleProject);
 // save project in DB
 projectRoute.post(
   "/",
-  isClient,
-  checkSchema(projectSchema),
-  validatorMiddleware,
+  // isClient,
+  // checkSchema(projectSchema),
+  // validatorMiddleware,
   createProject
 );
 

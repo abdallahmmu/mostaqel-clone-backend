@@ -22,6 +22,7 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "nodemon": "^2.0.22"
   }
 }
