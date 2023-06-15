@@ -31,13 +31,12 @@ function deleteClientById(id) {
 async function login(req, res) {
   var client = req.body;
   var savedClient = await clientModel.findOne({ email: client.email });
-
   if (savedClient) {
     var valid = bcrypt.compareSync(client.password, savedClient.password);
     if (valid) {
       var token = jwt.sign(
         {
-          clientName: savedClient.name,
+          clientName: savedClient.userName,
           clientId: savedClient._id,
         },
         process.env.SECRETE_KEY,
