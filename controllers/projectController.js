@@ -1,14 +1,47 @@
 import freelancerModel from "../models/freelancerModel.js";
 import offerModel from "../models/offerModel.js";
-
+import ApiFeatures from "../helpers/ApiFeatures.js";
 import projectModel from "../models/projectModel.js";
-
+import { faker } from '@faker-js/faker';
+import { query } from "express";
 const createProject = async (req, res, next) => {
-  req.body.clientId = req.clientId;
-  const project = req.body;
+
+  const projects = (num) => {
+    let projects = []
+    for (let i = 1; i <= num; i++) {
+      const title = faker.lorem.words({ min: 5, max: 15 });
+      const description = faker.lorem.words({ min: 10, max: 25 });
+      const status = faker.helpers.enumValue({
+        oprn: "open",
+        pending: "pending",
+        complete: "complete",
+        close: "close"
+      });
+      const range = faker.number.int({ min: 10, max: 20 });
+      const clientId = faker.database.mongodbObjectId();
+      const categoryId = faker.database.mongodbObjectId();
+   
+      projects.push({
+        title,
+        description,
+        status,
+        range,
+        clientId,
+        categoryId
+      })
+    }
+
+    return projects
+  };
+
 
   try {
-    let projectAdded = await projectModel.create(project);
+    let projectAdded;
+
+
+    projectAdded = await projectModel.create(projects(50));
+
+
     if (!projectAdded) {
       return res.status(400).json({ error: "can not save project" });
     }
@@ -20,27 +53,22 @@ const createProject = async (req, res, next) => {
 };
 
 const getAllProjects = async (req, res, next) => {
-  const limit = 5; //projects per page
-  const page = parseInt(req.query.page) || 1;
-
-  let countDocument;
-
-  const startIndex = (page - 1) * limit;
+ 
 
   try {
-    countDocument = await projectModel.find().countDocuments();
+ 
+    let totalDocuments = await projectModel.countDocuments();
+    let api = new ApiFeatures(req.query, projectModel.find()).search().paginate(totalDocuments).filter().select().sort()
+    
 
-    let resultProjects = await projectModel
-      .find()
-      .skip(startIndex)
-      .limit(limit);
-    let totalPages = Math.ceil(countDocument / limit);
-    let currentPage = page;
+  
+    let resultProjects = await api.mongooseQuery
 
-    resultProjects &&
+    resultProjects
+      &&
       res
         .status(200)
-        .json({ resultProjects, totalPages, currentPage, countDocument });
+        .json({ resultProjects, pagination: api.pagination, tot: totalDocuments });
 
     !resultProjects &&
       res.status(400).json({ error: "all project can't returned" });
