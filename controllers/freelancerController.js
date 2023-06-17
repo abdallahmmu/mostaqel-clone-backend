@@ -40,7 +40,7 @@ export const loginFreelancer = async (request, response, next) => {
   }
   const email = request.body.email;
   const password = request.body.password;
-
+  
   try {
     const freelancerAccout = await FreelancerModel.findOne({ email: email });
     const hashedPassword = await bcrypt.compare(

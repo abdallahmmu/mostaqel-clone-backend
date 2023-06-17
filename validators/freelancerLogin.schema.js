@@ -2,8 +2,7 @@ import FreelancerModel from './../models/freelancerModel.js'
 
 export const freelancerLoginSchemaValidation = {
     email: {
-        isEmail:true,
-        errorMessage: 'Email should be string with at leaset 8 alphanumeric',
+        errorMessage: 'invalid email or password',
         custom:{
           options: async (value)=>{
             const freelancerEmail = await FreelancerModel.findOne({email:value})
