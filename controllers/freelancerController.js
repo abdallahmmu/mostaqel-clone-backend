@@ -40,7 +40,7 @@ export const loginFreelancer = async (request, response, next) => {
   }
   const email = request.body.email;
   const password = request.body.password;
-  
+
   try {
     const freelancerAccout = await FreelancerModel.findOne({ email: email });
     const hashedPassword = await bcrypt.compare(
@@ -124,11 +124,11 @@ export const updateFreelancerById = async (request, response, next) => {
         .json({ error: "can not find this freelancer" });
     }
 
-    const updatedData = await FreelancerModel.updateOne(
+    await freelancerAccount.updateOne(newUpdate);
+    /*     const updatedData = await FreelancerModel.updateOne(
       { _id: freelancerId },
       newUpdate
-    );
-
+    ); */
     response.status(200).json({ message: "your data has been updated !" });
   } catch (error) {
     error.statusCode = 500;
@@ -151,11 +151,8 @@ export const uploadImageForFreelancer = async (request, response, next) => {
       deleteFile(freelancerAccount.avatar);
     }
 
-    freelancerAccount.avatar = avatarPhoto.path;
-    await freelancerAccount.save();
-    freelancerAccount.avatar = response
-      .status(200)
-      .json({ message: "your photo has been uploaded" });
+    await freelancerAccount.updateOne({ avatar: avatarPhoto.path });
+    response.status(200).json({ message: "your photo has been uploaded" });
   } catch (error) {
     error.message = "server error faild to upload";
     error.statusCode = 500;
