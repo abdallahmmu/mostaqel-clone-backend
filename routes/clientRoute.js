@@ -13,9 +13,9 @@ const clientRouter = express.Router();
 
 clientRouter.get("/", async (req, res, next) => {
   try {
-    var client = await getClient();
+    const client = await getClient();
 
-    res.status(200).json(client);
+    res.status(200).json({data:client});
   } catch (e) {
     e.statusCode = 500;
     next(e);
@@ -54,9 +54,9 @@ clientRouter.get("/:id", async (req, res, next) => {
 });
 
 clientRouter.patch("/:id", auth, async (req, res) => {
-  var { userName } = req.body;
+  const userData = {...req.body}
   var { id } = req.params;
-  var UpdatedClient = await EditClientById(id, userName);
+  var UpdatedClient = await EditClientById(id, userData);
   res.json(UpdatedClient);
 });
 
