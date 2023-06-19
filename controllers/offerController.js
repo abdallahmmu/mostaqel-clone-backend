@@ -7,13 +7,13 @@ export const getProjectOffers = async (req, res, next) => {
     const { id } = req.params;
     const projectOffers = await offerModel.find({ projectId: id }).populate({
       path: "freelancerId",
-      select: "firstName lastName jobTitle isVerify avatar -_id",
+      select: "firstName lastName jobTitle isVerify avatar _id",
     });
 
     res.status(200).json({
       message: "Success",
       count: projectOffers.length,
-      data: projectOffers,
+      results: projectOffers,
     });
   } catch (error) {
     error.statusCode = 500;
@@ -42,7 +42,7 @@ export const getProjectOffersStatistics = async (req, res, next) => {
 
     res.status(200).json({
       message: "Success",
-      data: projectOffers,
+      results: projectOffers,
     });
   } catch (error) {
     error.statusCode = 500;
@@ -59,7 +59,7 @@ export const sendOffer = async (req, res, next) => {
     const newOffer = await offerModel.create(req.body);
     res.status(200).json({
       message: "Success",
-      data: newOffer,
+      results: newOffer,
     });
   } catch (error) {
     error.statusCode = 500;
@@ -81,7 +81,7 @@ export const updateOffer = async (req, res, next) => {
       });
     res.status(200).json({
       message: "Offer Updated Successfully",
-      data: updatedOffer,
+      results: updatedOffer,
     });
   } catch (error) {
     error.statusCode = 500;
