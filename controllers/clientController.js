@@ -2,6 +2,7 @@ import clientModel from "../models/clientModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
 function saveClient(client) {
   return clientModel.create(client);
 }
@@ -52,6 +53,32 @@ async function login(req, res) {
   }
 }
 
+const uploadImageForClient = async (request, response, next) => {
+  const avatarPhoto = request.file;
+
+  if (!avatarPhoto) {
+    return response.status(404).json({ error: "no file to uploaded" });
+  }
+
+ 
+  try {
+    const clientAccount = await clientModel.findById(
+      request.params.id
+    );
+    if (clientAccount.avatar) {
+      deleteFile(clientAccount.avatar);
+    }
+
+    await clientAccount.updateOne({ avatar: avatarPhoto.path });
+    response.status(200).json({ message: "your photo has been uploaded" });
+  } catch (error) {
+    error.message = "server error faild to upload";
+    error.statusCode = 500;
+
+    next(error);
+  }
+};
+
 export {
   saveClient,
   getClientById,
@@ -59,4 +86,5 @@ export {
   getClient,
   deleteClientById,
   login,
+  uploadImageForClient
 };

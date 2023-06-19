@@ -83,6 +83,21 @@ clientSchema.pre('save', function(next){
 })
 
 
+const setImageURL = (doc) => {
+  if (doc.avatar) {
+    doc.avatar = `${process.env.BASE_URL}/${doc.avatar}`;
+  }
+};
+
+clientSchema.post("init", (doc) => {
+  setImageURL(doc);
+});
+
+clientSchema.post("save", (doc) => {
+  setImageURL(doc);
+});
+
+
 
 export default mongoose.model('client', clientSchema)
 
