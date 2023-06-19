@@ -68,7 +68,10 @@ isVerified:{
 avatar:{
   type:String
   
- }
+ },
+ description: {
+  type: String,
+},
   
 })
 
@@ -78,6 +81,21 @@ clientSchema.pre('save', function(next){
   this.password = bcrypt.hashSync(this.password, 12)
   next()
 })
+
+
+const setImageURL = (doc) => {
+  if (doc.avatar) {
+    doc.avatar = `${process.env.BASE_URL}/${doc.avatar}`;
+  }
+};
+
+clientSchema.post("init", (doc) => {
+  setImageURL(doc);
+});
+
+clientSchema.post("save", (doc) => {
+  setImageURL(doc);
+});
 
 
 
