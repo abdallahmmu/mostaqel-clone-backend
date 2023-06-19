@@ -68,7 +68,10 @@ isVerified:{
 avatar:{
   type:String
   
- }
+ },
+ description: {
+  type: String,
+},
   
 })
 

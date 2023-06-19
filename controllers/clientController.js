@@ -10,12 +10,10 @@ function getClientById(id) {
   return clientModel.findById(id);
 }
 
-function EditClientById(id, title) {
-  console.log("tesing");
-  return clientModel.findByIdAndUpdate(
+function EditClientById(id, updatedData) {
+  return clientModel.updateOne(
     { _id: id },
-    { userName: title },
-    { new: true }
+    {...updatedData}
   );
 }
 
