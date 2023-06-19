@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
+import process from "process";
 const Schema = mongoose.Schema;
 
 let FreelancerModel = new Schema({
@@ -13,7 +14,7 @@ let FreelancerModel = new Schema({
   phoneNumber: {
     type: String,
     unique: true,
-    required:true
+    required: true,
   },
   email: {
     type: String,
@@ -61,10 +62,21 @@ let FreelancerModel = new Schema({
   },
 });
 
+FreelancerModel.pre("save", function (next) {
+  this.password = bcrypt.hashSync(this.password, 12);
+  next();
+});
+const setImageURL = (doc) => {
+  if (doc.avatar) {
+    doc.avatar = `${process.env.BASE_URL}/${doc.avatar}`;
+  }
+};
 
-FreelancerModel.pre('save', function(next){
-  this.password = bcrypt.hashSync(this.password, 12)
-  next()
-})
+FreelancerModel.post("init", (doc) => {
+  setImageURL(doc);
+});
 
-export default  mongoose.model('freelancers',FreelancerModel)
+FreelancerModel.post("save", (doc) => {
+  setImageURL(doc);
+});
+export default mongoose.model("freelancers", FreelancerModel);
