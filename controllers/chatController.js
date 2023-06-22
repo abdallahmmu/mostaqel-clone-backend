@@ -6,7 +6,6 @@ import { validationResult } from "express-validator";
 export const createChat = async (req, res, next) => {
   try {
     req.body.clientId = req.clientId; // projectId,freelancerId
-    console.log(req.body);
     const { projectId, freelancerId, clientId } = req.body;
     const foundChat = await chatModel.findOne({
       projectId,
