@@ -7,7 +7,7 @@ const chatSchema = Schema(
       ref: "freelancer",
       required: true,
     },
-    cleintId: {
+    clientId: {
       type: Schema.Types.ObjectId,
       ref: "client",
       required: true,

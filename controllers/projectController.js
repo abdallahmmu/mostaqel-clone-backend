@@ -1,45 +1,16 @@
-import freelancerModel from "../models/freelancerModel.js";
-import offerModel from "../models/offerModel.js";
 import ApiFeatures from "../helpers/ApiFeatures.js";
 import projectModel from "../models/projectModel.js";
 import { faker } from '@faker-js/faker';
-import { query } from "express";
+
 const createProject = async (req, res, next) => {
 
-  const projects = (num) => {
-    let projects = []
-    for (let i = 1; i <= num; i++) {
-      const title = faker.lorem.words({ min: 5, max: 15 });
-      const description = faker.lorem.words({ min: 10, max: 25 });
-      const status = faker.helpers.enumValue({
-        oprn: "open",
-        pending: "pending",
-        complete: "complete",
-        close: "close"
-      });
-      const range = faker.number.int({ min: 10, max: 20 });
-      const clientId = faker.database.mongodbObjectId();
-      const categoryId = faker.database.mongodbObjectId();
-   
-      projects.push({
-        title,
-        description,
-        status,
-        range,
-        clientId,
-        categoryId
-      })
-    }
-
-    return projects
-  };
 
 
   try {
     let projectAdded;
 
-
-    projectAdded = await projectModel.create(projects(50));
+  
+    projectAdded = await projectModel.create(req.body);
 
 
     if (!projectAdded) {
@@ -58,7 +29,9 @@ const getAllProjects = async (req, res, next) => {
   try {
  
     let totalDocuments = await projectModel.countDocuments();
-    let api = new ApiFeatures(req.query, projectModel.find()).search().paginate(totalDocuments).filter().select().sort()
+    let api = new ApiFeatures(req.query, projectModel.find().populate('clientId categoryId'))
+    .search().paginate(totalDocuments).filter().select().sort()
+    
     
 
   

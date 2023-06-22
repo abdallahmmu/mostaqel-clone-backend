@@ -30,7 +30,7 @@ app.use(
 
 //MiddleWares Routes
 app.use("/api/v1", offerRoute);
-app.use("/api/", chatRoute);
+app.use("/api", chatRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/freelancers", freelancerRoute);
 app.use("/api/v1/projects", projectRoute);

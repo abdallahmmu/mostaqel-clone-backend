@@ -116,7 +116,11 @@ export const getFreelancerOffers = async (req, res, next) => {
       })
       .select("_id projectId duration amount description");
 
-    res.status(200).json(freelancerOffers);
+    res.status(200).json({
+      message: "Success",
+      count: freelancerOffers.length,
+      results: freelancerOffers,
+    });
   } catch (error) {
     error.statusCode = 404;
     next(error);
