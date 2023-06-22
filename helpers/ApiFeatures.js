@@ -1,6 +1,6 @@
 export default class ApiFeatures{
     constructor(queryString, mongooseQuery){
-        this.mongooseQuery= mongooseQuery;
+        this.mongooseQuery= mongooseQuery
         this.queryString = queryString
     }
 
@@ -40,7 +40,7 @@ export default class ApiFeatures{
         if(fields){
 
             fields = fields.split(',').join(' ');
-            console.log(fields)
+         
             this.mongooseQuery =  this.mongooseQuery.select(fields)
         }else{
             this.mongooseQuery =  this.mongooseQuery.select("-__v")
@@ -50,15 +50,14 @@ export default class ApiFeatures{
     }
 
     search() {
-        let  { keyword } = { ...this.queryString}
        
         if(this.queryString.keyword){
             let query= {}
             query.$or = [
                 { title: { $regex: this.queryString.keyword, $options: 'i' }},
-                {description: {$regex: this.queryString.keyword, $options: 'i'}}  ];
+                { description: {$regex: this.queryString.keyword, $options: 'i'}}  ];
 
-                console.log(this.queryString.keyword)
+              
             this.mongooseQuery = this.mongooseQuery.find(query)
         }
 
@@ -69,16 +68,15 @@ export default class ApiFeatures{
 
         let  page  = this.queryString.page || 1;
         let  limit  = this.queryString.limit || 5;
-        page = page || 1;
-        limit = limit || 5;
-        let skip = (page -  1 ) * page;
+
+        let skip = (page -  1 ) * limit;
         let endIndex = page * limit;
 
         let pagination = {};
 
         pagination.currentPage = +page;
         pagination.limit = limit;
-        pagination.numOfPages = Math.ceil( totalDocuments / limit);
+        pagination.numOfPages = Math.ceil( totalDocuments / limit )
 
         
         if( endIndex < totalDocuments ){
@@ -94,6 +92,5 @@ export default class ApiFeatures{
 
         this.pagination = pagination
         return this
-      
     }
 }
