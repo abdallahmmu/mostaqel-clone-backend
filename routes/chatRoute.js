@@ -21,7 +21,7 @@ export const chatRoute = express.Router();
 // @desc Create New Chat Between Between Client And Freelancer
 // @route post /api/v1/chats/
 // @access client
-chatRoute.post("v1/chats", isClient, createChat);
+chatRoute.post("/v1/chats", isClient, createChat);
 
 // @desc get all messages for specific chat
 // @route get /api/v1/chats/:chatId/messages

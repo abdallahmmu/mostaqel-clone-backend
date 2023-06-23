@@ -6,8 +6,20 @@ import { validationResult } from "express-validator";
 export const createChat = async (req, res, next) => {
   try {
     req.body.clientId = req.clientId; // projectId,freelancerId
+    const { projectId, freelancerId, clientId } = req.body;
+    const foundChat = await chatModel.findOne({
+      projectId,
+      freelancerId,
+      clientId,
+    });
+    if (foundChat) {
+      return res.status(200).json({
+        message: "Success",
+        results: foundChat,
+      });
+    }
     const newChat = await chatModel.create(req.body);
-    res.status(200).json({
+    return res.status(200).json({
       message: "Success",
       data: newChat,
     });
