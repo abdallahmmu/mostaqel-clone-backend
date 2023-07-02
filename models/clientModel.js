@@ -72,7 +72,10 @@ avatar:{
  description: {
   type: String,
 },
-  
+isActive:{
+  type:Boolean,
+  default:true
+}
 })
 
 

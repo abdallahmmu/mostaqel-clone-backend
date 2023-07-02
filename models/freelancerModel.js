@@ -60,6 +60,10 @@ let FreelancerModel = new Schema({
     type: Array,
     default: [],
   },
+  isActive:{
+    type:Boolean,
+    default:true
+  }
 });
 
 FreelancerModel.pre("save", function (next) {
