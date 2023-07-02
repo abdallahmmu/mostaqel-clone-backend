@@ -79,4 +79,4 @@ FreelancerModel.post("init", (doc) => {
 FreelancerModel.post("save", (doc) => {
   setImageURL(doc);
 });
-export default mongoose.model("freelancers", FreelancerModel);
+export default mongoose.model("freelancer", FreelancerModel);
