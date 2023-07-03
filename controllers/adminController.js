@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import FreelancerModel from "./../models/freelancerModel.js";
-import ClientModel from "./../models/clientModel.js";
-import OffersModel from "./../models/offerModel.js";
-import ProjectsModel from "./../models/projectModel.js";
+import FreelancerModel from "../models/freelancerModel.js";
+import ClientModel from "../models/clientModel.js";
+import OffersModel from "../models/offerModel.js";
+import ProjectsModel from "../models/projectModel.js";
 
 export const getAllStatistics = async (request, response, next) => {
   try {
@@ -62,32 +62,28 @@ export const deactiveFreelancerById = async (request, response, next) => {
   }
 };
 
+export const deactiveClientById = async (request, response, next) => {
+  const { clientId } = request.body;
 
-export const deactiveClientById = async (request,response,next)=>{
-    const { clientId } = request.body;
+  if (!clientId) {
+    return response
+      .status(401)
+      .json({ error: "please enter a valid clientId" });
+  }
 
-    if (!clientId) {
-      return response.status(401).json({ error: "please enter a valid clientId" });
+  try {
+    const deactiveClient = await ClientModel.updateOne({ _id: clientId }, [
+      {
+        $set: { isActive: { $not: "$isActive" } },
+      },
+    ]);
+
+    if (!deactiveClient) {
+      return response.status(404).json({ error: "can not find this client" });
     }
-  
-    try {
-      const deactiveClient = await ClientModel.updateOne(
-        { _id: clientId },
-        [
-          {
-            $set: { isActive: { $not: "$isActive" } },
-          },
-        ]
-      );
-  
-      if (!deactiveClient) {
-        return response
-          .status(404)
-          .json({ error: "can not find this client" });
-      }
-      response.status(200).json({ message: "Sucssess" });
-    } catch (error) {
-      error.statusCode = 500;
-      next(error);
-    }
-}
+    response.status(200).json({ message: "Sucssess" });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
+};
