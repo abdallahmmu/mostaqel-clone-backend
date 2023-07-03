@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import FreelancerModel from "./../models/freelancerModel.js";
-import ClientModel from "./../models/clientModel.js";
-import OffersModel from "./../models/offerModel.js";
-import ProjectsModel from "./../models/projectModel.js";
+import FreelancerModel from "../models/freelancerModel.js";
+import ClientModel from "../models/clientModel.js";
+import OffersModel from "../models/offerModel.js";
+import ProjectsModel from "../models/projectModel.js";
 
 export const getAllStatistics = async (request, response, next) => {
   try {
@@ -54,8 +54,6 @@ export const getAllFreelancers = async (request,response,next)=>{
   next(error)
 }
 }
-
-
 export const deactiveFreelancerById = async (request, response, next) => {
   const { freelancerId } = request.body;
 
