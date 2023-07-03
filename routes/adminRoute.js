@@ -1,5 +1,7 @@
 import express from "express";
 import {
+  getAllClients,
+  getAllFreelancers,
   getAllStatistics,
   deactiveFreelancerById,
   deactiveClientById,
@@ -18,6 +20,9 @@ adminRoute.post("/auth/admin", addSuperAdmin);
 adminRoute.post("/auth/register", registerAdmin);
 adminRoute.post("/auth/login", loginAdmin);
 
+adminRoute.get("/clients", getAllClients);
+
+adminRoute.get("/freelancers", getAllFreelancers);
 adminRoute.get("/statistics", getAllStatistics);
 adminRoute.patch("/deactive-freelancer", deactiveFreelancerById);
 adminRoute.patch("/deactive-client", deactiveClientById);
