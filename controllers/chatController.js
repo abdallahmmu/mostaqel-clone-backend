@@ -85,11 +85,25 @@ export const getFreelancerChats = async (req, res, next) => {
 export const getClientChats = async (req, res, next) => {
   try {
     const { clientId } = req;
-    const clientChats = await chatModel.find({ clientId });
+    const clientChats = await chatModel
+      .find({ clientId })
+      .populate({
+        path: "projectId",
+        select: "_id title",
+      })
+      .populate({
+        path: "clientId",
+        select: "_id firstName lastName",
+      })
+      .populate({
+        path: "freelancerId",
+        select: "_id firstName lastName",
+      });
+
     res.status(200).json({
       message: "Success",
       count: clientChats.length,
-      data: clientChats,
+      results: clientChats,
     });
   } catch (error) {
     error.statusCode = 500;

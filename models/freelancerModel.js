@@ -60,6 +60,10 @@ let FreelancerModel = new Schema({
     type: Array,
     default: [],
   },
+  isActive:{
+    type:Boolean,
+    default:true
+  }
 });
 
 FreelancerModel.pre("save", function (next) {
@@ -79,4 +83,4 @@ FreelancerModel.post("init", (doc) => {
 FreelancerModel.post("save", (doc) => {
   setImageURL(doc);
 });
-export default mongoose.model("freelancers", FreelancerModel);
+export default mongoose.model("freelancer", FreelancerModel);
