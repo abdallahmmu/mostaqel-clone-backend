@@ -29,10 +29,6 @@ export const getAllStatistics = async (request, response, next) => {
   }
 };
 
-export const loginAdmin = (request, response, next) => {
-  response.status(200).json({ message: "admin Login" });
-};
-
 export const deactiveFreelancerById = async (request, response, next) => {
   const { freelancerId } = request.body;
 

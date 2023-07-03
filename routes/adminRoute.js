@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  loginAdmin,
   getAllStatistics,
   deactiveFreelancerById,
   deactiveClientById,
