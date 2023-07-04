@@ -14,4 +14,4 @@ let CategoryModel = new Schema(
   }
 );
 
-export default mongoose.model("categories", CategoryModel);
+export default mongoose.model("category", CategoryModel);
