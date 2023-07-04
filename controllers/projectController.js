@@ -4,12 +4,10 @@ import { faker } from '@faker-js/faker';
 
 const createProject = async (req, res, next) => {
 
-
-
   try {
     let projectAdded;
 
-  
+
     projectAdded = await projectModel.create(req.body);
 
 
@@ -24,17 +22,17 @@ const createProject = async (req, res, next) => {
 };
 
 const getAllProjects = async (req, res, next) => {
- 
+
 
   try {
- 
+
     let totalDocuments = await projectModel.countDocuments();
     let api = new ApiFeatures(req.query, projectModel.find().populate('clientId categoryId'))
-    .search().paginate(totalDocuments).filter().select().sort()
-    
-    
+      .search().paginate(totalDocuments).filter().select().sort()
 
-  
+
+
+
     let resultProjects = await api.mongooseQuery
 
     resultProjects
