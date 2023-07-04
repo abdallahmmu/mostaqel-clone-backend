@@ -1,5 +1,6 @@
 import express from "express";
-import {
+import   {
+  // loginAdmin,
   getAllClients,
   getAllFreelancers,
   getAllStatistics,
@@ -16,6 +17,9 @@ import {
   protectMiddleware,
   allowedTo,
 } from "../controllers/adminAuthController.js";
+
+import { deactiveProject, getAllProjects, getProjectById, getProjectsStats } from "../controllers/Projects/adminProjectsConroller.js";
+
 export const adminRoute = express.Router();
 const roles = ["superAdmin", "admin"];
 adminRoute.post("/auth/admin", addSuperAdmin);
@@ -26,42 +30,15 @@ adminRoute.post(
   registerAdmin
 );
 adminRoute.post("/auth/login", loginAdmin);
+adminRoute.get('/freelancers',getAllFreelancers);
+adminRoute.get("/statistics", getAllStatistics);
+adminRoute.patch("/deactive-freelancer", deactiveFreelancerById);
+adminRoute.patch("/deactive-client", deactiveClientById);
+adminRoute.patch("/verify-freelancer", verifyFreelancerById);
+adminRoute.patch("/verify-client", verifyClientById);
 
-adminRoute.get("/clients", protectMiddleware, allowedTo(roles), getAllClients);
-
-adminRoute.get(
-  "/freelancers",
-  protectMiddleware,
-  allowedTo(roles),
-  getAllFreelancers
-);
-adminRoute.get(
-  "/statistics",
-  protectMiddleware,
-  allowedTo(roles),
-  getAllStatistics
-);
-adminRoute.patch(
-  "/deactive-freelancer",
-  protectMiddleware,
-  allowedTo(roles),
-  deactiveFreelancerById
-);
-adminRoute.patch(
-  "/deactive-client",
-  protectMiddleware,
-  allowedTo(roles),
-  deactiveClientById
-);
-adminRoute.patch(
-  "/verify-freelancer",
-  protectMiddleware,
-  allowedTo(roles),
-  verifyFreelancerById
-);
-adminRoute.patch(
-  "/verify-client",
-  protectMiddleware,
-  allowedTo(roles),
-  verifyClientById
-);
+// Projects
+adminRoute.get('/projects', getAllProjects)
+adminRoute.get('/projects/:id', getProjectById)
+adminRoute.get('/projects-stats', getProjectsStats)
+adminRoute.patch('/deactivate-project', deactiveProject)
