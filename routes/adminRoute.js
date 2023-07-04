@@ -1,5 +1,5 @@
 import express from "express";
-import {
+import   {
   // loginAdmin,
   getAllClients,
   getAllFreelancers,
@@ -14,17 +14,21 @@ import {
   loginAdmin,
   registerAdmin,
   addSuperAdmin,
+  protectMiddleware,
+  allowedTo,
 } from "../controllers/adminAuthController.js";
 
 import { deactiveProject, getAllProjects, getProjectById, getProjectsStats } from "../controllers/Projects/adminProjectsConroller.js";
 
 export const adminRoute = express.Router();
-
-
-
-adminRoute.get('/clients',getAllClients);
+const roles = ["superAdmin", "admin"];
 adminRoute.post("/auth/admin", addSuperAdmin);
-adminRoute.post("/auth/register", registerAdmin);
+adminRoute.post(
+  "/auth/register",
+  protectMiddleware,
+  allowedTo(["superAdmin"]),
+  registerAdmin
+);
 adminRoute.post("/auth/login", loginAdmin);
 adminRoute.get('/freelancers',getAllFreelancers);
 adminRoute.get("/statistics", getAllStatistics);

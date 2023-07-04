@@ -26,34 +26,33 @@ export const getAllStatistics = async (request, response, next) => {
   }
 };
 
-export const loginAdmin = (request, response, next) => {
-  response.status(200).json({ message: "admin Login" });
+export const getAllClients = async (requset, response, next) => {
+  try {
+    const clients = await ClientModel.find(
+      {},
+      "firstName lastName userName phone email address isVerified isActive _id avatar"
+    );
+
+    response.status(201).json({ message: "Succsses", clients });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
 };
 
-
-export const getAllClients = async (requset,response,next)=>{
-
+export const getAllFreelancers = async (request, response, next) => {
   try {
-      const clients = await ClientModel.find({},"firstName lastName userName phone email address isVerified isActive _id avatar")
+    const freelancers = await FreelancerModel.find(
+      {},
+      "firstName lastName userName phone email address isVerify isActive _id avatar"
+    );
 
-      response.status(201).json({message:'Succsses', clients})
+    response.status(201).json({ message: "Succsses", freelancers });
   } catch (error) {
-    error.statusCode = 500
-    next(error)
+    error.statusCode = 500;
+    next(error);
   }
-}
-
-export const getAllFreelancers = async (request,response,next)=>{
-
-  try {
-    const freelancers = await FreelancerModel.find({},"firstName lastName userName phone email address isVerify isActive _id avatar")
-
-    response.status(201).json({message:'Succsses', freelancers})
-} catch (error) {
-  error.statusCode = 500
-  next(error)
-}
-}
+};
 export const deactiveFreelancerById = async (request, response, next) => {
   const { freelancerId } = request.body;
 
