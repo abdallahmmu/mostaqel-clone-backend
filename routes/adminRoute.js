@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  loginAdmin,
+  // loginAdmin,
   getAllClients,
   getAllFreelancers,
   getAllStatistics,
@@ -15,6 +15,9 @@ import {
   registerAdmin,
   addSuperAdmin,
 } from "../controllers/adminAuthController.js";
+
+import { deactiveProject, getAllProjects, getProjectById, getProjectsStats } from "../controllers/Projects/adminProjectsConroller.js";
+
 export const adminRoute = express.Router();
 
 
@@ -29,3 +32,9 @@ adminRoute.patch("/deactive-freelancer", deactiveFreelancerById);
 adminRoute.patch("/deactive-client", deactiveClientById);
 adminRoute.patch("/verify-freelancer", verifyFreelancerById);
 adminRoute.patch("/verify-client", verifyClientById);
+
+// Projects
+adminRoute.get('/projects', getAllProjects)
+adminRoute.get('/projects/:id', getProjectById)
+adminRoute.get('/projects-stats', getProjectsStats)
+adminRoute.patch('/deactivate-project', deactiveProject)
