@@ -1,5 +1,5 @@
 import express from "express";
-import   {
+import {
   getAllClients,
   getAllFreelancers,
   getAllStatistics,
@@ -13,14 +13,21 @@ import {
   registerAdmin,
   addSuperAdmin,
   protectMiddleware,
+  loginAdmin,
   allowedTo,
 } from "../controllers/adminAuthController.js";
 
-import { deactiveProject, getAllProjects, getProjectById, getProjectsStats } from "../controllers/Projects/adminProjectsConroller.js";
+import {
+  deactiveProject,
+  getAllProjects,
+  getProjectById,
+  getProjectsStats,
+} from "../controllers/Projects/adminProjectsConroller.js";
 
 export const adminRoute = express.Router();
 const roles = ["superAdmin", "admin"];
 adminRoute.post("/auth/admin", addSuperAdmin);
+adminRoute.post("/auth/login", loginAdmin);
 adminRoute.post(
   "/auth/register",
   protectMiddleware,
@@ -29,11 +36,10 @@ adminRoute.post(
 );
 
 // Projects
-adminRoute.get('/projects', getAllProjects)
-adminRoute.get('/projects/:id', getProjectById)
-adminRoute.get('/projects-stats', protectMiddleware,getProjectsStats)
-adminRoute.patch('/deactivate-project', protectMiddleware,deactiveProject)
-
+adminRoute.get("/projects", getAllProjects);
+adminRoute.get("/projects/:id", getProjectById);
+adminRoute.get("/projects-stats", protectMiddleware, getProjectsStats);
+adminRoute.patch("/deactivate-project", protectMiddleware, deactiveProject);
 
 adminRoute.get("/clients", protectMiddleware, allowedTo(roles), getAllClients);
 
