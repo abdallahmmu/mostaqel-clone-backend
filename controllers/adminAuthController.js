@@ -90,7 +90,6 @@ export const protectMiddleware = async (req, res, next) => {
       });
     }
     req.admin = currentAdmin;
-    console.log(req.admin);
     next();
   } catch (err) {
     err.statusCode = 500;
