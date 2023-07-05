@@ -39,7 +39,7 @@ let FreelancerModel = new Schema({
   },
   categoryId: {
     type: Schema.Types.ObjectId,
-    ref: "categories",
+    ref: "category",
   },
   jobTitle: {
     type: String,
@@ -63,6 +63,10 @@ let FreelancerModel = new Schema({
   isActive:{
     type:Boolean,
     default:true
+  },
+  skill:{
+    type:Array,
+    default:[]
   }
 });
 

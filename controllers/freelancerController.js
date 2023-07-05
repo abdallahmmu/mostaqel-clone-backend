@@ -80,17 +80,10 @@ export const loginFreelancer = async (request, response, next) => {
 
 export const getFreelancerById = async (request, response, next) => {
   const freelancerId = request.params.id;
-
-  /*   if (!req.freelancerId || !request.params.id) { // it was for authorization but now anyone can get any freelancer details
-    return response
-      .status(401)
-      .json({ error: "Your Are Not Allowed To Get This Data" });
-  } */
-
   try {
     const freelancerAccount = await FreelancerModel.findOne(
       { _id: freelancerId },
-      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username"
+      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username skill"
     ).populate("categoryId");
     if (!freelancerAccount) {
       return response.status(404).json({ error: "user not found" });

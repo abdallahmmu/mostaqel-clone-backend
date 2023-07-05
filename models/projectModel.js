@@ -15,7 +15,7 @@ const projectSchema = new Schema(
     clientId: { type: Schema.Types.ObjectId, ref: "client", required: true },
     categoryId: {
       type: Schema.Types.ObjectId,
-      ref: "categories",
+      ref: "category",
       required: true,
     },
     offerId: {
