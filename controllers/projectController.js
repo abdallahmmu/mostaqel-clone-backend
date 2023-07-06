@@ -27,7 +27,7 @@ const getAllProjects = async (req, res, next) => {
   try {
 
     let totalDocuments = await projectModel.countDocuments();
-    let api = new ApiFeatures(req.query, projectModel.find().populate('clientId categoryId'))
+    let api = new ApiFeatures(req.query, projectModel.find().populate('clientId categoryId skillsIds'))
       .search().paginate(totalDocuments).filter().select().sort()
 
 
