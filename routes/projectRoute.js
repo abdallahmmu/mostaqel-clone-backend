@@ -36,5 +36,4 @@ projectRoute.patch("/:id/update", updateProject);
 projectRoute.patch("/:id/accept", acceptFreelancerToProject);
 
 // update project after accept the winner freelancer Id
-// projectRoute.patch('/update/:id/:fId', isClient, updateProjectFreelancer)
 projectRoute.delete("/:id", isClient, deleteProject);

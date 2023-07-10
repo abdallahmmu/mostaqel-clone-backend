@@ -75,7 +75,11 @@ avatar:{
 isActive:{
   type:Boolean,
   default:true
-}
+},
+  totalMoney: {
+    type: Number,
+    default: 0
+  }
 })
 
 
