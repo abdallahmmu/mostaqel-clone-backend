@@ -14,6 +14,7 @@ import { offerRoute } from "./routes/offerRoute.js";
 import { chatRoute } from "./routes/chatRoute.js";
 import { skillesRoute } from "./routes/skillRoute.js";
 import { adminRoute } from "./routes/adminRoute.js";
+import { transactionRoute } from "./routes/transactionRoute.js";
 //Configuration
 config();
 const app = express();
@@ -38,6 +39,7 @@ app.use("/api/v1/projects", projectRoute);
 app.use("/api/v1/skills", skillesRoute);
 app.use("/api/v1/clients", clientRouter);
 app.use('/api/v1/admin',adminRoute)
+app.use('/api/v1/payment',transactionRoute)
 
 //Catch All Routes
 app.use("*", (request, response) => {
