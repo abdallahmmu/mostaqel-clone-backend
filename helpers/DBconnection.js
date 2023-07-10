@@ -7,7 +7,7 @@ export const init = async (app) => {
     if (CONNECTION) {
       console.log("DB CONNECTED");
       app.listen(process.env.PORT, () => {
-        console.log("APP IS WORKING");
+        console.log("APP IS WORKING PORT " + process.env.PORT);
       });
     }
   } catch (error) {
