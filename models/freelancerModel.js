@@ -67,6 +67,10 @@ let FreelancerModel = new Schema({
   skill:{
     type:Array,
     default:[]
+  },
+  totalMoney: {
+    type: Number,
+    default: 0
   }
 });
 
