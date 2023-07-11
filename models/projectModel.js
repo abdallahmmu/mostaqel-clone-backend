@@ -2,8 +2,10 @@ import { Schema, model } from "mongoose";
 
 const projectSchema = new Schema(
   {
-    title: { type: String, min: 3, max: 30, required: true },
-    description: { type: String, min: 20, max: 100, required: true },
+    title: { type: String, min: 3, max: 100, required: true },
+    title_ar: { type: String, min: 3, max: 100, required: false},
+    description: { type: String, min: 20, max: 200, required: true },
+    description_ar: { type: String, min: 20, max: 200, required: false },
     status: {
       type: String,
       enum: ["open", "pending", "complete", "close"],

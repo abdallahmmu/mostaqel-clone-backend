@@ -72,7 +72,7 @@ const acceptFreelancerToProject = async (req, res, next) => {
 const getSingleProject = async (req, res, next) => {
   let projectId = req.params.id;
   try {
-    let singleProject = await projectModel.findById(projectId);
+    let singleProject = await projectModel.findById(projectId).populate('clientId categoryId skillsIds');
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
       res.status(404).json({ error: "single project can't returned" });

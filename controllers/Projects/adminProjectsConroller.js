@@ -4,7 +4,7 @@ import projectModel from "./../../models/projectModel.js"
 
 export const getAllProjects = async (req, res, next) => {
     try {
-        let projects = await projectModel.find();
+        let projects = await projectModel.find().populate('skillsIds clientId categoryId offerId')
 
         res.status(200).json({ projects });
     } catch (err) {
