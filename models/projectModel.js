@@ -13,7 +13,7 @@ const projectSchema = new Schema(
       required: true,
     },
     range: { type: Number, required: true },
-    skillsIds: { type: [Schema.Types.ObjectId], ref: "skill" },
+    skillsIds: { type: [ Schema.Types.ObjectId ], ref: "skill" },
     clientId: { type: Schema.Types.ObjectId, ref: "client", required: true },
     categoryId: {
       type: Schema.Types.ObjectId,
