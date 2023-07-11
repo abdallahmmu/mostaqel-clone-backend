@@ -5,8 +5,9 @@ import {
   getSingleProject,
   updateProject,
   deleteProject,
+  completeProject,
   // getProjectReviews,
-  acceptFreelancerToProject,
+  acceptOffer,
 } from "../controllers/projectController.js";
 import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
 import { checkSchema } from "express-validator";
@@ -33,7 +34,8 @@ projectRoute.post(
 projectRoute.patch("/:id/update", updateProject);
 
 // accept the freelancer route
-projectRoute.patch("/:id/accept", acceptFreelancerToProject);
+projectRoute.patch("/:id/accept", acceptOffer);
+projectRoute.patch("/:id/complete", completeProject);
 
 // update project after accept the winner freelancer Id
 projectRoute.delete("/:id", isClient, deleteProject);

@@ -42,7 +42,6 @@ export const despositPayment = async (request, response, next) => {
       mode: 'payment'
     });
 
-    // let transaction = TranssactionModel.findById
     response.status(201).json({ message: "Success", session, amount: newPrice });
   } catch (error) {
     error.statusCode = 500;
@@ -55,7 +54,6 @@ export const despositPayment = async (request, response, next) => {
 export const ThankYou = async (req, res, next) => {
   let { clientId, mode, sessionId, amount } = req.body;
 
-  console.log({ clientId, mode, sessionId, amount })
 
   try {
 
