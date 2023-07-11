@@ -89,3 +89,42 @@ export const getPayments = async (req, res, next) => {
 
 
 }
+
+
+export const withdrawFreelancer = async (request,response,next) => {
+
+  const {userId,amount} = request.body
+  const randomSessionId = Math.floor(Math.random()*200) + userId
+  const mode = 'withdraw'
+
+  try {
+    const freelancer = await FreelancerModel.findById(userId)
+
+    if(!freelancer){
+      return response.status(401).json({error:'can not find this freelancer'})
+    }
+
+    if(freelancer.totalMoney < +amount){
+      return response.status(400).json({error:'your money is less than this amount'})
+    }
+
+    const updateAmount = {
+      totalMoney : freelancer.totalMoney - +amount
+    }
+
+    await freelancer.updateOne(updateAmount)
+
+
+    await TranssactionModel.create({
+      amount:amount,
+      mode:mode,
+      sessionId:randomSessionId,
+      userId:userId
+    })
+   
+    response.status(201).json({message:'Succsess'})
+  } catch (error) {
+    error.statusCode = 500
+    next(error)
+  }
+}
