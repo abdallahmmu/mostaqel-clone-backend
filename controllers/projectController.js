@@ -3,16 +3,14 @@ import clientModel from "../models/clientModel.js";
 import freelancerModel from "../models/freelancerModel.js";
 import offerModel from "../models/offerModel.js";
 import projectModel from "../models/projectModel.js";
-import { faker } from '@faker-js/faker';
+import TransactionModel from "../models/transsactionModel.js";
+import { faker } from "@faker-js/faker";
 
 const createProject = async (req, res, next) => {
-
   try {
     let projectAdded;
 
-
     projectAdded = await projectModel.create(req.body);
-
 
     if (!projectAdded) {
       return res.status(400).json({ error: "can not save project" });
@@ -25,24 +23,29 @@ const createProject = async (req, res, next) => {
 };
 
 const getAllProjects = async (req, res, next) => {
-
-
   try {
-
     let totalDocuments = await projectModel.countDocuments();
-    let api = new ApiFeatures(req.query, projectModel.find().populate('clientId categoryId skillsIds').sort('-createdAt'))
-      .search().paginate(totalDocuments).filter().select().sort()
+    let api = new ApiFeatures(
+      req.query,
+      projectModel
+        .find()
+        .populate("clientId categoryId skillsIds")
+        .sort("-createdAt")
+    )
+      .search()
+      .paginate(totalDocuments)
+      .filter()
+      .select()
+      .sort();
 
+    let resultProjects = await api.mongooseQuery;
 
-
-
-    let resultProjects = await api.mongooseQuery
-
-    resultProjects
-      &&
-      res
-        .status(200)
-        .json({ resultProjects, pagination: api.pagination, tot: totalDocuments });
+    resultProjects &&
+      res.status(200).json({
+        resultProjects,
+        pagination: api.pagination,
+        tot: totalDocuments,
+      });
 
     !resultProjects &&
       res.status(400).json({ error: "all project can't returned" });
@@ -57,17 +60,22 @@ const acceptOffer = async (req, res, next) => {
   let offerId = req.body.offerId;
 
   try {
-    let projectUpdated = await projectModel.findByIdAndUpdate(
-      projetId,
-      { status: "pending", offerId },
-      {
-        new: true,
-      }
-    ).populate("offerId")
+    let projectUpdated = await projectModel
+      .findByIdAndUpdate(
+        projetId,
+        { status: "pending", offerId },
+        {
+          new: true,
+        }
+      )
+      .populate("offerId");
 
-    let winnerFreelancer = await offerModel.findById(offerId, { freelancerId: 1, _id: 0 }).populate('freelancerId')
+    let winnerFreelancer = await offerModel
+      .findById(offerId, { freelancerId: 1, _id: 0 })
+      .populate("freelancerId");
 
-    projectUpdated && res.status(200).json({ projectUpdated, winnerFreelancer });
+    projectUpdated &&
+      res.status(200).json({ projectUpdated, winnerFreelancer });
   } catch (error) {
     error.statusCode = 500;
     next(error);
@@ -77,12 +85,13 @@ const acceptOffer = async (req, res, next) => {
 const getSingleProject = async (req, res, next) => {
   let projectId = req.params.id;
   try {
-    let singleProject = await projectModel.findById(projectId)
-      .populate('clientId categoryId skillsIds')
+    let singleProject = await projectModel
+      .findById(projectId)
+      .populate("clientId categoryId skillsIds")
       .populate({
-        path: 'offerId',
-        populate: 'freelancerId'
-      })
+        path: "offerId",
+        populate: "freelancerId",
+      });
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
       res.status(404).json({ error: "single project can't returned" });
@@ -121,73 +130,73 @@ const deleteProject = async (req, res, next) => {
   }
 };
 
-
-
-
 const completeProject = async (req, res, next) => {
-
   let { freelancerId, clientId, offerId } = req.body;
-  let { projectId } = req.params;
+  const { id } = req.params;
   let offer = await offerModel.findById(offerId);
 
   try {
-    let project = await projectModel.findById(projectId);
+    let project = await projectModel.findById(id);
     let client = await clientModel.findById(clientId);
 
     if (client.totalMoney < offer.amount) {
-      res.status(500).json({ message: 'the client charge is less than offer amount money !!' });
+      res.status(500).json({
+        message: "the client charge is less than offer amount money !!",
+      });
     }
     if (project.status !== "pending") {
-      res.status(500).json({ message: 'this project wasnot accpted yet !!' });
-
+      res.status(500).json({ message: "this project wasnot accpted yet !!" });
     } else {
+      let session = Math.random() * 10;
 
-
-      let session = (Math.random() * 10);
-
-      let freelancer = await freelancerModel.findByIdAndUpdate(freelancerId,
+      let freelancer = await freelancerModel.findByIdAndUpdate(
+        freelancerId,
         {
-          $inc: { totalMoney: offer.amount } ,
-          $push:{ completedProjects : projectId} },
-        { new: true });
+          $inc: { totalMoney: offer.amount },
+          $push: { completedProjects: id },
+        },
+        { new: true }
+      );
 
-      let client = await clientModel.findByIdAndUpdate(clientId,
-        { $dec: { totalMoney: offer.amount } }, { new: true });
+      let client = await clientModel.findByIdAndUpdate(
+        clientId,
+        { $inc: { totalMoney: -offer.amount } },
+        { new: true }
+      );
 
-      let project = await projectModel.findByIdAndUpdate(projectId, { status: 'complete' }, { new: true });
+      let project = await projectModel.findByIdAndUpdate(
+        id,
+        { status: "complete" },
+        { new: true }
+      );
 
-      let transToFreelancer = await transsactionModel.create({
+      let transToFreelancer = await TransactionModel.create({
         amount: offer.amount,
         userId: freelancerId,
-        mode: 'profit',
-        sessionId: session
-      })
-      let transFromClient = await transsactionModel.create({
+        mode: "profit",
+        sessionId: session,
+      });
+      let transFromClient = await TransactionModel.create({
         amount: offer.amount,
         userId: clientId,
-        mode: 'withdraw',
-        sessionId: session
-      })
-
-
+        mode: "withdraw",
+        sessionId: session,
+      });
 
       res.status(200).json({
-        message: 'the project ended successfully ',
+        message: "the project ended successfully ",
         freelancer,
         client,
         project,
         transToFreelancer,
-        transFromClient
+        transFromClient,
       });
-
     }
-
   } catch (error) {
     error.statusCode = 500;
     next(error);
   }
-}
-
+};
 
 export {
   createProject,
@@ -196,5 +205,5 @@ export {
   updateProject,
   deleteProject,
   acceptOffer,
-  completeProject
+  completeProject,
 };

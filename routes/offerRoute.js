@@ -7,6 +7,7 @@ import {
   getProjectOffers,
   getProjectOffersStatistics,
   sendOffer,
+  getOfferInfo,
   deleteOffer,
   updateOffer,
   getFreelancerOffers,
@@ -43,6 +44,11 @@ offerRoute.post(
   validatorMiddleware,
   sendOffer
 );
+
+// @desc get winning offer for specific project
+// @route delete /api/v1/offers/:id
+//  @access freelancer who logged In and who sent the offer
+offerRoute.get("/offers/:id", getOfferInfo);
 
 // @desc delete offer for specific project
 // @route delete /api/v1/offers/:id
