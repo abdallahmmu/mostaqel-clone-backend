@@ -4,6 +4,7 @@ import clientModel from "../../models/clientModel.js";
 export const isClient = (req, res, next) => {
   const token = req.get("Authorization");
 
+
   if (!token) {
     return res.status(404).json({
       error:
