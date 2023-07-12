@@ -6,6 +6,7 @@ import {
   updateProject,
   deleteProject,
   completeProject,
+  deactivateProject,
   // getProjectReviews,
   acceptOffer,
 } from "../controllers/projectController.js";
@@ -39,3 +40,4 @@ projectRoute.patch("/:id/complete", completeProject);
 
 // update project after accept the winner freelancer Id
 projectRoute.delete("/:id", isClient, deleteProject);
+projectRoute.patch("/:id/deactivate",isClient ,deactivateProject);

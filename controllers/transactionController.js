@@ -11,9 +11,9 @@ export const despositPayment = async (request, response, next) => {
   if (!userId || !amount || !mode) {
     return response.status(401).json({ error: "data is missing" });
   }
-  // const percent = 2.5;
-  // const increase = parseInt(amount) * (percent / 100);
-  const newPrice = parseInt(amount) ;
+  const percent = 2.5;
+  const increase = parseInt(amount) * (percent / 100);
+  const newPrice = parseInt(amount) + increase;
   try {
     let findUser;
     if (mode === "deposit") {

@@ -140,19 +140,21 @@ const completeProject = async (req, res, next) => {
     let client = await clientModel.findById(clientId);
 
     if (client.totalMoney < offer.amount) {
-      res.status(500).json({
+     return res.status(500).json({
         message: "the client charge is less than offer amount money !!",
       });
     }
+
+
     if (project.status !== "pending") {
-      res.status(500).json({ message: "this project wasnot accpted yet !!" });
+      return res.status(500).json({ message: "this project wasnot accpted yet !!" });
     } else {
       let session = Math.random() * 10;
 
       let freelancer = await freelancerModel.findByIdAndUpdate(
         freelancerId,
         {
-          $inc: { totalMoney: offer.amount },
+          $inc: { totalMoney: (offer.amount * 0.8) },
           $push: { completedProjects: id },
         },
         { new: true }
@@ -183,7 +185,7 @@ const completeProject = async (req, res, next) => {
         sessionId: session,
       });
 
-      res.status(200).json({
+       res.status(200).json({
         message: "the project ended successfully ",
         freelancer,
         client,
@@ -197,7 +199,30 @@ const completeProject = async (req, res, next) => {
     next(error);
   }
 };
+const deactivateProject = async (req, res, next) => {
+  let { id } = req.params;
+  
+  try {
+   
+    if(!id){
+      return res.status(500).json({message: 'project is not exist!!'})
+    }
+    
+    let project  = await projectModel.findById(id);
+    
+    if(project.status == 'pending'){
+      return res.status(500).json({message: 'can not activate project with Pending Status'});
+    }
 
+      let resultProject = await projectModel.findByIdAndUpdate( id , { status: 'close'}, {new: true})
+      
+      res.status(200).json(resultProject);
+
+  } catch (error) {
+    error.statusCode = 500;
+    next(error)
+  }
+}
 export {
   createProject,
   getAllProjects,
@@ -205,5 +230,6 @@ export {
   updateProject,
   deleteProject,
   acceptOffer,
+  deactivateProject,
   completeProject,
 };
