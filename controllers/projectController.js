@@ -65,9 +65,9 @@ const acceptOffer = async (req, res, next) => {
       }
     ).populate("offerId")
 
-    let winnerFreelancer = await offerModel.findById(offerId, {freelancerId: 1, _id: 0}).populate('freelancerId')
+    let winnerFreelancer = await offerModel.findById(offerId, { freelancerId: 1, _id: 0 }).populate('freelancerId')
 
-    projectUpdated && res.status(200).json({ projectUpdated , winnerFreelancer});
+    projectUpdated && res.status(200).json({ projectUpdated, winnerFreelancer });
   } catch (error) {
     error.statusCode = 500;
     next(error);
@@ -78,11 +78,11 @@ const getSingleProject = async (req, res, next) => {
   let projectId = req.params.id;
   try {
     let singleProject = await projectModel.findById(projectId)
-    .populate('clientId categoryId skillsIds')
-    .populate({
-      path: 'offerId',
-      populate: 'freelancerId'
-    })
+      .populate('clientId categoryId skillsIds')
+      .populate({
+        path: 'offerId',
+        populate: 'freelancerId'
+      })
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
       res.status(404).json({ error: "single project can't returned" });
@@ -124,24 +124,64 @@ const deleteProject = async (req, res, next) => {
 
 
 
-const completeProject = async (req , res, next) => {
-  let { projectId, freelancerId,  clientId } = req.body;
+const completeProject = async (req, res, next) => {
+
+  let { freelancerId, clientId, offerId } = req.body;
+  let { projectId } = req.params;
+  let offer = await offerModel.findById(offerId);
 
   try {
-  let projectAmount = await projectModel.findById(projectId, { range: 1});
-  let clientCharge = await clientModel.findById(clientId, { totalMoney: 1});
+    let project = await projectModel.findById(projectId);
+    let client = await clientModel.findById(clientId);
 
-  if(clientCharge.totalMoney < projectAmount.range){
-    res.status(500).json({message: 'the client charge is less than pproject range money !!'});
-    
-  }else{
-    let freelancer = await freelancerModel.findByIdAndUpdate(freelancerId, { $inc: { totalMoney: projectAmount.range}}, { new : true});
-    let client = await clientModel.findByIdAndUpdate(clientId, { $dec: { totalMoney: projectAmount.range}}, { new : true});
-    let project = await projectModel.findByIdAndUpdate(projectId, { status: 'completed'}, { new : true});
+    if (client.totalMoney < offer.amount) {
+      res.status(500).json({ message: 'the client charge is less than offer amount money !!' });
+    }
+    if (project.status !== "pending") {
+      res.status(500).json({ message: 'this project wasnot accpted yet !!' });
 
-    res.status(200).json({message: 'the project ended successfully ', freelancer, client , project});
-  }
-  res.status(201).json({projectAmount})
+    } else {
+
+
+      let session = (Math.random() * 10);
+
+      let freelancer = await freelancerModel.findByIdAndUpdate(freelancerId,
+        {
+          $inc: { totalMoney: offer.amount } ,
+          $push:{ completedProjects : projectId} },
+        { new: true });
+
+      let client = await clientModel.findByIdAndUpdate(clientId,
+        { $dec: { totalMoney: offer.amount } }, { new: true });
+
+      let project = await projectModel.findByIdAndUpdate(projectId, { status: 'complete' }, { new: true });
+
+      let transToFreelancer = await transsactionModel.create({
+        amount: offer.amount,
+        userId: freelancerId,
+        mode: 'profit',
+        sessionId: session
+      })
+      let transFromClient = await transsactionModel.create({
+        amount: offer.amount,
+        userId: clientId,
+        mode: 'withdraw',
+        sessionId: session
+      })
+
+
+
+      res.status(200).json({
+        message: 'the project ended successfully ',
+        freelancer,
+        client,
+        project,
+        transToFreelancer,
+        transFromClient
+      });
+
+    }
+
   } catch (error) {
     error.statusCode = 500;
     next(error);

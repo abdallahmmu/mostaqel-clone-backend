@@ -3,6 +3,7 @@ import {
   despositPayment,
   getPayments,
   ThankYou,
+  withdrawFreelancer,
 } from "../controllers/transactionController.js";
 
 export const transactionRoute = express.Router();
@@ -12,3 +13,6 @@ transactionRoute.get("/", getPayments);
 transactionRoute.post("/thankyou", ThankYou);
 
 transactionRoute.post("/", despositPayment);
+transactionRoute.get("/", getPayments);
+transactionRoute.post("/thankyou", ThankYou);
+transactionRoute.post("/withdraw", withdrawFreelancer);
