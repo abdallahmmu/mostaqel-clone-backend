@@ -38,8 +38,8 @@ app.use("/api/v1/freelancers", freelancerRoute);
 app.use("/api/v1/projects", projectRoute);
 app.use("/api/v1/skills", skillesRoute);
 app.use("/api/v1/clients", clientRouter);
-app.use('/api/v1/admin',adminRoute)
-app.use('/api/v1/payment',transactionRoute)
+app.use("/api/v1/admin", adminRoute);
+app.use("/api/v1/payment", transactionRoute);
 
 //Catch All Routes
 app.use("*", (request, response) => {

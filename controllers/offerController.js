@@ -67,7 +67,26 @@ export const sendOffer = async (req, res, next) => {
   }
 };
 
-// @route delete /api/v1/offers/:id
+// @route get /api/v1/offers/:id
+export const getOfferInfo = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const offerDetails = await offerModel.findOne({ _id: id });
+    if (!offerDetails)
+      return res.status(404).json({
+        error: "Can't Not Find Offer",
+      });
+    res.status(200).json({
+      results: offerDetails,
+    });
+  } catch (error) {
+    error.statusCode = 500;
+
+    next(error);
+  }
+};
+
+// @route pacth /api/v1/offers/:id
 export const updateOffer = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -77,7 +96,7 @@ export const updateOffer = async (req, res, next) => {
     });
     if (!updatedOffer)
       return res.status(404).json({
-        error: "Can't Not Updated Offer Successfully",
+        error: "Can't Not Updated Offer",
       });
     res.status(200).json({
       message: "Offer Updated Successfully",
@@ -90,7 +109,7 @@ export const updateOffer = async (req, res, next) => {
   }
 };
 
-// @route patch /api/v1/offers/:id
+// @route delete /api/v1/offers/:id
 export const deleteOffer = async (req, res, next) => {
   try {
     const { id } = req.params;
