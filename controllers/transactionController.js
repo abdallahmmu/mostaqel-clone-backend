@@ -14,6 +14,7 @@ export const despositPayment = async (request, response, next) => {
   const percent = 2.5;
   const increase = parseInt(amount) * (percent / 100);
   const newPrice = parseInt(amount) + increase;
+  
   try {
     let findUser;
     if (mode === "deposit") {
@@ -32,7 +33,7 @@ export const despositPayment = async (request, response, next) => {
             unit_amount_decimal: newPrice * 100,
             currency: "usd",
             product_data: {
-              name: "Deposite will be Here",
+              name: "Deposite For Mostaql",
               description: "welcome to mostaql-clone purcheses here you will deposite some mony to use in our platform.",
             },
           },
@@ -53,9 +54,23 @@ export const despositPayment = async (request, response, next) => {
 
 export const ThankYou = async (req, res, next) => {
   let { clientId, mode, sessionId, amount } = req.body;
-
-
+  const stripe = new Stripe(process.env.STRIPE_PRIVTE_KEY)
+  
   try {
+    const confirmation = await stripe.checkout.sessions.retrieve(sessionId)
+
+    if(confirmation.payment_status === 'unpaid' || !sessionId || !amount){
+      return res.status(401).json({error:'paied is not sucsess'})
+    }
+    
+    let client = await ClientModel.findById(clientId)
+
+    const updatedAmount = {
+      totalMoney:parseInt(client.totalMoney) + parseInt(amount)
+    }
+
+    await client.updateOne(updatedAmount)
+
 
     let transaction = await TranssactionModel.create({
       mode,
@@ -63,10 +78,6 @@ export const ThankYou = async (req, res, next) => {
       amount,
       userId: clientId
     })
-
-    let client = await ClientModel.findByIdAndUpdate(clientId, 
-      { $inc: { totalMoney: amount } }, 
-      { new: true })
 
     res.status(200).json({transaction, client});
 
@@ -125,6 +136,23 @@ export const withdrawFreelancer = async (request,response,next) => {
     response.status(201).json({message:'Succsess'})
   } catch (error) {
     error.statusCode = 500
+    next(error)
+  }
+}
+
+
+export const getAllUserTranactios = async (req, res, next) => {
+  let { userId } = req.params;
+ 
+  try {
+    let transaction = await TranssactionModel.find({userId});
+
+    if(!transaction){
+      return res.status(200).json({message: 'This User does not have any transactions'});
+    }
+    res.status(200).json({transaction});
+  } catch (error) {
+    error.statusCode = 500;
     next(error)
   }
 }

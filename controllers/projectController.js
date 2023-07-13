@@ -24,11 +24,11 @@ const createProject = async (req, res, next) => {
 
 const getAllProjects = async (req, res, next) => {
   try {
-    let totalDocuments = await projectModel.countDocuments();
+    let totalDocuments = await projectModel.countDocuments({ status: "open" });
     let api = new ApiFeatures(
       req.query,
       projectModel
-        .find()
+        .find({ status :"open"})
         .populate("clientId categoryId skillsIds")
         .sort("-createdAt")
     )
@@ -36,7 +36,7 @@ const getAllProjects = async (req, res, next) => {
       .paginate(totalDocuments)
       .filter()
       .select()
-      .sort()
+      .sort();
   
 
     let resultProjects = await api.mongooseQuery;
@@ -55,6 +55,8 @@ const getAllProjects = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 const acceptOffer = async (req, res, next) => {
   let projetId = req.params.id;

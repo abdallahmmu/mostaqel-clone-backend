@@ -88,6 +88,7 @@ clientRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+
 clientRouter.get('/:id/projects', async (req, res) => {
   let { id} = req.params;
   try {
@@ -102,7 +103,11 @@ clientRouter.get('/:id/projects', async (req, res) => {
     error.statusCode = 500;
     next(error)
   }
+  
 });
+
+
+
 
 clientRouter.patch("/:id", auth, async (req, res) => {
   const userData = {...req.body}
