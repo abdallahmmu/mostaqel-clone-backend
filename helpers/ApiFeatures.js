@@ -1,63 +1,76 @@
-export default class ApiFeatures{
-    constructor(queryString, mongooseQuery){
-        this.mongooseQuery= mongooseQuery
+export default class ApiFeatures {
+    constructor(queryString, mongooseQuery) {
+        this.mongooseQuery = mongooseQuery
         this.queryString = queryString
     }
 
 
-    filter(){
-        let queryStringObj = { ...this.queryString};
+    filter() {
+        let queryStringObj = { ...this.queryString };
 
-        ['page', 'sort', 'fields', 'limit', 'keyword'].forEach( item =>  delete queryStringObj[item])
+        ['page', 'sort', 'fields', 'limit', 'keyword'].forEach(item => delete queryStringObj[item])
 
+        let newQueryObj
+        if (Object.keys(queryStringObj).length > 1 && Object.keys(queryStringObj).includes('range_lt') ) {
+            newQueryObj = {
+                ...queryStringObj,
+                range: {
+                    $lt: queryStringObj.range_lt,
+                    $gt: queryStringObj.range_gt,
 
-        let queryStr = JSON.stringify(queryStringObj)
-        
-        queryStr = queryStr.replace(/\b(gt|lt|gte|lte)\b/g, match => `$${match}`);
-        
-        this.mongooseQuery = this.mongooseQuery.find(JSON.parse(queryStr))
+                }
+            }
+
+        }else{
+            newQueryObj = queryStringObj
+        }
+        ['range_lt', 'range_gt'].forEach(item => delete newQueryObj[item])
+    
+
+        this.mongooseQuery = this.mongooseQuery.find(newQueryObj)
 
 
         return this
     }
 
-    sort(){
 
-        let { sort } = { ...this.queryString};
-        if(sort){
+    sort() {
+
+        let { sort } = { ...this.queryString };
+        if (sort) {
             sort = sort.split(',').join(' ');
-            this.mongooseQuery =  this.mongooseQuery.sort(sort)
-        }else{
-            this.mongooseQuery =  this.mongooseQuery.sort('-createAt')
+            this.mongooseQuery = this.mongooseQuery.sort(sort)
+        } else {
+            this.mongooseQuery = this.mongooseQuery.sort('-createAt')
         }
 
         return this
     }
 
     select() {
-        let { fields } = { ...this.queryString};
+        let { fields } = { ...this.queryString };
 
-        if(fields){
+        if (fields) {
 
             fields = fields.split(',').join(' ');
-         
-            this.mongooseQuery =  this.mongooseQuery.select(fields)
-        }else{
-            this.mongooseQuery =  this.mongooseQuery.select("-__v")
+
+            this.mongooseQuery = this.mongooseQuery.select(fields)
+        } else {
+            this.mongooseQuery = this.mongooseQuery.select("-__v")
         }
 
         return this
     }
 
     search() {
-       
-        if(this.queryString.keyword){
-            let query= {}
-            query.$or = [
-                { title: { $regex: this.queryString.keyword, $options: 'i' }},
-                { description: {$regex: this.queryString.keyword, $options: 'i'}}  ];
 
-              
+        if (this.queryString.keyword) {
+            let query = {}
+            query.$or = [
+                { title: { $regex: this.queryString.keyword, $options: 'i' } },
+                { description: { $regex: this.queryString.keyword, $options: 'i' } }];
+
+
             this.mongooseQuery = this.mongooseQuery.find(query)
         }
 
@@ -66,31 +79,48 @@ export default class ApiFeatures{
 
     paginate(totalDocuments) {
 
-        let  page  = this.queryString.page || 1;
-        let  limit  = this.queryString.limit || 5;
+        let page = this.queryString.page || 1;
+        let limit = this.queryString.limit || 5;
 
-        let skip = (page -  1 ) * limit;
+        let skip = (page - 1) * limit;
         let endIndex = page * limit;
 
         let pagination = {};
 
         pagination.currentPage = +page;
         pagination.limit = limit;
-        pagination.numOfPages = Math.ceil( totalDocuments / limit )
+        pagination.numOfPages = Math.ceil(totalDocuments / limit)
 
-        
-        if( endIndex < totalDocuments ){
-            pagination.next = +page + 1; 
+
+        if (endIndex < totalDocuments) {
+            pagination.next = +page + 1;
         }
-        
 
-        if( skip > 0){
+
+        if (skip > 0) {
             pagination.prev = +page - 1;
         }
 
         this.mongooseQuery = this.mongooseQuery.skip(skip).limit(limit);
 
         this.pagination = pagination
+        return this
+    }
+
+    returnSkills(){
+        let {skillsIds} = {...this.queryString};
+        if(skillsIds){
+            this.mongooseQuery = this.mongooseQuery.find({skillsIds})
+        }
+        return this
+    }
+
+    returnCategories(){
+        let {categoryId} = {...this.queryString};
+        if(categoryId){
+        
+            this.mongooseQuery = this.mongooseQuery.find({categoryId: categoryId._id})
+        }
         return this
     }
 }
