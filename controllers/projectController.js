@@ -36,7 +36,8 @@ const getAllProjects = async (req, res, next) => {
       .paginate(totalDocuments)
       .filter()
       .select()
-      .sort();
+      .sort()
+  
 
     let resultProjects = await api.mongooseQuery;
 

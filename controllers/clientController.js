@@ -79,6 +79,7 @@ const uploadImageForClient = async (request, response, next) => {
   }
 };
 
+
 export {
   saveClient,
   getClientById,

@@ -9,8 +9,9 @@ import {
   getClient,
   deleteClientById,
   uploadImageForClient,
-  login,
+  login
 } from "../controllers/clientController.js";
+import projectModel from "../models/projectModel.js";
 const clientRouter = express.Router();
 
 //Multer Configuration
@@ -84,6 +85,22 @@ clientRouter.get("/:id", async (req, res, next) => {
   } catch (e) {
     e.statusCode = 500;
     next(e);
+  }
+});
+
+clientRouter.get('/:id/projects', async (req, res) => {
+  let { id} = req.params;
+  try {
+    let project = await projectModel.find({clientId: id});
+
+    if(Object.keys(project).length === 0){
+      return res.status(500).json({message: 'there is no projects for this client'});
+    }
+
+    res.status(200).json({message: 'success', project});
+  } catch (error) {
+    error.statusCode = 500;
+    next(error)
   }
 });
 
