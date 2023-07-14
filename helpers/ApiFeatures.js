@@ -8,7 +8,7 @@ export default class ApiFeatures {
     filter() {
         let queryStringObj = { ...this.queryString };
 
-        ['page', 'sort', 'fields', 'limit', 'keyword'].forEach(item => delete queryStringObj[item])
+        ['page', 'sort', 'fields', 'limit', 'keyword', 'skillsIds', 'categoryIds'].forEach(item => delete queryStringObj[item])
 
         let newQueryObj
         if (Object.keys(queryStringObj).length > 1 && Object.keys(queryStringObj).includes('range_lt') ) {
@@ -38,7 +38,7 @@ export default class ApiFeatures {
 
         let { sort } = { ...this.queryString };
         if (sort) {
-            sort = sort.split(',').join(' ');
+            // sort = sort.split(',').join(' ');
             this.mongooseQuery = this.mongooseQuery.sort(sort)
         } else {
             this.mongooseQuery = this.mongooseQuery.sort('-createAt')
@@ -64,6 +64,7 @@ export default class ApiFeatures {
 
     search() {
 
+         
         if (this.queryString.keyword) {
             let query = {}
             query.$or = [
@@ -78,7 +79,7 @@ export default class ApiFeatures {
     }
 
     paginate(totalDocuments) {
-
+        
         let page = this.queryString.page || 1;
         let limit = this.queryString.limit || 5;
 
@@ -107,19 +108,24 @@ export default class ApiFeatures {
         return this
     }
 
-    returnSkills(){
+    Skills(){
         let {skillsIds} = {...this.queryString};
+    
+        console.log(skillsIds)
         if(skillsIds){
-            this.mongooseQuery = this.mongooseQuery.find({skillsIds})
+            // skillsIds = skillsIds.split(',').join(' ');
+            this.mongooseQuery = this.mongooseQuery.find({skillsIds: { $in : skillsIds}})
         }
         return this
     }
 
-    returnCategories(){
-        let {categoryId} = {...this.queryString};
-        if(categoryId){
+
+
+    Categories(){
+        let {categoryIds} = {...this.queryString};
+        if(categoryIds){
         
-            this.mongooseQuery = this.mongooseQuery.find({categoryId: categoryId._id})
+            this.mongooseQuery = this.mongooseQuery.find({categoryId: { $in : categoryIds}})
         }
         return this
     }

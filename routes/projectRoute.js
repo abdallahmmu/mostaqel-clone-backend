@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProject,
   getAllProjects,
+  getAllOpenProjects,
   getSingleProject,
   updateProject,
   deleteProject,
@@ -18,6 +19,7 @@ import { projectSchema } from "../validators/addProject.schema.js";
 export const projectRoute = express.Router();
 
 projectRoute.get("/", getAllProjects);
+projectRoute.get("/open", getAllOpenProjects);
 
 projectRoute.get("/:id", getSingleProject);
 // projectRoute.get("/:projectId/feedback", getProjectReviews);

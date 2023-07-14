@@ -24,6 +24,39 @@ const createProject = async (req, res, next) => {
 
 const getAllProjects = async (req, res, next) => {
   try {
+    let totalDocuments = await projectModel.countDocuments();
+    let api = new ApiFeatures(
+      req.params,
+      projectModel
+        .find()
+        .populate("clientId categoryId skillsIds")
+        .sort("-createdAt")
+    )
+      .search()
+      .paginate(totalDocuments)
+      .filter()
+      .select()
+      .sort()
+  
+
+    let resultProjects = await api.mongooseQuery;
+
+    resultProjects &&
+      res.status(200).json({
+        resultProjects,
+        pagination: api.pagination,
+        tot: totalDocuments,
+      });
+
+    !resultProjects &&
+      res.status(400).json({ error: "all project can't returned" });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
+};
+const getAllOpenProjects = async (req, res, next) => {
+  try {
     let totalDocuments = await projectModel.countDocuments({ status: "open" });
     let api = new ApiFeatures(
       req.query,
@@ -36,7 +69,9 @@ const getAllProjects = async (req, res, next) => {
       .paginate(totalDocuments)
       .filter()
       .select()
-      .sort();
+      .sort()
+      .Skills()
+      .Categories()
   
 
     let resultProjects = await api.mongooseQuery;
@@ -229,6 +264,7 @@ const deactivateProject = async (req, res, next) => {
 export {
   createProject,
   getAllProjects,
+  getAllOpenProjects,
   getSingleProject,
   updateProject,
   deleteProject,
