@@ -6,7 +6,9 @@ export const getAllSkills = async (req, res, next) => {
       path: "categoryId",
       select: "title  -_id",
     });
-
+    if (req.query.lang == "ar") {
+      skills.map((sk) => (sk.name = sk.nameAr));
+    }
     res.status(200).json({
       message: "Success",
       count: skills.length,
@@ -51,12 +53,10 @@ export const getSkillById = async (req, res, next) => {
 export const EditSkillById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    req.body.freelancerId = req.freelancerId;
-    const UpdatedSkill = await skillModel.findByIdAndUpdate(
-      id,
-      { name: req.body.name },
-      { new: true }
-    );
+    console.log(req.body);
+    const UpdatedSkill = await skillModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!UpdatedSkill)
       return res.status(404).json({
         error: "Can't Not Updated Skill Successfully",

@@ -1,132 +1,132 @@
 export default class ApiFeatures {
-    constructor(queryString, mongooseQuery) {
-        this.mongooseQuery = mongooseQuery
-        this.queryString = queryString
+  constructor(queryString, mongooseQuery) {
+    this.mongooseQuery = mongooseQuery;
+    this.queryString = queryString;
+  }
+
+  filter() {
+    let queryStringObj = { ...this.queryString };
+
+    [
+      "page",
+      "sort",
+      "fields",
+      "limit",
+      "keyword",
+      "skillsIds",
+      "categoryIds",
+      "lang",
+    ].forEach((item) => delete queryStringObj[item]);
+
+    let newQueryObj;
+    if (
+      Object.keys(queryStringObj).length > 1 &&
+      Object.keys(queryStringObj).includes("range_lt")
+    ) {
+      newQueryObj = {
+        ...queryStringObj,
+        range: {
+          $lt: queryStringObj.range_lt,
+          $gt: queryStringObj.range_gt,
+        },
+      };
+    } else {
+      newQueryObj = queryStringObj;
+    }
+    ["range_lt", "range_gt"].forEach((item) => delete newQueryObj[item]);
+
+    this.mongooseQuery = this.mongooseQuery.find(newQueryObj);
+
+    return this;
+  }
+
+  sort() {
+    let { sort } = { ...this.queryString };
+    if (sort) {
+      // sort = sort.split(',').join(' ');
+      this.mongooseQuery = this.mongooseQuery.sort(sort);
+    } else {
+      this.mongooseQuery = this.mongooseQuery.sort("-createAt");
     }
 
+    return this;
+  }
 
-    filter() {
-        let queryStringObj = { ...this.queryString };
+  select() {
+    let { fields } = { ...this.queryString };
 
-        ['page', 'sort', 'fields', 'limit', 'keyword', 'skillsIds', 'categoryIds'].forEach(item => delete queryStringObj[item])
+    if (fields) {
+      fields = fields.split(",").join(" ");
 
-        let newQueryObj
-        if (Object.keys(queryStringObj).length > 1 && Object.keys(queryStringObj).includes('range_lt') ) {
-            newQueryObj = {
-                ...queryStringObj,
-                range: {
-                    $lt: queryStringObj.range_lt,
-                    $gt: queryStringObj.range_gt,
-
-                }
-            }
-
-        }else{
-            newQueryObj = queryStringObj
-        }
-        ['range_lt', 'range_gt'].forEach(item => delete newQueryObj[item])
-    
-
-        this.mongooseQuery = this.mongooseQuery.find(newQueryObj)
-
-
-        return this
+      this.mongooseQuery = this.mongooseQuery.select(fields);
+    } else {
+      this.mongooseQuery = this.mongooseQuery.select("-__v");
     }
 
+    return this;
+  }
 
-    sort() {
+  search() {
+    if (this.queryString.keyword) {
+      let query = {};
+      query.$or = [
+        { title: { $regex: this.queryString.keyword, $options: "i" } },
+        { description: { $regex: this.queryString.keyword, $options: "i" } },
+      ];
 
-        let { sort } = { ...this.queryString };
-        if (sort) {
-            // sort = sort.split(',').join(' ');
-            this.mongooseQuery = this.mongooseQuery.sort(sort)
-        } else {
-            this.mongooseQuery = this.mongooseQuery.sort('-createAt')
-        }
-
-        return this
+      this.mongooseQuery = this.mongooseQuery.find(query);
     }
 
-    select() {
-        let { fields } = { ...this.queryString };
+    return this;
+  }
 
-        if (fields) {
+  paginate(totalDocuments) {
+    let page = this.queryString.page || 1;
+    let limit = this.queryString.limit || 5;
 
-            fields = fields.split(',').join(' ');
+    let skip = (page - 1) * limit;
+    let endIndex = page * limit;
 
-            this.mongooseQuery = this.mongooseQuery.select(fields)
-        } else {
-            this.mongooseQuery = this.mongooseQuery.select("-__v")
-        }
+    let pagination = {};
 
-        return this
+    pagination.currentPage = +page;
+    pagination.limit = limit;
+    pagination.numOfPages = Math.ceil(totalDocuments / limit);
+
+    if (endIndex < totalDocuments) {
+      pagination.next = +page + 1;
     }
 
-    search() {
-
-         
-        if (this.queryString.keyword) {
-            let query = {}
-            query.$or = [
-                { title: { $regex: this.queryString.keyword, $options: 'i' } },
-                { description: { $regex: this.queryString.keyword, $options: 'i' } }];
-
-
-            this.mongooseQuery = this.mongooseQuery.find(query)
-        }
-
-        return this
+    if (skip > 0) {
+      pagination.prev = +page - 1;
     }
 
-    paginate(totalDocuments) {
-        
-        let page = this.queryString.page || 1;
-        let limit = this.queryString.limit || 5;
+    this.mongooseQuery = this.mongooseQuery.skip(skip).limit(limit);
 
-        let skip = (page - 1) * limit;
-        let endIndex = page * limit;
+    this.pagination = pagination;
+    return this;
+  }
 
-        let pagination = {};
+  Skills() {
+    let { skillsIds } = { ...this.queryString };
 
-        pagination.currentPage = +page;
-        pagination.limit = limit;
-        pagination.numOfPages = Math.ceil(totalDocuments / limit)
-
-
-        if (endIndex < totalDocuments) {
-            pagination.next = +page + 1;
-        }
-
-
-        if (skip > 0) {
-            pagination.prev = +page - 1;
-        }
-
-        this.mongooseQuery = this.mongooseQuery.skip(skip).limit(limit);
-
-        this.pagination = pagination
-        return this
+    console.log(skillsIds);
+    if (skillsIds) {
+      // skillsIds = skillsIds.split(',').join(' ');
+      this.mongooseQuery = this.mongooseQuery.find({
+        skillsIds: { $in: skillsIds },
+      });
     }
+    return this;
+  }
 
-    Skills(){
-        let {skillsIds} = {...this.queryString};
-    
-        console.log(skillsIds)
-        if(skillsIds){
-            // skillsIds = skillsIds.split(',').join(' ');
-            this.mongooseQuery = this.mongooseQuery.find({skillsIds: { $in : skillsIds}})
-        }
-        return this
+  Categories() {
+    let { categoryIds } = { ...this.queryString };
+    if (categoryIds) {
+      this.mongooseQuery = this.mongooseQuery.find({
+        categoryId: { $in: categoryIds },
+      });
     }
-
-
-
-    Categories(){
-        let {categoryIds} = {...this.queryString};
-        if(categoryIds){
-        
-            this.mongooseQuery = this.mongooseQuery.find({categoryId: { $in : categoryIds}})
-        }
-        return this
-    }
+    return this;
+  }
 }

@@ -5,6 +5,10 @@ let skillSchema = Schema({
     type: String,
     minLength: 3,
   },
+  nameAr: {
+    type: String,
+    minLength: 3,
+  },
 
   categoryId: {
     type: Types.ObjectId,
