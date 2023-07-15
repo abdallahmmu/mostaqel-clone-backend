@@ -5,7 +5,9 @@ import FreelancerModel from "../models/freelancerModel.js";
 export const getAllCategories = async (request, response, next) => {
   try {
     const categories = await CategoryModel.find();
-
+    if (request.query.lang == "ar") {
+      categories.map((category) => (category.title = category.titleAr));
+    }
     response.status(200).json({ categories });
   } catch (error) {
     error.statusCode = 500;
@@ -50,9 +52,7 @@ export const addNewCategory = async (request, response, next) => {
   }
 
   try {
-    const newCategory = new CategoryModel({
-      title,
-    });
+    const newCategory = new CategoryModel(request.body);
 
     const savedCategory = await newCategory.save();
     response.status(200).json({ message: "Your Category Has Been Saved !" });
@@ -76,7 +76,7 @@ export const updateCategoryById = async (request, response, next) => {
   }
 
   try {
-    await CategoryModel.updateOne({ _id: categoryId }, { title: title });
+    await CategoryModel.updateOne({ _id: categoryId }, request.body);
     response.status(200).json({ message: "Your Category Has Been Updated!!" });
   } catch (error) {
     error.statusCode = 500;

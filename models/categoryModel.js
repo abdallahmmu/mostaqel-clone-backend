@@ -8,6 +8,11 @@ let CategoryModel = new Schema(
       required: true,
       unique: true,
     },
+    titleAr: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   {
     timestamps: true,

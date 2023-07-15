@@ -36,8 +36,7 @@ const getAllProjects = async (req, res, next) => {
       .paginate(totalDocuments)
       .filter()
       .select()
-      .sort()
-  
+      .sort();
 
     let resultProjects = await api.mongooseQuery;
 
@@ -61,7 +60,7 @@ const getAllOpenProjects = async (req, res, next) => {
     let api = new ApiFeatures(
       req.query,
       projectModel
-        .find({ status :"open"})
+        .find({ status: "open" })
         .populate("clientId categoryId skillsIds")
         .sort("-createdAt")
     )
@@ -71,11 +70,17 @@ const getAllOpenProjects = async (req, res, next) => {
       .select()
       .sort()
       .Skills()
-      .Categories()
-  
+      .Categories();
 
     let resultProjects = await api.mongooseQuery;
-
+    if (req.query?.lang == "ar") {
+      resultProjects.forEach((pro) => {
+        pro.skillsIds.map((sk) => (sk.name = sk.nameAr));
+        if (pro.categoryId) {
+          pro.categoryId.title = pro.categoryId?.titleAr;
+        }
+      });
+    }
     resultProjects &&
       res.status(200).json({
         resultProjects,
@@ -90,8 +95,6 @@ const getAllOpenProjects = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 const acceptOffer = async (req, res, next) => {
   let projetId = req.params.id;
@@ -130,6 +133,9 @@ const getSingleProject = async (req, res, next) => {
         path: "offerId",
         populate: "freelancerId",
       });
+    if (req.query?.lang == "ar") {
+      singleProject.skillsIds.map((skill) => (skill.name = skill.nameAr));
+    }
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
       res.status(404).json({ error: "single project can't returned" });
@@ -178,21 +184,22 @@ const completeProject = async (req, res, next) => {
     let client = await clientModel.findById(clientId);
 
     if (client.totalMoney < offer.amount) {
-     return res.status(500).json({
+      return res.status(500).json({
         message: "the client charge is less than offer amount money !!",
       });
     }
 
-
     if (project.status !== "pending") {
-      return res.status(500).json({ message: "this project wasnot accpted yet !!" });
+      return res
+        .status(500)
+        .json({ message: "this project wasnot accpted yet !!" });
     } else {
       let session = Math.random() * 10;
 
       let freelancer = await freelancerModel.findByIdAndUpdate(
         freelancerId,
         {
-          $inc: { totalMoney: (offer.amount * 0.8) },
+          $inc: { totalMoney: offer.amount * 0.8 },
           $push: { completedProjects: id },
         },
         { new: true }
@@ -223,7 +230,7 @@ const completeProject = async (req, res, next) => {
         sessionId: session,
       });
 
-       res.status(200).json({
+      res.status(200).json({
         message: "the project ended successfully ",
         freelancer,
         client,
@@ -239,28 +246,32 @@ const completeProject = async (req, res, next) => {
 };
 const deactivateProject = async (req, res, next) => {
   let { id } = req.params;
-  
+
   try {
-   
-    if(!id){
-      return res.status(500).json({message: 'project is not exist!!'})
-    }
-    
-    let project  = await projectModel.findById(id);
-    
-    if(project.status == 'pending'){
-      return res.status(500).json({message: 'can not activate project with Pending Status'});
+    if (!id) {
+      return res.status(500).json({ message: "project is not exist!!" });
     }
 
-      let resultProject = await projectModel.findByIdAndUpdate( id , { status: 'close'}, {new: true})
-      
-      res.status(200).json(resultProject);
+    let project = await projectModel.findById(id);
 
+    if (project.status == "pending") {
+      return res
+        .status(500)
+        .json({ message: "can not activate project with Pending Status" });
+    }
+
+    let resultProject = await projectModel.findByIdAndUpdate(
+      id,
+      { status: "close" },
+      { new: true }
+    );
+
+    res.status(200).json(resultProject);
   } catch (error) {
     error.statusCode = 500;
-    next(error)
+    next(error);
   }
-}
+};
 export {
   createProject,
   getAllProjects,
