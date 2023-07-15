@@ -110,7 +110,6 @@ export default class ApiFeatures {
   Skills() {
     let { skillsIds } = { ...this.queryString };
 
-    console.log(skillsIds);
     if (skillsIds) {
       // skillsIds = skillsIds.split(',').join(' ');
       this.mongooseQuery = this.mongooseQuery.find({

@@ -83,7 +83,7 @@ export const getFreelancerById = async (request, response, next) => {
   try {
     const freelancerAccount = await FreelancerModel.findOne(
       { _id: freelancerId },
-      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username skill totalMoney"
+      "isVerify firstName lastName avatar email jobTitle phoneNumber hourRate description completedProjects username skill totalMoney isActive"
     ).populate("categoryId");
     if (!freelancerAccount) {
       return response.status(404).json({ error: "user not found" });

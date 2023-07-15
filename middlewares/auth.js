@@ -8,7 +8,6 @@ function auth(req, res, next) {
       if (err) {
         res.status(403).json({ message: err.message });
       } else {
-        console.log(decoded.data);
         req.user = decoded.data;
         next();
       }
