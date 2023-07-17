@@ -3,6 +3,8 @@ import { fileURLToPath } from "url";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
+import { translate } from "@vitalets/google-translate-api";
+import axios from "axios";
 //INIT APP
 import { init } from "./helpers/DBconnection.js";
 //ROUTES IMPORT
@@ -40,7 +42,16 @@ app.use("/api/v1/skills", skillesRoute);
 app.use("/api/v1/clients", clientRouter);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/payment", transactionRoute);
-
+app.get("/api/v1/translate", async (req, res) => {
+  const url = `https://api.pawan.krd/gtranslate?from=en&to=ar&text=${req.query.text}`;
+  try {
+    const response = await axios.get(url);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 //Catch All Routes
 app.use("*", (request, response) => {
   response.status(200).json({ error: "This Route Is Not Correct" });

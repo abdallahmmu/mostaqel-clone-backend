@@ -145,6 +145,16 @@ export const cateogryStatistics = async (request, response, next) => {
           numProjects: { $sum: 1 },
         },
       },
+
+      {
+        $lookup: {
+          from: "categories",
+          localField: "_id",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+
       {
         $sort: { numProjects: -1 },
       },
