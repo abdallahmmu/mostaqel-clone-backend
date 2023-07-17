@@ -1,5 +1,5 @@
 import skillModel from "../models/skillModel.js";
-
+import projectModel from "./../models/projectModel.js";
 export const getAllSkills = async (req, res, next) => {
   try {
     const skills = await skillModel.find().populate({
@@ -80,6 +80,41 @@ export const deleteSkillById = async (req, res, next) => {
     res.status(200).json({
       message: "Successfully Deleted Skills",
     });
+  } catch (error) {
+    error.statusCode = 500;
+
+    next(error);
+  }
+};
+
+export const skillStatistics = async (request, response, next) => {
+  console.log("jgigjigj");
+  try {
+    const results = await projectModel.aggregate([
+      {
+        $unwind: "$skillsIds",
+      },
+      {
+        $group: {
+          _id: "$skillsIds",
+          numProjects: { $sum: 1 },
+        },
+      },
+
+      {
+        $lookup: {
+          from: "skills",
+          localField: "_id",
+          foreignField: "_id",
+          as: "skill",
+        },
+      },
+
+      {
+        $sort: { numProjects: -1 },
+      },
+    ]);
+    return response.status(200).json({ results });
   } catch (error) {
     error.statusCode = 500;
 

@@ -9,7 +9,7 @@ import { faker } from "@faker-js/faker";
 const createProject = async (req, res, next) => {
   try {
     let projectAdded;
-
+    console.log(req.body);
     projectAdded = await projectModel.create(req.body);
 
     if (!projectAdded) {
@@ -135,6 +135,9 @@ const getSingleProject = async (req, res, next) => {
       });
     if (req.query?.lang == "ar") {
       singleProject.skillsIds.map((skill) => (skill.name = skill.nameAr));
+      if (singleProject.description_ar) {
+        singleProject.description = singleProject.description_ar;
+      }
     }
     singleProject && res.status(200).json(singleProject);
     !singleProject &&

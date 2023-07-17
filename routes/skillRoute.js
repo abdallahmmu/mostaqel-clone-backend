@@ -5,10 +5,12 @@ import {
   getSkillById,
   EditSkillById,
   deleteSkillById,
+  skillStatistics,
 } from "../controllers/skillController.js";
 export const skillesRoute = express.Router();
 
 skillesRoute.get("/", getAllSkills);
+skillesRoute.get("/statistics", skillStatistics);
 
 skillesRoute.post("/", saveSkill);
 
