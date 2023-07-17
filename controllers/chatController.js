@@ -21,7 +21,7 @@ export const createChat = async (req, res, next) => {
     const newChat = await chatModel.create(req.body);
     return res.status(200).json({
       message: "Success",
-      data: newChat,
+      results: newChat,
     });
   } catch (error) {
     error.statusCode = 500;
