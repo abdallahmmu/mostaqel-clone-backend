@@ -5,6 +5,7 @@ export const categoryRoute = express.Router();
 //Controllers
 import {
   getAllCategories,
+  cateogryStatistics,
   getCategoryById,
   addNewCategory,
   updateCategoryById,
@@ -13,6 +14,7 @@ import {
 } from "./../controllers/categoryController.js";
 //GET ==> get all Categories
 categoryRoute.get("/", getAllCategories);
+categoryRoute.get("/statistics", cateogryStatistics);
 
 //GET ==> get CategoryById
 categoryRoute.get("/:id", getCategoryById);

@@ -1,6 +1,8 @@
 //MODELS
 import CategoryModel from "./../models/categoryModel.js";
 import FreelancerModel from "../models/freelancerModel.js";
+
+import projectModel from "./../models/projectModel.js";
 // READ - GET ===> All Categories
 export const getAllCategories = async (request, response, next) => {
   try {
@@ -127,6 +129,27 @@ export const getFreelancersForCategory = async (request, response, next) => {
         .status(200)
         .json({ message: "can not find freelancers in this category" });
     return response.status(200).json({ freelancers });
+  } catch (error) {
+    error.statusCode = 500;
+
+    next(error);
+  }
+};
+export const cateogryStatistics = async (request, response, next) => {
+  console.log("jgigjigj");
+  try {
+    const results = await projectModel.aggregate([
+      {
+        $group: {
+          _id: "$categoryId",
+          numProjects: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { numProjects: -1 },
+      },
+    ]);
+    return response.status(200).json({ results });
   } catch (error) {
     error.statusCode = 500;
 
