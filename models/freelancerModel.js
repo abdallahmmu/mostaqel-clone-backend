@@ -71,6 +71,9 @@ let FreelancerModel = new Schema({
   totalMoney: {
     type: Number,
     default: 0
+  },
+  verifyCode:{
+    type:String,
   }
 });
 
