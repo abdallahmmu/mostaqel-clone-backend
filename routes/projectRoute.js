@@ -9,12 +9,16 @@ import {
   completeProject,
   deactivateProject,
   // getProjectReviews,
+  // saveProjectFiles,
   acceptOffer,
 } from "../controllers/projectController.js";
 import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
 import { checkSchema } from "express-validator";
 import validatorMiddleware from "./../middlewares/validatorMiddleware.js";
 import { projectSchema } from "../validators/addProject.schema.js";
+import path from 'path';
+import multer from 'multer';
+
 
 export const projectRoute = express.Router();
 
@@ -22,16 +26,49 @@ projectRoute.get("/", getAllProjects);
 projectRoute.get("/open", getAllOpenProjects);
 
 projectRoute.get("/:id", getSingleProject);
-// projectRoute.get("/:projectId/feedback", getProjectReviews);
+
+const storage = multer.diskStorage({
+        destination: function(req, file, cb)  {
+          cb(null, "./projectfiles" )
+        },
+        filename: (req, file, cb) => {
+          cb(null, 'projectFile' +  Math.random() * 255 + file.originalname);
+        }
+    })
+
+const upload = multer({storage})
+
+   
+
 
 // save project in DB
 projectRoute.post(
   "/",
   isClient,
+  // upload.fields([{name: 'file', maxCount:1}, {name: 'files', maxCount: 5}]),
+  upload.single('file'),
   checkSchema(projectSchema),
   validatorMiddleware,
   createProject
 );
+
+// projectRoute.post('/uploadFile' , upload.single('file') , async (req, res , next) => {
+// let projectId = req.params.id;
+//  let file  = req.file;
+
+//  if(!file){
+//   return res.status(403).json({message: 'there is no file selected !!'});
+//  }
+
+//  try {
+//   let project = await projectModel.findById(projectId);
+//  } catch (error) {
+  
+//  }
+  
+//     res.status(200).json({message: 'file uploaded'});
+  
+// })
 
 // page to Edit a project
 projectRoute.patch("/:id/update", updateProject);
