@@ -215,17 +215,17 @@ export const verifyFreelancerAccount = async (request, response, next) => {
     await freelancer.updateOne({ verifyCode: hashedNumbers });
 
     let email = await transporter.sendMail({
-      from: "abdallahiifox@gmail.com",
+      from: "mostaqlClone14@gmail.com",
       to: `${freelancer.email}`,
       subject: "Your Verification Code",
       text: `Hello Dear,${freelancer.username} This email send By Mostaql-clone To Infrom You With The Verification Code to your Account`, // plain text body
-      html: `<b>Your Verification Code is : ${OTPCode} <br/></b>
-          <span>Click Here To Verify Your Account: <a href="http://127.0.0.1:5173/verify-account/${freelancer._id}/">Visit Me</a></span>
+      html: `
+          <h3>Click Here To Verify Your Account: <a style="font-size:24px;" href="http://127.0.0.1:5173/verify-account/${freelancer._id}?code=${OTPCode}/">Visit Me</a></h3>
     
     `,
     });
 
-    response.json({ message: "Email Has Been Send",OTPCode });
+    response.json({ message: "Email Has Been Send" });
   } catch (error) {
     error.statusCode = 500;
     next(error);
@@ -234,16 +234,15 @@ export const verifyFreelancerAccount = async (request, response, next) => {
 
 export const verifyFreelancerOTPCode = async (request, response, next) => {
   const { freelancerId, OTPCode } = request.body;
-
   if (!freelancerId || !OTPCode) {
-    return response.status(401).json({ error: "can not find freelancer" });
+    return response.status(404).json({ error: "can not find freelancer" });
   }
 
   try {
     const freelancer = await FreelancerModel.findById(freelancerId);
 
     if (!freelancer) {
-      return response.status(401).json({ error: "can not find freelancer" });
+      return response.status(404).json({ error: "can not find freelancer" });
     }
 
     const compareNumber = crypto
@@ -252,7 +251,7 @@ export const verifyFreelancerOTPCode = async (request, response, next) => {
       .digest("hex");
 
     if (compareNumber !== freelancer.verifyCode) {
-      return response.status(401).json({ error: "OTP Code is Worng" });
+      return response.status(404).json({ error: "OTP Code is Worng" });
     }
 
     await freelancer.updateOne({ isVerify: true, verifyCode: "" });
