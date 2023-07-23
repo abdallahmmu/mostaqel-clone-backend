@@ -6,11 +6,20 @@ import projectModel from "../models/projectModel.js";
 import TransactionModel from "../models/transsactionModel.js";
 import { faker } from "@faker-js/faker";
 
+
+
 const createProject = async (req, res, next) => {
+
+  let files = req.files;
+  let newfiles = []
+  files.map((file) => {
+    newfiles.push(`http://localhost:3300/${file.path}`)
+  })
+ 
   try {
+
     let projectAdded;
-    console.log(req.body);
-    projectAdded = await projectModel.create(req.body);
+    projectAdded = await projectModel.create({ ...req.body , files: newfiles});
 
     if (!projectAdded) {
       return res.status(400).json({ error: "can not save project" });
@@ -284,5 +293,6 @@ export {
   deleteProject,
   acceptOffer,
   deactivateProject,
+  // saveProjectFiles,
   completeProject,
 };

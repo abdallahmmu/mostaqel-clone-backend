@@ -12,7 +12,7 @@ const projectSchema = new Schema(
       default: "open",
       required: true,
     },
-    range: { type: Number, required: true },
+    range: { type: Number, required: true, min:1 , max: 1000000 },
     skillsIds: { type: [ Schema.Types.ObjectId ], ref: "skill" },
     clientId: { type: Schema.Types.ObjectId, ref: "client", required: true },
     categoryId: {
@@ -25,9 +25,21 @@ const projectSchema = new Schema(
       default: null,
       ref: "offer",
     },
+    duration: {
+      type: Number,
+      min: 1,
+      required: true,
+    },
+    files: {
+      type: [String]
+    }
   },
   { timestamps: true }
 );
 
+
+
 const projectModel = model("project", projectSchema);
+
+
 export default projectModel;
