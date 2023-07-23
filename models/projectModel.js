@@ -30,9 +30,6 @@ const projectSchema = new Schema(
       min: 1,
       required: true,
     },
-    file: {
-      type: String
-    },
     files: {
       type: [String]
     }

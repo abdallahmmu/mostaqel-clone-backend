@@ -36,7 +36,8 @@ const storage = multer.diskStorage({
         }
     })
 
-const upload = multer({storage})
+// const upload = multer({storage})
+const upload = multer({ storage , array: true})
 
    
 
@@ -44,31 +45,15 @@ const upload = multer({storage})
 // save project in DB
 projectRoute.post(
   "/",
-  isClient,
+  // isClient,
   // upload.fields([{name: 'file', maxCount:1}, {name: 'files', maxCount: 5}]),
-  upload.single('file'),
+  upload.array('files', 4),
+  // upload.single('file'),
   checkSchema(projectSchema),
   validatorMiddleware,
   createProject
 );
 
-// projectRoute.post('/uploadFile' , upload.single('file') , async (req, res , next) => {
-// let projectId = req.params.id;
-//  let file  = req.file;
-
-//  if(!file){
-//   return res.status(403).json({message: 'there is no file selected !!'});
-//  }
-
-//  try {
-//   let project = await projectModel.findById(projectId);
-//  } catch (error) {
-  
-//  }
-  
-//     res.status(200).json({message: 'file uploaded'});
-  
-// })
 
 // page to Edit a project
 projectRoute.patch("/:id/update", updateProject);

@@ -9,17 +9,17 @@ import { faker } from "@faker-js/faker";
 
 
 const createProject = async (req, res, next) => {
-  let file = req.file;
-  // let files = req.files;
-  console.log(file)
-  // console.log(files)
+
+  let files = req.files;
+  let newfiles = []
+  files.map((file) => {
+    newfiles.push(`http://localhost:3300/${file.path}`)
+  })
+ 
   try {
-    if(!file){
-      return res.status(400).json({message: 'no file selected !!'})
-    }
 
     let projectAdded;
-    projectAdded = await projectModel.create({...req.body, file: `http://localhost:3300/${file.path}`});
+    projectAdded = await projectModel.create({ ...req.body , files: newfiles});
 
     if (!projectAdded) {
       return res.status(400).json({ error: "can not save project" });
