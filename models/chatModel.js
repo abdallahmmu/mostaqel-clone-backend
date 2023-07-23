@@ -17,6 +17,20 @@ const chatSchema = Schema(
       ref: "project",
       required: true,
     },
+    lastMessage: {
+      content: {
+        type: String,
+      },
+      sender: {
+        type: String,
+
+        enums: ["freelancer", "client"],
+      },
+      read: {
+        type: Boolean,
+        default: false,
+      },
+    },
   },
   {
     timestamps: true,

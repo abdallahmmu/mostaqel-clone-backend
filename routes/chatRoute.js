@@ -8,6 +8,8 @@ import {
   getFreelancerChats,
   getClientChats,
   createChat,
+  getFreelancerNotReadMessages,
+  getClientNotReadMessages,
 } from "../controllers/chatController.js";
 
 //Schema Validator
@@ -40,9 +42,15 @@ chatRoute.post(
 // @desc get all chats for specific freelancer
 // @route get /api/v1/freelancers/chats
 // @access freelancer
-chatRoute.get("/v1/freelancers/chats", isFreelancersAuth, getFreelancerChats);
+chatRoute.get("/v1/freelancer/chats", isFreelancersAuth, getFreelancerChats);
+chatRoute.get(
+  "/v1/freelancer/messages",
+  isFreelancersAuth,
+  getFreelancerNotReadMessages
+);
 
 // @desc get all chats for specific client
 // @route get /api/v1/clients/chats
 // @access client
-chatRoute.get("/v1/clients/chats", isClient, getClientChats);
+chatRoute.get("/v1/client/chats", isClient, getClientChats);
+chatRoute.get("/v1/client/messages", isClient, getClientNotReadMessages);

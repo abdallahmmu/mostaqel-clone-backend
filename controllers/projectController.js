@@ -5,6 +5,7 @@ import offerModel from "../models/offerModel.js";
 import projectModel from "../models/projectModel.js";
 import TransactionModel from "../models/transsactionModel.js";
 import { faker } from "@faker-js/faker";
+import { sendNotification } from "./../helpers/socket.js";
 
 const createProject = async (req, res, next) => {
   try {
@@ -114,7 +115,13 @@ const acceptOffer = async (req, res, next) => {
     let winnerFreelancer = await offerModel
       .findById(offerId, { freelancerId: 1, _id: 0 })
       .populate("freelancerId");
-
+    sendNotification({
+      userId: winnerFreelancer.freelancerId._id,
+      attachedId: projetId,
+      relatedTo: "projects",
+      content: `You Have Hired For Project ${projectUpdated.title}`,
+    });
+    console.log(winnerFreelancer.freelancerId._id);
     projectUpdated &&
       res.status(200).json({ projectUpdated, winnerFreelancer });
   } catch (error) {

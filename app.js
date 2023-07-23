@@ -17,6 +17,7 @@ import { chatRoute } from "./routes/chatRoute.js";
 import { skillesRoute } from "./routes/skillRoute.js";
 import { adminRoute } from "./routes/adminRoute.js";
 import { transactionRoute } from "./routes/transactionRoute.js";
+import { notificationRoute } from "./routes/notificationRoute.js";
 //Configuration
 config();
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api/v1/skills", skillesRoute);
 app.use("/api/v1/clients", clientRouter);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/payment", transactionRoute);
+app.use("/api/v1/notifications", notificationRoute);
 app.get("/api/v1/translate", async (req, res) => {
   const url = `https://api.pawan.krd/gtranslate?from=en&to=ar&text=${req.query.text}`;
   try {
@@ -54,7 +56,7 @@ app.get("/api/v1/translate", async (req, res) => {
 });
 //Catch All Routes
 app.use("*", (request, response) => {
-  response.status(200).json({ error: "This Route Is Not Correct" });
+  response.status(404).json({ error: "This Route Is Not Correct" });
 });
 
 //ERROR HANDLING
