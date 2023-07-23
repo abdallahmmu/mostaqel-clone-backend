@@ -32,6 +32,10 @@ app.use(
   "/Freelancers-Avatars",
   express.static(path.join(path.dirname(filename), "Freelancers-Avatars"))
 );
+app.use(
+  "/uploads",
+  express.static(path.join(path.dirname(filename), "uploads"))
+);
 
 //MiddleWares Routes
 app.use("/api/v1", offerRoute);

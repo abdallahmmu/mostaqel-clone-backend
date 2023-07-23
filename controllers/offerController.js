@@ -1,6 +1,7 @@
 import offerModel from "../models/offerModel.js";
 import { validationResult } from "express-validator";
 import { Schema, model } from "mongoose";
+import FreelancerModel from "../models/freelancerModel.js";
 // @route get /api/v1/projects/:id/offers
 export const getProjectOffers = async (req, res, next) => {
   try {
@@ -54,8 +55,21 @@ export const getProjectOffersStatistics = async (req, res, next) => {
 // @route post /api/v1/projects/:id/offers
 export const sendOffer = async (req, res, next) => {
   try {
+    if (req.files.attachments) {
+      req.body.attachments = [];
+      req.files.attachments.map((file) => {
+        // Save image into our db
+        req.body.attachments.push(file.filename);
+        console.log(file.filename);
+      });
+    }
+
     req.body.freelancerId = req.freelancerId;
+    const freelancer = await FreelancerModel.findById(req.body.freelancerId);
+    freelancer.availableOffers--;
+    await freelancer.save();
     req.body.projectId = req.params.id;
+    console.log(req.body);
     const newOffer = await offerModel.create(req.body);
     res.status(200).json({
       message: "Success",

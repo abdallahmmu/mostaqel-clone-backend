@@ -111,6 +111,8 @@ const acceptOffer = async (req, res, next) => {
         }
       )
       .populate("offerId");
+    await offerModel.updateMany({ projetId }, { stage: "Good Luck" });
+    await offerModel.findByIdAndUpdate(offerId, { stage: "Winning" });
 
     let winnerFreelancer = await offerModel
       .findById(offerId, { freelancerId: 1, _id: 0 })
