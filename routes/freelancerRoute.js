@@ -10,6 +10,8 @@ import {
   updateFreelancerById,
   uploadImageForFreelancer,
   getAllFreelancers,
+  verifyFreelancerAccount,
+  verifyFreelancerOTPCode
 } from "../controllers/freelancerController.js";
 
 //Schema Validator
@@ -88,3 +90,10 @@ freelancerRoute.post(
   upload.single("avatar"),
   uploadImageForFreelancer
 );
+
+
+//VerifyFreelancer
+freelancerRoute.post('/verify-me',verifyFreelancerAccount)
+freelancerRoute.post('/verify-code',verifyFreelancerOTPCode)
+
+

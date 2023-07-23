@@ -5,6 +5,9 @@ import { deleteFile } from "../helpers/deleteFile.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+import nodemailer from "nodemailer";
+import crypto from "crypto";
+
 //Create ===> Register A Freelancer
 export const registerFreelancer = async (request, response, next) => {
   const errors = validationResult(request)
@@ -164,6 +167,96 @@ export const getAllFreelancers = async (request, response, next) => {
     ).sort({ username: -1 });
 
     response.status(200).json({ allFreelancers });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
+};
+
+//POST ==> Verify Freelancer Account
+
+export const verifyFreelancerAccount = async (request, response, next) => {
+  const freelancerId = request.body.freelancerId;
+
+  if (!freelancerId) {
+    return response.status(401).json({ error: "Can Not Find This Freelancer" });
+  }
+
+  try {
+    const freelancer = await FreelancerModel.findById(freelancerId);
+    if (!freelancer) {
+      return response
+        .status(401)
+        .json({ error: "Can Not Find This Freelancer" });
+    }
+
+    //preper transporter for nodemailer
+    let transporter = nodemailer.createTransport({
+      host: "smtp.sendgrid.net",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "apikey",
+        pass: "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", // generated ethereal password
+      },
+    });
+
+    //generate the 6 numbers of OTP
+
+    const OTPCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    //hashed numbers
+
+    const hashedNumbers = crypto
+      .createHash("sha256")
+      .update(OTPCode)
+      .digest("hex");
+
+    await freelancer.updateOne({ verifyCode: hashedNumbers });
+
+    let email = await transporter.sendMail({
+      from: "mostaqlClone14@gmail.com",
+      to: `${freelancer.email}`,
+      subject: "Your Verification Code",
+      text: `Hello Dear,${freelancer.username} This email send By Mostaql-clone To Infrom You With The Verification Code to your Account`, // plain text body
+      html: `
+          <h3>Click Here To Verify Your Account: <a style="font-size:24px;" href="http://127.0.0.1:5173/verify-account/${freelancer._id}?code=${OTPCode}/">Visit Me</a></h3>
+    
+    `,
+    });
+
+    response.json({ message: "Email Has Been Send" });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
+};
+
+export const verifyFreelancerOTPCode = async (request, response, next) => {
+  const { freelancerId, OTPCode } = request.body;
+  if (!freelancerId || !OTPCode) {
+    return response.status(404).json({ error: "can not find freelancer" });
+  }
+
+  try {
+    const freelancer = await FreelancerModel.findById(freelancerId);
+
+    if (!freelancer) {
+      return response.status(404).json({ error: "can not find freelancer" });
+    }
+
+    const compareNumber = crypto
+      .createHash("sha256")
+      .update(OTPCode)
+      .digest("hex");
+
+    if (compareNumber !== freelancer.verifyCode) {
+      return response.status(404).json({ error: "OTP Code is Worng" });
+    }
+
+    await freelancer.updateOne({ isVerify: true, verifyCode: "" });
+
+    response.status(201).json({ message: "Your Accout Has Been Verified" });
   } catch (error) {
     error.statusCode = 500;
     next(error);
