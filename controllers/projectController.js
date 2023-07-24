@@ -12,9 +12,12 @@ const createProject = async (req, res, next) => {
 
   let files = req.files;
   let newfiles = []
-  files.map((file) => {
-    newfiles.push(`http://localhost:3300/${file.path}`)
-  })
+  if(files){
+
+    files.map((file) => {
+      newfiles.push(`http://localhost:3300/${file.path}`)
+    })
+  }
  
   try {
 
