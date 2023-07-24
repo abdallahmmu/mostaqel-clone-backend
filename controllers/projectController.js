@@ -19,7 +19,6 @@ const createProject = async (req, res, next) => {
       newfiles.push(`http://localhost:3300/${file.path}`)
     })
   }
- 
   try {
 
     let projectAdded;
