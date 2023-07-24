@@ -28,6 +28,7 @@ app.use(express.json());
 
 //Serveing file staticly ==>> localhost:port/Freelancers-avatars/...
 const filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(
   "/Freelancers-Avatars",
   express.static(path.join(path.dirname(filename), "Freelancers-Avatars"))
@@ -36,6 +37,7 @@ app.use(
   "/uploads",
   express.static(path.join(path.dirname(filename), "uploads"))
 );
+app.use("/projectfiles", express.static(path.join(__dirname, "projectfiles")));
 
 //MiddleWares Routes
 app.use("/api/v1", offerRoute);
@@ -65,7 +67,8 @@ app.use("*", (request, response) => {
 
 //ERROR HANDLING
 app.use((error, request, response, next) => {
-  response.status(error.statusCode).json({ error: error.message });
+  const status = error.status || 500;
+  response.status(status).json({ error: error.message });
 });
 
 init(app);
