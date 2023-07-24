@@ -46,9 +46,7 @@ const upload = multer({ storage , array: true})
 projectRoute.post(
   "/",
   // isClient,
-  // upload.fields([{name: 'file', maxCount:1}, {name: 'files', maxCount: 5}]),
   upload.array('files', 4),
-  // upload.single('file'),
   checkSchema(projectSchema),
   validatorMiddleware,
   createProject

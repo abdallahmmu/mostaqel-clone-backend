@@ -86,8 +86,10 @@ let FreelancerModel = new Schema({
   },
 });
 
-FreelancerModel.pre("save", function (next) {
-  this.password = bcrypt.hashSync(this.password, 12);
+FreelancerModel.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  // Hashing user password
+  this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 const setImageURL = (doc) => {

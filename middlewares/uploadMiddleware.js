@@ -1,9 +1,9 @@
 import multer, { diskStorage } from "multer";
 
-const multerOptions = () => {
+const multerOptions = (something) => {
   const storage = diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "uploads/offers");
+      cb(null, `uploads/${something}`);
     },
     filename: (req, file, cb) => {
       const ext = file.mimetype.split("/")[1];
@@ -18,6 +18,6 @@ const multerOptions = () => {
   return upload;
 };
 
-export function uploadFiles(arrayOfFields) {
-  return multerOptions().fields(arrayOfFields);
+export function uploadFiles(something, arrayOfFields) {
+  return multerOptions(something).fields(arrayOfFields);
 }

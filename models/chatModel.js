@@ -20,11 +20,13 @@ const chatSchema = Schema(
     lastMessage: {
       content: {
         type: String,
+        default: "Hi !",
       },
       sender: {
         type: String,
 
         enums: ["freelancer", "client"],
+        default: "client",
       },
       read: {
         type: Boolean,

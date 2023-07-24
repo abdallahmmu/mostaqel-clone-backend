@@ -1,7 +1,7 @@
 import chatModel from "../models/chatModel.js";
 import messageModel from "../models/messageModel.js";
 import { validationResult } from "express-validator";
-import { sendNotification } from "./../helpers/socket.js";
+import { sendNotification, getIo } from "./../helpers/socket.js";
 // @route get /api/v1/chats/
 export const createChat = async (req, res, next) => {
   try {
@@ -82,9 +82,24 @@ export const getChatMessages = async (req, res, next) => {
 // @route post /api/v1/chats/:chatId/messages
 export const sendMessage = async (req, res, next) => {
   try {
-    const newMessage = await messageModel.create(req.body);
-    // getIo().emit("newMessage", newMessage);
+    if (req.files.attachments) {
+      req.body.attachments = [];
+      req.files.attachments.map((file) => {
+        // Save image into our db
+        req.body.attachments.push(file.filename);
+        console.log(file.filename);
+      });
+    }
 
+    const newMessage = await messageModel.create(req.body);
+    getIo().to(req.params.chatId).emit("message", newMessage);
+    await chatModel.findByIdAndUpdate(req.params.chatId, {
+      lastMessage: {
+        sender: newMessage.sender,
+        content: newMessage.content,
+        read: false,
+      },
+    });
     res.status(200).json({
       message: "Success",
       results: newMessage,

@@ -40,7 +40,7 @@ offerRoute.get("/projects/:id/offers/statistics", getProjectOffersStatistics);
 // @access freelancer who logged In
 offerRoute.post(
   "/projects/:id/offers",
-  uploadFiles([
+  uploadFiles("offers", [
     {
       name: "attachments",
       maxCount: 5,

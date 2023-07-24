@@ -17,7 +17,7 @@ import {
 //Authentication Middlewar
 import { isClient } from "../middlewares/clientMiddlewares/isClient.js";
 import { isFreelancersAuth } from "../middlewares/freelancersMiddlewares/isFreelancersAuth.js";
-
+import { uploadFiles } from "../middlewares/uploadMiddleware.js";
 export const chatRoute = express.Router();
 
 // @desc Create New Chat Between Between Client And Freelancer
@@ -35,6 +35,12 @@ chatRoute.get("/v1/chats/:chatId/messages", getChatMessages);
 // @access freelancer, the client they chat to each other
 chatRoute.post(
   "/v1/chats/:chatId/messages",
+  uploadFiles("chats", [
+    {
+      name: "attachments",
+      maxCount: 5,
+    },
+  ]),
   // isFreelancersAuth,
   sendMessage
 );

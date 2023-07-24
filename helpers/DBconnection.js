@@ -29,19 +29,19 @@ export const init = async (app) => {
           }
         });
 
-        socket.on("newMessage", async (message) => {
-          const newMessage = await messageModel.create(message);
-          await chatModel.findByIdAndUpdate(message.chatId, {
-            lastMessage: {
-              sender: newMessage.sender,
-              content: newMessage.content,
-              read: false,
-            },
-          });
+        // socket.on("newMessage", async (message) => {
+        //   const newMessage = await messageModel.create(message);
+        //   await chatModel.findByIdAndUpdate(message.chatId, {
+        //     lastMessage: {
+        //       sender: newMessage.sender,
+        //       content: newMessage.content,
+        //       read: false,
+        //     },
+        //   });
 
-          // Broadcast the message to all clients in the chat room
-          io.to(message.chatId).emit("message", newMessage);
-        });
+        //   // Broadcast the message to all clients in the chat room
+        //   io.to(message.chatId).emit("message", newMessage);
+        // });
 
         // Handle disconnections
         socket.on("disconnect", () => {

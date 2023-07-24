@@ -1,28 +1,25 @@
 import ApiFeatures from "../helpers/ApiFeatures.js";
 import clientModel from "../models/clientModel.js";
 import freelancerModel from "../models/freelancerModel.js";
-import offerModel from "../models/offerModel.js";
+
 import projectModel from "../models/projectModel.js";
 import TransactionModel from "../models/transsactionModel.js";
 import { faker } from "@faker-js/faker";
+
+import offerModel from "../models/offerModel.js";
 import { sendNotification } from "./../helpers/socket.js";
 
-
-
 const createProject = async (req, res, next) => {
-
   let files = req.files;
-  let newfiles = []
-  if(files){
-
+  let newfiles = [];
+  if (files) {
     files.map((file) => {
-      newfiles.push(`http://localhost:3300/${file.path}`)
-    })
+      newfiles.push(`http://localhost:3300/${file.path}`);
+    });
   }
   try {
-
     let projectAdded;
-    projectAdded = await projectModel.create({ ...req.body , files: newfiles});
+    projectAdded = await projectModel.create({ ...req.body, files: newfiles });
 
     if (!projectAdded) {
       return res.status(400).json({ error: "can not save project" });
@@ -142,7 +139,6 @@ const acceptOffer = async (req, res, next) => {
     next(error);
   }
 };
-
 const getSingleProject = async (req, res, next) => {
   let projectId = req.params.id;
   try {
