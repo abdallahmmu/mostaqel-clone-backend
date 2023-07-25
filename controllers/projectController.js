@@ -149,12 +149,36 @@ const getSingleProject = async (req, res, next) => {
         path: "offerId",
         populate: "freelancerId",
       });
+    const projectOffers = await offerModel.aggregate([
+      {
+        $match: {
+          $expr: { $eq: ["$projectId", { $toObjectId: projectId }] },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          numOffers: { $sum: 1 },
+          avgPrice: { $avg: "$amount" },
+        },
+      },
+    ]);
+    console.log(projectOffers);
+    if (projectOffers.length > 0) {
+      singleProject.numOffers = projectOffers[0].numOffers;
+      singleProject.avgPrice = projectOffers[0].avgPrice;
+    } else {
+      singleProject.numOffers = 0;
+      singleProject.avgPrice = 0;
+    }
+    console.log(singleProject);
     if (req.query?.lang == "ar") {
       singleProject.skillsIds.map((skill) => (skill.name = skill.nameAr));
       if (singleProject.description_ar) {
         singleProject.description = singleProject.description_ar;
       }
     }
+
     singleProject && res.status(200).json(singleProject);
     !singleProject &&
       res.status(404).json({ error: "single project can't returned" });
