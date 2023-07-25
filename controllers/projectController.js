@@ -88,6 +88,9 @@ const getAllOpenProjects = async (req, res, next) => {
         if (pro.categoryId) {
           pro.categoryId.title = pro.categoryId?.titleAr;
         }
+        if (pro.description_ar) {
+          pro.description = pro.description_ar;
+        }
       });
     }
     resultProjects &&
