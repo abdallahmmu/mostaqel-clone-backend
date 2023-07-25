@@ -60,25 +60,36 @@ let FreelancerModel = new Schema({
     type: Array,
     default: [],
   },
-  isActive:{
-    type:Boolean,
-    default:true
+  isActive: {
+    type: Boolean,
+    default: true,
   },
-  skill:{
-    type:Array,
-    default:[]
+  skill: {
+    type: Array,
+    default: [],
   },
   totalMoney: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  verifyCode:{
-    type:String,
-  }
+  verifyCode: {
+    type: String,
+  },
+  availableOffers: {
+    type: Number,
+    default: 12,
+  },
+  nextCharge: {
+    type: Date,
+    required: true,
+    default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  },
 });
 
-FreelancerModel.pre("save", function (next) {
-  this.password = bcrypt.hashSync(this.password, 12);
+FreelancerModel.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  // Hashing user password
+  this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 const setImageURL = (doc) => {

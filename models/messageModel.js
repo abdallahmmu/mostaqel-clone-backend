@@ -16,11 +16,30 @@ const messageSchema = Schema(
       required: true,
       enums: ["freelancer", "client"],
     },
+    attachments: [String],
   },
   {
     timestamps: true,
   }
 );
+const setFileURL = (doc) => {
+  if (doc.attachments) {
+    const filesList = [];
+    doc.attachments.forEach((file) => {
+      const fileUrl = `${process.env.BASE_URL}/uploads/chats/${file}`;
+      filesList.push(fileUrl);
+    });
+    doc.attachments = filesList;
+  }
+};
+// findOne, findAll and update
+messageSchema.post("init", (doc) => {
+  setFileURL(doc);
+});
 
+// create
+messageSchema.post("save", (doc) => {
+  setFileURL(doc);
+});
 const messageModel = model("message", messageSchema);
 export default messageModel;

@@ -21,6 +21,7 @@ import {
 
 //Authentication Middlewar
 import { isFreelancersAuth } from "../middlewares/freelancersMiddlewares/isFreelancersAuth.js";
+import { uploadFiles } from "../middlewares/uploadMiddleware.js";
 
 export const offerRoute = express.Router();
 
@@ -39,6 +40,12 @@ offerRoute.get("/projects/:id/offers/statistics", getProjectOffersStatistics);
 // @access freelancer who logged In
 offerRoute.post(
   "/projects/:id/offers",
+  uploadFiles("offers", [
+    {
+      name: "attachments",
+      maxCount: 5,
+    },
+  ]),
   isFreelancersAuth,
   checkSchema(sendOfferSchemaValidator),
   validatorMiddleware,
