@@ -220,8 +220,7 @@ export const verifyFreelancerAccount = async (request, response, next) => {
       subject: "Your Verification Code",
       text: `Hello Dear,${freelancer.username} This email send By Mostaql-clone To Infrom You With The Verification Code to your Account`, // plain text body
       html: `
-          <h3>Click Here To Verify Your Account: <a style="font-size:24px;" href="http://127.0.0.1:5173/verify-account/${freelancer._id}?code=${OTPCode}/">Visit Me</a></h3>
-    
+          <h3>Click Here To Verify Your Account: <a style="font-size:24px;" target="_blank" href="http://localhost:5173/verify-account/${freelancer._id}?code=${OTPCode}/">Visit Me</a></h3>
     `,
     });
 
