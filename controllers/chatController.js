@@ -40,6 +40,20 @@ export const getChatMessages = async (req, res, next) => {
   try {
     const { chatId } = req.params;
     const chatMessages = await messageModel.find({ chatId });
+    const chatDetails = await chatModel
+      .findById(chatId)
+      .populate({
+        path: "projectId",
+        select: "_id title",
+      })
+      .populate({
+        path: "clientId",
+        select: "_id firstName lastName",
+      })
+      .populate({
+        path: "freelancerId",
+        select: "_id firstName lastName",
+      });
     // getIo().emit("joinRoom", chatId);
     // getIo().on("message", (message) => {
     //   if (message.chatId === chatId) {
@@ -70,6 +84,7 @@ export const getChatMessages = async (req, res, next) => {
     res.status(200).json({
       message: "Success",
       count: chatMessages.length,
+      details: chatDetails,
       data: chatMessages,
     });
   } catch (error) {
