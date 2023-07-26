@@ -35,7 +35,7 @@ export const registerAdmin = async (req, res, next) => {
     const adminCount = await adminModel.countDocuments();
     if (adminCount == 5) {
       return res.status(401).json({
-        message: "Can't be more than one 4 admin",
+        error: "Can't be more than one 4 admin",
       });
     }
     await adminModel.create(req.body);
@@ -104,3 +104,4 @@ export const allowedTo = (roles) => async (req, res, next) => {
   }
   next();
 };
+
