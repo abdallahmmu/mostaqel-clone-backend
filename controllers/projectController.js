@@ -122,7 +122,10 @@ const acceptOffer = async (req, res, next) => {
         }
       )
       .populate("offerId");
-    await offerModel.updateMany({ projetId }, { stage: "Good Luck" });
+    await offerModel.updateMany(
+      { projetId: projetId },
+      { $set: { stage: "Good Luck" } }
+    );
     await offerModel.findByIdAndUpdate(offerId, { stage: "Winning" });
 
     let winnerFreelancer = await offerModel
@@ -134,7 +137,7 @@ const acceptOffer = async (req, res, next) => {
       relatedTo: "projects",
       content: `Congratulations! You Have Hired For Project ${projectUpdated.title}`,
     });
-    console.log(winnerFreelancer.freelancerId._id);
+    // console.log(winnerFreelancer.freelancerId._id);
     projectUpdated &&
       res.status(200).json({ projectUpdated, winnerFreelancer });
   } catch (error) {
@@ -166,7 +169,7 @@ const getSingleProject = async (req, res, next) => {
         },
       },
     ]);
-    console.log(projectOffers);
+    // console.log(projectOffers);
     if (projectOffers.length > 0) {
       singleProject.numOffers = projectOffers[0].numOffers;
       singleProject.avgPrice = projectOffers[0].avgPrice;
@@ -174,7 +177,7 @@ const getSingleProject = async (req, res, next) => {
       singleProject.numOffers = 0;
       singleProject.avgPrice = 0;
     }
-    console.log(singleProject);
+    // console.log(singleProject);
     if (req.query?.lang == "ar") {
       singleProject.skillsIds.map((skill) => (skill.name = skill.nameAr));
       if (singleProject.description_ar) {

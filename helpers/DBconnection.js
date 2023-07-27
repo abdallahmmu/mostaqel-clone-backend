@@ -18,7 +18,7 @@ export const init = async (app) => {
         // Handle messages for the chat room
         socket.on("joinRoom", (chatId) => {
           socket.join(chatId);
-          console.log(`User joined chat room ${chatId}`);
+          // console.log(`User joined chat room ${chatId}`);
         });
         socket.on("markAsRead", async (chatId, role) => {
           const chat = await chatModel.findById(chatId);

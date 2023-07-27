@@ -19,7 +19,7 @@ export const getIo = () => {
 };
 export const sendNotification = async (notification) => {
   const newNotification = await notificationModel.create(notification);
-  console.log(notification, "From Server");
+  // console.log(notification, "From Server");
   // Broadcast the notification to all clients in the chat room
   io.of("/notification")
     .to(notification.userId.toString())

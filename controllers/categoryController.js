@@ -136,7 +136,6 @@ export const getFreelancersForCategory = async (request, response, next) => {
   }
 };
 export const cateogryStatistics = async (request, response, next) => {
-  console.log("jgigjigj");
   try {
     const results = await projectModel.aggregate([
       {
