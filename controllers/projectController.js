@@ -132,7 +132,7 @@ const acceptOffer = async (req, res, next) => {
       userId: winnerFreelancer.freelancerId._id,
       attachedId: projetId,
       relatedTo: "projects",
-      content: `You Have Hired For Project ${projectUpdated.title}`,
+      content: `Congratulations! You Have Hired For Project ${projectUpdated.title}`,
     });
     console.log(winnerFreelancer.freelancerId._id);
     projectUpdated &&
@@ -264,7 +264,7 @@ const completeProject = async (req, res, next) => {
       );
 
       let transToFreelancer = await TransactionModel.create({
-        amount: offer.amount,
+        amount: offer.amount * 0.8,
         userId: freelancerId,
         mode: "profit",
         sessionId: session,
@@ -275,7 +275,12 @@ const completeProject = async (req, res, next) => {
         mode: "withdraw",
         sessionId: session,
       });
-
+      sendNotification({
+        userId: freelancerId,
+        attachedId: id,
+        relatedTo: "transaction",
+        content: ` Great Work 😍! You Milestone Was Released`,
+      });
       res.status(200).json({
         message: "the project ended successfully ",
         freelancer,

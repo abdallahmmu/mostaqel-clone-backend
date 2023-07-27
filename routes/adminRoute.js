@@ -15,6 +15,8 @@ import {
   protectMiddleware,
   loginAdmin,
   allowedTo,
+  getAllAdmins,
+  deleteAdmin,
 } from "../controllers/adminAuthController.js";
 
 import {
@@ -33,6 +35,18 @@ adminRoute.post(
   protectMiddleware,
   allowedTo(["superAdmin"]),
   registerAdmin
+);
+adminRoute.get(
+  "/admins",
+  protectMiddleware,
+  allowedTo(["superAdmin"]),
+  getAllAdmins
+);
+adminRoute.delete(
+  "/admins/:adminId",
+  protectMiddleware,
+  allowedTo(["superAdmin"]),
+  deleteAdmin
 );
 
 // Projects

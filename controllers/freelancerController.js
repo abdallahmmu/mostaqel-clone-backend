@@ -4,7 +4,7 @@ import { deleteFile } from "../helpers/deleteFile.js";
 //bcrypt and jwt
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { sendNotification } from "./../helpers/socket.js";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 
@@ -254,7 +254,12 @@ export const verifyFreelancerOTPCode = async (request, response, next) => {
     }
 
     await freelancer.updateOne({ isVerify: true, verifyCode: "" });
-
+    // sendNotification({
+    //   userId: freelancerId,
+    //   attachedId: freelancerId,
+    //   relatedTo: "account",
+    //   content: `Your Account Has Been Verified Successfully!`,
+    // });
     response.status(201).json({ message: "Your Accout Has Been Verified" });
   } catch (error) {
     error.statusCode = 500;

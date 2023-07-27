@@ -5,6 +5,7 @@ import FreelancerModel from "../models/freelancerModel.js";
 import ClientModel from "../models/clientModel.js";
 import OffersModel from "../models/offerModel.js";
 import ProjectsModel from "../models/projectModel.js";
+import { sendNotification } from "./../helpers/socket.js";
 
 export const getAllStatistics = async (request, response, next) => {
   try {
@@ -75,6 +76,13 @@ export const deactiveFreelancerById = async (request, response, next) => {
         .status(404)
         .json({ error: "can not find this freelancer" });
     }
+    // console.log(deactiveFreelancer, "fkfnfklnfkl");
+    // sendNotification({
+    //   userId: freelancerId,
+    //   attachedId: freelancerId,
+    //   relatedTo: "account",
+    //   content: `Your Account Has Been Deactivated Feel Free to contact us: mostaqel@clone.com`,
+    // });
     response.status(200).json({ message: "Sucssess" });
   } catch (error) {
     error.statusCode = 500;
@@ -101,6 +109,13 @@ export const deactiveClientById = async (request, response, next) => {
     if (!deactiveClient) {
       return response.status(404).json({ error: "can not find this client" });
     }
+    // console.log(deactiveClient, "fkfnfklnfkl");
+    // sendNotification({
+    //   userId: clientId,
+    //   attachedId: clientId,
+    //   relatedTo: "account",
+    //   content: `Your Account Has Been Deactivated Feel Free to contact us: mostaqel@clone.com`,
+    // });
     response.status(200).json({ message: "Sucssess" });
   } catch (error) {
     error.statusCode = 500;
@@ -130,6 +145,7 @@ export const verifyFreelancerById = async (request, response, next) => {
         .status(404)
         .json({ error: "can not find this freelancer" });
     }
+
     response.status(200).json({ message: "Sucssess" });
   } catch (error) {
     error.statusCode = 500;
