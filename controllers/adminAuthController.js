@@ -21,9 +21,7 @@ export const addSuperAdmin = async (req, res, next) => {
       });
     }
     await adminModel.create(req.body);
-    res
-      .status(200)
-      .json({ message: "Successfully Done You Have The Permissions" });
+    res.status(200).json({ message: "Successfully Done!" });
   } catch (err) {
     err.statusCode = 500;
     next(err);
@@ -39,9 +37,7 @@ export const registerAdmin = async (req, res, next) => {
       });
     }
     await adminModel.create(req.body);
-    res
-      .status(200)
-      .json({ message: "Successfully Done You Have Specific Permissions" });
+    res.status(200).json({ message: "Successfully Done !" });
   } catch (err) {
     err.statusCode = 500;
     next(err);
@@ -61,6 +57,36 @@ export const loginAdmin = async (req, res, next) => {
 
     // 4) send response to client side
     res.status(200).json({ token });
+  } catch (err) {
+    err.statusCode = 500;
+    next(err);
+  }
+};
+export const deleteAdmin = async (req, res, next) => {
+  try {
+    const deletedAdmin = await adminModel.findByIdAndDelete(req.params.adminId);
+
+    if (!deletedAdmin) {
+      return res.status(401).json({
+        message: "Incorrect email or password",
+      });
+    }
+
+    // 4) send response to client side
+    res.status(200).json({ message: "Successfully! Admin Was Deleted" });
+  } catch (err) {
+    err.statusCode = 500;
+    next(err);
+  }
+};
+export const getAllAdmins = async (req, res, next) => {
+  try {
+    const allAdmins = await adminModel.find({
+      role: "admin",
+    });
+
+    // 4) send response to client side
+    res.status(200).json({ message: "Successfully! ", results: allAdmins });
   } catch (err) {
     err.statusCode = 500;
     next(err);
@@ -104,4 +130,3 @@ export const allowedTo = (roles) => async (req, res, next) => {
   }
   next();
 };
-

@@ -23,7 +23,7 @@ export const createChat = async (req, res, next) => {
       userId: freelancerId,
       relatedTo: "messages",
       attachedId: newChat._id,
-      content: "You Have New Message",
+      content: `You Have New Message About ${req.body.title}`,
     });
     return res.status(200).json({
       message: "Success",
