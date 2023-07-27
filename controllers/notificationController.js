@@ -10,12 +10,12 @@ export const getMyNotifications = async (request, response, next) => {
     notificationIo.on("connection", (socket) => {
       socket.on("LogIn", (userId) => {
         socket.join(userId);
-        console.log(`${userId} Has Logged In`);
+        // console.log(`${userId} Has Logged In`);
       });
 
       // Handle disconnections
       socket.on("disconnect", () => {
-        console.log("A user disconnected");
+        // console.log("A user disconnected");
       });
     });
     response.status(200).json({ message: "Success", results: notification });

@@ -53,7 +53,7 @@ export const getSkillById = async (req, res, next) => {
 export const EditSkillById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(req.body);
+    // console.log(req.body);
     const UpdatedSkill = await skillModel.findByIdAndUpdate(id, req.body, {
       new: true,
     });
@@ -88,7 +88,7 @@ export const deleteSkillById = async (req, res, next) => {
 };
 
 export const skillStatistics = async (request, response, next) => {
-  console.log("jgigjigj");
+  // console.log("jgigjigj");
   try {
     const results = await projectModel.aggregate([
       {

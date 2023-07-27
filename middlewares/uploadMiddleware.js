@@ -7,7 +7,7 @@ const multerOptions = (something) => {
     },
     filename: (req, file, cb) => {
       const ext = file.mimetype.split("/")[1];
-      console.log(ext);
+      // console.log(ext);
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       cb(null, file.fieldname + "-" + uniqueSuffix + "." + ext);
     },

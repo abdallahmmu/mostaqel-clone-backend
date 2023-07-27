@@ -60,7 +60,7 @@ export const sendOffer = async (req, res, next) => {
       req.files.attachments.map((file) => {
         // Save image into our db
         req.body.attachments.push(file.filename);
-        console.log(file.filename);
+        // console.log(file.filename);
       });
     }
 
@@ -69,7 +69,7 @@ export const sendOffer = async (req, res, next) => {
     freelancer.availableOffers--;
     await freelancer.save();
     req.body.projectId = req.params.id;
-    console.log(req.body);
+    // console.log(req.body);
     const newOffer = await offerModel.create(req.body);
     res.status(200).json({
       message: "Success",
