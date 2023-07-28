@@ -65,9 +65,12 @@ export const sendOffer = async (req, res, next) => {
     }
 
     req.body.freelancerId = req.freelancerId;
-    const freelancer = await FreelancerModel.findById(req.body.freelancerId);
-    freelancer.availableOffers--;
-    await freelancer.save();
+
+    await offerModel.updateOne(
+      { _id: req.body.freelancerId },
+      { $set: { availableOffers: { $inc: -1 } } }
+    );
+
     req.body.projectId = req.params.id;
     // console.log(req.body);
     const newOffer = await offerModel.create(req.body);
