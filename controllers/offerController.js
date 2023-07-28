@@ -66,9 +66,9 @@ export const sendOffer = async (req, res, next) => {
 
     req.body.freelancerId = req.freelancerId;
 
-    await offerModel.updateOne(
+    await FreelancerModel.updateOne(
       { _id: req.body.freelancerId },
-      { $set: { availableOffers: { $inc: -1 } } }
+      { $inc: { availableOffers: -1 } }
     );
 
     req.body.projectId = req.params.id;
