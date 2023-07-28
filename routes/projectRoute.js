@@ -45,8 +45,8 @@ const upload = multer({ storage , array: true})
 // save project in DB
 projectRoute.post(
   "/",
-  // isClient,
-  upload.array('files', 4),
+  isClient,
+  upload.array('files'),
   checkSchema(projectSchema),
   validatorMiddleware,
   createProject

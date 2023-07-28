@@ -17,7 +17,7 @@ export const getAllProjects = async (req, res, next) => {
 export const getProjectById = async (req, res, next) => {
     try {
         let id = req.params.id;
-        let project = await projectModel.findById(id)
+        let project = await projectModel.findById(id).populate('clientId categoryId')
         if (project) {
 
             res.status(200).json({ project });
@@ -59,7 +59,6 @@ export const deactiveProject = async (req, res, next) => {
     try {
         let id = req.body.id;
         let status = req.body.status;
-    
         let deactivatedProject =await projectModel.findByIdAndUpdate( id , { status },{ new : true   });
         res.status(200).json({deactivatedProject})
 
