@@ -13,11 +13,17 @@ export const isFreelancersAuth = async (request, response, next) => {
     request.freelancerId = verify.freelancerId;
     const freelancer = await FreelancerModel.findById(verify.freelancerId);
     if (new Date().getTime() > freelancer.nextCharge.getTime()) {
-      freelancer.availableOffers = 12;
-      freelancer.nextCharge = new Date(
-        freelancer.nextCharge.getTime() + 7 * 24 * 60 * 60 * 1000
+      await offerModel.updateOne(
+        { _id: verify.freelancerId },
+        {
+          $set: {
+            availableOffers: 12,
+            nextCharge: new Date(
+              freelancer.nextCharge.getTime() + 7 * 24 * 60 * 60 * 1000
+            ),
+          },
+        }
       );
-      await freelancer.save();
     }
 
     next();
