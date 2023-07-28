@@ -123,7 +123,7 @@ const acceptOffer = async (req, res, next) => {
       )
       .populate("offerId");
     await offerModel.updateMany(
-      { projetId: projetId },
+      { projectId: projetId },
       { $set: { stage: "Good Luck" } }
     );
     await offerModel.findByIdAndUpdate(offerId, { stage: "Winning" });
@@ -318,6 +318,10 @@ const deactivateProject = async (req, res, next) => {
       id,
       { status: "close" },
       { new: true }
+    );
+    await offerModel.updateMany(
+      { projectId: id },
+      { $set: { stage: "Good Luck" } }
     );
 
     res.status(200).json(resultProject);
